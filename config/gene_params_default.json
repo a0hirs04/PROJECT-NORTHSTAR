@@ -1,0 +1,23 @@
+{
+  "tumor_mutations": {
+    "KRAS": {
+      "locked": true,
+      "state": 1.0
+    },
+    "TP53": {
+      "locked": true,
+      "state": 0.0
+    },
+    "CDKN2A": {
+      "locked": true,
+      "state": 0.0
+    },
+    "SMAD4": {
+      "locked": true,
+      "state": 0.0
+    }
+  },
+  "tau_overrides": {},
+  "initial_state_noise": 0.05,
+  "description": "Default PDAC genotype: KRAS+, TP53-, CDKN2A-, SMAD4-"
+}

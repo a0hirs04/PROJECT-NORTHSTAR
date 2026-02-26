@@ -1,0 +1,8 @@
+{
+  "interventions": [],
+  "drug_delivery": {
+    "start_time": 2880,
+    "mode": "constant_boundary"
+  },
+  "notes": "Template - EA fills in interventions list"
+}
