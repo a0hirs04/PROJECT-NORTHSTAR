@@ -310,15 +310,9 @@ class PhysiCellRunner:
             f.write("\n")
 
     def _primary_command(self, config_path: Path, intervention_path: Path, output_path: Path) -> List[str]:
-        return [
-            str(self.binary_path),
-            "--config",
-            str(config_path),
-            "--intervention",
-            str(intervention_path),
-            "--output",
-            str(output_path),
-        ]
+        # stroma_world uses positional args: binary config.xml [intervention.json]
+        # The output directory is embedded in the patched config XML, not a CLI arg.
+        return [str(self.binary_path), str(config_path), str(intervention_path)]
 
     def _legacy_command(self, config_path: Path, intervention_path: Path) -> List[str]:
         return [str(self.binary_path), str(config_path), str(intervention_path)]
