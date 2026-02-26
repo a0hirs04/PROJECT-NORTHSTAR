@@ -3,3 +3,17 @@ PhysiCell/
 __pycache__/
 *.pyc
 .env
+
+# PhysiCell simulation output (gitignored per spec — can be large)
+output/
+!output/.gitkeep
+
+# EA run artifacts
+ea_runs/
+*.pkl
+ea_generation_stats.csv
+
+# Build artifacts
+build/
+*.o
+stroma_world

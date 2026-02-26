@@ -106,7 +106,7 @@ class SlurmRunner(PhysiCellRunner):
             poll_interval_seconds=self.slurm_poll_interval_seconds,
         )
 
-    def run_batch_slurm(
+    def run_batch_slurm( # type: ignore
         self,
         intervention_jsons: list,
         max_parallel: int = 50,
@@ -186,7 +186,7 @@ class SlurmRunner(PhysiCellRunner):
                     del active[job_id]
                     continue
 
-                state, exit_code, terminal = self._query_sacct_state(job_id)
+                state, exit_code, terminal = self._query_slurm_state(job_id)
                 if not terminal:
                     continue
 
@@ -271,6 +271,8 @@ class SlurmRunner(PhysiCellRunner):
             f'export ZURADA_PROJECT_ROOT="{self.project_root}"',
             'export PYTHONPATH="$ZURADA_PROJECT_ROOT:${PYTHONPATH:-}"',
             'export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-1}"',
+            'export OMP_PROC_BIND="${OMP_PROC_BIND:-spread}"',
+            'export OMP_PLACES="${OMP_PLACES:-cores}"',
             "if command -v module >/dev/null 2>&1; then",
         ]
         for line in self.module_commands:
@@ -288,13 +290,13 @@ class SlurmRunner(PhysiCellRunner):
         script_path.chmod(0o755)
         return script_path
 
-    def _query_sacct_state(self, job_id: str) -> Tuple[str, int, bool]:
+    def _query_slurm_state(self, job_id: str) -> Tuple[str, int, bool]:
         cmd = ["sacct", "-j", job_id, "--format=JobIDRaw,State,ExitCode", "-n", "-P"]
         probe = subprocess.run(cmd, capture_output=True, text=True, check=False)
         if probe.returncode == 0 and probe.stdout.strip():
-            state, exit_code = self._parse_sacct_output(job_id, probe.stdout)
+            state, exit_code, terminal = self._parse_sacct_output(job_id, probe.stdout)
             if state:
-                return state, exit_code, state in self.TERMINAL_STATES
+                return state, exit_code, terminal
 
         # Fallback: scheduler still knows about the job but sacct is lagging.
         sq = subprocess.run(["squeue", "-j", job_id, "-h", "-o", "%T"], capture_output=True, text=True, check=False)
@@ -302,10 +304,10 @@ class SlurmRunner(PhysiCellRunner):
             return sq.stdout.strip().splitlines()[0], -1, False
         return "UNKNOWN", -1, True
 
-    def _parse_sacct_output(self, job_id: str, output: str) -> Tuple[str, int]:
+    def _parse_sacct_output(self, job_id: str, output: str) -> Tuple[str, int, bool]:
         # Prefer exact JobIDRaw match, then fallback to job steps.
-        exact_matches: List[Tuple[str, int]] = []
-        step_matches: List[Tuple[str, int]] = []
+        exact_matches: List[Tuple[str, int, bool]] = []
+        step_matches: List[Tuple[str, int, bool]] = []
         for line in output.strip().splitlines():
             fields = line.split("|")
             if len(fields) < 3:
@@ -318,19 +320,19 @@ class SlurmRunner(PhysiCellRunner):
 
             state = state_raw.split()[0].split("+")[0]
             code = self._parse_exit_code(exit_raw)
+            terminal = state in self.TERMINAL_STATES
             if jid == job_id:
-                exact_matches.append((state, code))
+                exact_matches.append((state, code, terminal))
             elif jid.startswith(f"{job_id}."):
-                step_matches.append((state, code))
+                step_matches.append((state, code, terminal))
 
         if exact_matches:
             return exact_matches[0]
         if step_matches:
             return step_matches[0]
-        return "", -1
+        return "", -1, True
 
-    @staticmethod
-    def _parse_exit_code(raw: str) -> int:
+    def _parse_exit_code(self, raw: str) -> int:
         if ":" in raw:
             raw = raw.split(":", 1)[0]
         try:

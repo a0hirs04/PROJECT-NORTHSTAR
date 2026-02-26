@@ -76,10 +76,18 @@ class PhysiCellRunner:
                 stdout_log=stdout_log,
                 stderr_log=stderr_log,
             )
-            wall_time = time.perf_counter() - start_time
+            primary_elapsed = time.perf_counter() - start_time
+            wall_time = primary_elapsed
 
             output_files = self._collect_output_files(output_subdir)
-            if exit_code != 0 and not timed_out and not mem_exceeded and not output_files:
+            if self._should_retry_legacy(
+                exit_code=exit_code,
+                timed_out=timed_out,
+                mem_exceeded=mem_exceeded,
+                output_files=output_files,
+                stderr_log=stderr_log,
+                elapsed_seconds=primary_elapsed,
+            ):
                 LOGGER.warning(
                     "Primary CLI failed for %s (exit=%s). Retrying with legacy positional CLI.",
                     run_dir,
@@ -386,17 +394,76 @@ class PhysiCellRunner:
 
     def _read_rss_mb(self, pid: int) -> Optional[float]:
         status_file = Path(f"/proc/{pid}/status")
-        if not status_file.exists():
-            return None
+        if status_file.exists():
+            try:
+                for line in status_file.read_text(encoding="utf-8", errors="ignore").splitlines():
+                    if line.startswith("VmRSS:"):
+                        parts = line.split()
+                        kb = float(parts[1])
+                        return kb / 1024.0
+            except Exception:
+                return None
+
+        # Fallback for systems without /proc (e.g., macOS).
         try:
-            for line in status_file.read_text(encoding="utf-8", errors="ignore").splitlines():
-                if line.startswith("VmRSS:"):
-                    parts = line.split()
-                    kb = float(parts[1])
-                    return kb / 1024.0
+            probe = subprocess.run(
+                ["ps", "-o", "rss=", "-p", str(pid)],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            if probe.returncode != 0:
+                return None
+            raw = probe.stdout.strip().split()
+            if not raw:
+                return None
+            kb = float(raw[0])
+            return kb / 1024.0
         except Exception:
             return None
         return None
+
+    def _should_retry_legacy(
+        self,
+        exit_code: int,
+        timed_out: bool,
+        mem_exceeded: bool,
+        output_files: Dict[int, Path],
+        stderr_log: Path,
+        elapsed_seconds: float,
+    ) -> bool:
+        # Only retry legacy CLI when failure strongly looks like unsupported flag syntax.
+        if exit_code == 0 or timed_out or mem_exceeded:
+            return False
+        if output_files:
+            return False
+        if elapsed_seconds > 30.0:
+            return False
+
+        err = self._tail_text(stderr_log, max_chars=6000).lower()
+        if not err:
+            return False
+
+        known_cli_markers = [
+            "unknown option",
+            "unrecognized option",
+            "invalid option",
+            "unknown flag",
+            "unknown argument",
+            "unrecognized argument",
+            "no such option",
+        ]
+        return any(marker in err for marker in known_cli_markers)
+
+    @staticmethod
+    def _tail_text(path: Path, max_chars: int = 4096) -> str:
+        try:
+            text = path.read_text(encoding="utf-8", errors="ignore")
+        except Exception:
+            return ""
+        if len(text) <= max_chars:
+            return text
+        return text[-max_chars:]
 
     def _collect_output_files(self, output_dir: Path) -> Dict[int, Path]:
         files: Dict[int, Path] = {}
