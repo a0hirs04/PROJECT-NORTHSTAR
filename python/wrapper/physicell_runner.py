@@ -87,6 +87,7 @@ class PhysiCellRunner:
                 output_files=output_files,
                 stderr_log=stderr_log,
                 elapsed_seconds=primary_elapsed,
+                stdout_log=stdout_log,
             ):
                 LOGGER.warning(
                     "Primary CLI failed for %s (exit=%s). Retrying with legacy positional CLI.",
@@ -431,6 +432,7 @@ class PhysiCellRunner:
         output_files: Dict[int, Path],
         stderr_log: Path,
         elapsed_seconds: float,
+        stdout_log: Optional[Path] = None,
     ) -> bool:
         # Only retry legacy CLI when failure strongly looks like unsupported flag syntax.
         if exit_code == 0 or timed_out or mem_exceeded:
@@ -440,8 +442,12 @@ class PhysiCellRunner:
         if elapsed_seconds > 30.0:
             return False
 
-        err = self._tail_text(stderr_log, max_chars=6000).lower()
-        if not err:
+        # Check both stderr and stdout — PhysiCell prints CLI errors to stdout.
+        combined = (
+            self._tail_text(stderr_log, max_chars=6000)
+            + (self._tail_text(stdout_log, max_chars=6000) if stdout_log else "")
+        ).lower()
+        if not combined:
             return False
 
         known_cli_markers = [
@@ -452,8 +458,11 @@ class PhysiCellRunner:
             "unknown argument",
             "unrecognized argument",
             "no such option",
+            # PhysiCell standard main.cpp: printed to stdout when argv[1] starts with '-'
+            "error loading --config",
+            "using config file --config",
         ]
-        return any(marker in err for marker in known_cli_markers)
+        return any(marker in combined for marker in known_cli_markers)
 
     @staticmethod
     def _tail_text(path: Path, max_chars: int = 4096) -> str:
