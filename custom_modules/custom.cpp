@@ -1,4 +1,5 @@
 #include "./custom.h"
+#include "baseline_validation.h"
 
 #include <algorithm>
 #include <atomic>
@@ -371,6 +372,15 @@ void create_cell_types(void)
 void setup_tissue(void)
 {
     const std::chrono::steady_clock::time_point t0 = std::chrono::steady_clock::now();
+
+    // §8.1  Run baseline behavioral validation before placing any cells.
+    // Failures indicate a broken gene-network invariant; do not proceed.
+    if (!run_baseline_validation())
+    {
+        std::cerr << "[setup_tissue] FATAL: baseline validation failed."
+                     "  Fix gene-network before running simulation.\n";
+        exit(EXIT_FAILURE);
+    }
 
     Cell_Definition* pTumor = find_cell_definition("tumor_cell");
     Cell_Definition* pStroma = find_cell_definition("stromal_cell");
