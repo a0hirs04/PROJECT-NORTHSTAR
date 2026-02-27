@@ -38,3 +38,11 @@
 ## EA touch surface
 - EA config now uses `targetable_knobs` (not `druggable_genes`).
 - Individuals are knob-based with at most one intervention per knob and max 4 interventions.
+
+## Reality Anchors
+- `python/validation/validate_biology.py` runs **10 dependency-ordered reality anchors**.
+- Dependency tree enforced at runtime; downstream anchors are skipped when prerequisites fail.
+- Priority anchors for early bug-catching are wired explicitly:
+  - Anchor 1 first (`ANCHOR_1_SELF_ASSEMBLY`)
+  - Anchor 3 early (`ANCHOR_3_SHH_PARADOX`)
+  - Anchor 10 final integration (`ANCHOR_10_SPATIAL_SANCTUARY`)
