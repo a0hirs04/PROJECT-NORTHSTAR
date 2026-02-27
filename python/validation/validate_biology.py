@@ -1174,12 +1174,17 @@ class BiologyValidator:
             ScenarioSpec(
                 anchor_id=12,
                 name="CHECK_2_CHEMO_FAILURE",
-                description="Single-agent chemotherapy fails to eradicate tumor through ECM barrier.",
-                criterion="Drug penetration declines as barrier matures AND residual survivors persist after treatment",
+                description="Single-agent chemotherapy partially responds but fails to eradicate; barrier persists, survivors regrow, resistance emerges.",
+                criterion="partial response + barrier persistence ≥80% + regrowth after withdrawal + ABCB1 emergence",
                 intervention_payload={},
                 user_parameter_overrides={},
                 variable_overrides={},
-                dependencies=["ANCHOR_2_DRUG_PENETRATION_MATURITY", "ANCHOR_7_ECM_DEGRADATION_LIMITS"],
+                dependencies=[
+                    "ANCHOR_1_SELF_ASSEMBLY",
+                    "ANCHOR_2_DRUG_PENETRATION_MATURITY",
+                    "ANCHOR_7_ECM_DEGRADATION_LIMITS",
+                    "ANCHOR_10_SPATIAL_SANCTUARY",
+                ],
                 evaluator=self._eval_check2_chemo_failure,
                 virtual=True,
             ),
@@ -1198,12 +1203,18 @@ class BiologyValidator:
             ScenarioSpec(
                 anchor_id=14,
                 name="CHECK_4_FITNESS_RANKING",
-                description="Treatment hierarchy: combination strategy outperforms single-agent drug.",
-                criterion="viability(combination) < viability(drug-only) < 1.0",
+                description="Full treatment hierarchy: ECM-degrade+drug > SHH+drug > drug-only > untreated > SHH-only.",
+                criterion="tc(A8_BOTH) < tc(A7) < tc(A2) < tc(A1) < tc(A3) — four pairwise comparisons",
                 intervention_payload={},
                 user_parameter_overrides={},
                 variable_overrides={},
-                dependencies=["ANCHOR_2_DRUG_PENETRATION_MATURITY", "ANCHOR_7_ECM_DEGRADATION_LIMITS", "ANCHOR_8_BOTH_DEPLETED_DRUG"],
+                dependencies=[
+                    "ANCHOR_1_SELF_ASSEMBLY",
+                    "ANCHOR_2_DRUG_PENETRATION_MATURITY",
+                    "ANCHOR_3_SHH_PARADOX",
+                    "ANCHOR_7_ECM_DEGRADATION_LIMITS",
+                    "ANCHOR_8_BOTH_DEPLETED_DRUG",
+                ],
                 evaluator=self._eval_check4_fitness_ranking,
                 virtual=True,
             ),
@@ -1621,22 +1632,53 @@ class BiologyValidator:
     def _eval_check2_chemo_failure(
         self, metrics: Optional[SimulationMetrics], extras: Dict[str, Any], baseline: Dict[str, Any]
     ) -> Tuple[bool, str]:
+        a1_m = self._cached_metrics(baseline, "ANCHOR_1_SELF_ASSEMBLY")
         a2_m = self._cached_metrics(baseline, "ANCHOR_2_DRUG_PENETRATION_MATURITY")
         a7_m = self._cached_metrics(baseline, "ANCHOR_7_ECM_DEGRADATION_LIMITS")
-        if a2_m is None or a7_m is None:
-            return False, "missing ANCHOR_2 / ANCHOR_7 metrics for Check 2"
+        a10_x = self._cached_extras(baseline, "ANCHOR_10_SPATIAL_SANCTUARY")
+        a1_x = self._cached_extras(baseline, "ANCHOR_1_SELF_ASSEMBLY")
+        a7_x = self._cached_extras(baseline, "ANCHOR_7_ECM_DEGRADATION_LIMITS")
+        if a1_m is None or a2_m is None or a7_m is None:
+            return False, "missing ANCHOR_1 / ANCHOR_2 / ANCHOR_7 metrics for Check 2"
+
+        # C2a: Partial response — drug reduces tumor count vs untreated control
+        tc_a2 = float(a2_m.get("total_tumor_cells", math.nan))
+        tc_a1 = float(a1_m.get("total_tumor_cells", math.nan))
+        # C2b: Barrier persistence — ECM survives drug treatment at ≥80% of pre-treatment density
+        barrier_a2 = float(a2_m.get("stroma_barrier_score", math.nan))
+        barrier_a1 = float(a1_m.get("stroma_barrier_score", math.nan))
+        barrier_ratio = barrier_a2 / barrier_a1 if (math.isfinite(barrier_a1) and barrier_a1 > 0) else math.nan
+        # C2c: Regrowth after withdrawal — survivors rebuild (from A10's time series)
+        tc_end = float(a10_x.get("tumor_count_end", math.nan))
+        tc_min = float(a10_x.get("tumor_count_min", math.nan))
+        # C2d: Resistance emergence — ABCB1 rises under drug pressure
+        abcb1_a7 = float(a7_x.get("mean_abcb1_surviving_tumor", math.nan))
+        abcb1_a1 = float(a1_x.get("mean_abcb1_surviving_tumor", math.nan))
+
         tests = [
             self._make_test(
                 "C2a",
-                float(a2_m.get("stroma_barrier_score", math.nan)) > 0.0,
-                "ECM barrier forms and impairs drug delivery (stroma_barrier_score > 0 in Anchor 2)",
-                "No barrier signal in Anchor 2: ECM->drug diffusion coupling missing.",
+                tc_a2 < tc_a1,
+                "Drug reduces tumor count: tc(A2: drug) < tc(A1: control)",
+                "Drug ineffective: tumor count with drug not lower than untreated control.",
             ),
             self._make_test(
                 "C2b",
-                float(a7_m.get("live_tumor_cells", math.nan)) > 0.0,
-                "Residual live tumor cells > 0 after SHH-off + drug treatment (Anchor 7)",
-                "Complete eradication in Anchor 7: sanctuary/resistance machinery too weak.",
+                math.isfinite(barrier_ratio) and barrier_ratio >= 0.8,
+                f"Barrier persists through treatment: stroma(A2)/stroma(A1) = {barrier_ratio:.2f} >= 0.80",
+                "Barrier demolished by drug: ECM did not persist at ≥80% of untreated density.",
+            ),
+            self._make_test(
+                "C2c",
+                math.isfinite(tc_end) and math.isfinite(tc_min) and tc_end > tc_min,
+                "Sanctuary survivors regrow after drug withdrawal: tc(endpoint) > tc(nadir) in A10",
+                "No regrowth after withdrawal: surviving population static; check genotype preservation.",
+            ),
+            self._make_test(
+                "C2d",
+                abcb1_a7 > abcb1_a1,
+                "ABCB1 resistance emerges: mean ABCB1 in A7 survivors > A1 baseline",
+                "No efflux pump induction: Rule 11 (efflux_induction_delay) temporal dynamics not working.",
             ),
         ]
         extras["check_tests"] = tests
@@ -1685,33 +1727,54 @@ class BiologyValidator:
     def _eval_check4_fitness_ranking(
         self, metrics: Optional[SimulationMetrics], extras: Dict[str, Any], baseline: Dict[str, Any]
     ) -> Tuple[bool, str]:
-        drug_only_m  = self._cached_metrics(baseline, "ANCHOR_2_DRUG_PENETRATION_MATURITY")
-        combination_m = self._cached_metrics(baseline, "ANCHOR_8_BOTH_DEPLETED_DRUG")
-        if drug_only_m is None or combination_m is None:
-            return False, "missing A2 / A8_BOTH metrics for Check 4 fitness ranking"
+        a8_m = self._cached_metrics(baseline, "ANCHOR_8_BOTH_DEPLETED_DRUG")
+        a7_m = self._cached_metrics(baseline, "ANCHOR_7_ECM_DEGRADATION_LIMITS")
+        a2_m = self._cached_metrics(baseline, "ANCHOR_2_DRUG_PENETRATION_MATURITY")
+        a1_m = self._cached_metrics(baseline, "ANCHOR_1_SELF_ASSEMBLY")
+        a3_m = self._cached_metrics(baseline, "ANCHOR_3_SHH_PARADOX")
+        if any(m is None for m in (a8_m, a7_m, a2_m, a1_m, a3_m)):
+            return False, "missing A1/A2/A3/A7/A8_BOTH metrics for Check 4 fitness ranking"
 
-        viab_drug_only   = self._viability(drug_only_m)
-        viab_combination = self._viability(combination_m)
+        # Five-strategy ranking by total tumor count (ascending = better outcome):
+        # ECM-degrade+drug < SHH+drug < drug-only < untreated < SHH-only
+        tc_a8 = float(a8_m.get("total_tumor_cells", math.nan))
+        tc_a7 = float(a7_m.get("total_tumor_cells", math.nan))
+        tc_a2 = float(a2_m.get("total_tumor_cells", math.nan))
+        tc_a1 = float(a1_m.get("total_tumor_cells", math.nan))
+        tc_a3 = float(a3_m.get("total_tumor_cells", math.nan))
+
         tests = [
             self._make_test(
                 "C4a",
-                viab_combination < viab_drug_only,
-                "Viability (ECM-depletion+drug) < Viability (drug-only against intact barrier)",
-                "Combination not outperforming drug alone: ECM depletion not improving drug kill.",
+                tc_a8 < tc_a7,
+                f"tc(ECM-degrade+drug)={tc_a8:.0f} < tc(SHH+drug)={tc_a7:.0f}",
+                "Full ECM depletion + drug not better than SHH pathway + drug: check barrier decomposition.",
             ),
             self._make_test(
                 "C4b",
-                math.isfinite(viab_drug_only) and viab_drug_only < 1.0,
-                "Viability (drug-only) < 1.0 — drug achieves some kill against intact barrier",
-                "Drug completely ineffective against intact barrier: check drug penetration minimum.",
+                tc_a7 < tc_a2,
+                f"tc(SHH+drug)={tc_a7:.0f} < tc(drug-only)={tc_a2:.0f}",
+                "SHH+drug not better than drug alone: barrier opening not improving drug delivery.",
+            ),
+            self._make_test(
+                "C4c",
+                tc_a2 < tc_a1,
+                f"tc(drug-only)={tc_a2:.0f} < tc(untreated)={tc_a1:.0f}",
+                "Drug alone not reducing tumor vs untreated: drug mechanism non-functional.",
+            ),
+            self._make_test(
+                "C4d",
+                tc_a1 < tc_a3,
+                f"tc(untreated)={tc_a1:.0f} < tc(SHH-only)={tc_a3:.0f}",
+                "SHH-only not worse than untreated: SHH paradox absent from fitness landscape.",
             ),
         ]
         extras["check_tests"] = tests
         failed = [t for t in tests if not bool(t["passed"])]
         if not failed:
             return True, (
-                f"CHECK 4 PASS — combination({viab_combination:.3f}) < "
-                f"drug-only({viab_drug_only:.3f}) < 1.0"
+                f"CHECK 4 PASS — full ranking: ECM+drug({tc_a8:.0f}) < SHH+drug({tc_a7:.0f}) "
+                f"< drug({tc_a2:.0f}) < control({tc_a1:.0f}) < SHH-only({tc_a3:.0f})"
             )
         fail_ids = ", ".join(t["id"] for t in failed)
         return False, f"CHECK 4 FAIL — fitness hierarchy broken; failed: {fail_ids}"

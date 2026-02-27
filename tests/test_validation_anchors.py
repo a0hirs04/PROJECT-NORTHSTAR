@@ -63,6 +63,20 @@ def test_anchor_suite_has_expected_order_and_dependencies(ea_test_paths, tmp_pat
     # Reality Checks are virtual and have the right gate dependencies
     assert by_name["CHECK_1_NATURAL_HISTORY"].virtual is True
     assert by_name["CHECK_5_SANCTUARY_REGROWTH"].virtual is True
+
+    # CHECK_2 needs A1 (baseline), A2 (drug), A7 (treatment), A10 (regrowth)
+    assert by_name["CHECK_2_CHEMO_FAILURE"].dependencies == [
+        "ANCHOR_1_SELF_ASSEMBLY",
+        "ANCHOR_2_DRUG_PENETRATION_MATURITY",
+        "ANCHOR_7_ECM_DEGRADATION_LIMITS",
+        "ANCHOR_10_SPATIAL_SANCTUARY",
+    ]
+
+    # CHECK_4 ranks all five treatment strategies
+    assert "ANCHOR_1_SELF_ASSEMBLY" in by_name["CHECK_4_FITNESS_RANKING"].dependencies
+    assert "ANCHOR_3_SHH_PARADOX" in by_name["CHECK_4_FITNESS_RANKING"].dependencies
+    assert "ANCHOR_8_BOTH_DEPLETED_DRUG" in by_name["CHECK_4_FITNESS_RANKING"].dependencies
+
     assert by_name["CHECK_5_SANCTUARY_REGROWTH"].dependencies == [
         "CHECK_1_NATURAL_HISTORY",
         "CHECK_2_CHEMO_FAILURE",
