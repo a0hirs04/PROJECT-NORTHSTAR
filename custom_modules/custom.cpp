@@ -334,6 +334,18 @@ void load_interventions_at_setup()
         apply_targetable_knob_interventions(knobs, knob_interventions);
         set_active_calibration_knobs(knobs);
 
+        // Load ECM component degradation parameters from XML user_parameters.
+        // These are physical intervention parameters (Anchor 8 / validation only) that
+        // bypass the knob partition — the EA never sets them, only the validation suite does.
+        {
+            TumorCalibrationKnobs ecm_knobs = get_active_calibration_knobs();
+            if (parameters.doubles.find_index("ha_degrade_strength") >= 0)
+                ecm_knobs.ha_degrade_strength  = parameters.doubles("ha_degrade_strength");
+            if (parameters.doubles.find_index("col_degrade_strength") >= 0)
+                ecm_knobs.col_degrade_strength = parameters.doubles("col_degrade_strength");
+            set_active_calibration_knobs(ecm_knobs);
+        }
+
         // Runtime interventions are knob-driven; keep gene-level interventions empty.
         set_current_interventions(std::vector<Intervention>());
 

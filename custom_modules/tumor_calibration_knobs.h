@@ -71,6 +71,13 @@ struct TumorCalibrationKnobs
 
     // Trait 8
     double mechanical_compaction_strength = 0.6; // 8 (Fixed)
+
+    // --- ECM component degradation (validation / external physical intervention only).
+    // These are NOT EA-targetable knobs — they represent enzymatic/physical ECM depletion
+    // applied by the validation suite (Anchor 8) to isolate HA vs. collagen contributions.
+    // HA contributes 70% of the diffusion barrier; collagen contributes 80% of mechanical stiffness.
+    double ha_degrade_strength  = 0.0;  // [0=no HA depletion, 1=full HA depletion]
+    double col_degrade_strength = 0.0;  // [0=no collagen depletion, 1=full collagen depletion]
 };
 
 struct TumorCalibrationProfiles

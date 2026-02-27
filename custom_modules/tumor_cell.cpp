@@ -367,12 +367,21 @@ void tumor_phenotype_update(Cell* pCell, Phenotype& phenotype, double dt)
     // mechanical stress rather than allowing viscoelastic dissipation.
     // At ECM=0.0: solid_stress = simple_pressure (cells only).
     // At ECM=0.8: solid_stress = 1.8 × simple_pressure (stiff matrix contribution).
-    const double solid_stress = simple_pressure * (1.0 + local_ecm_val * compaction_mult);
+    //
+    // Component-specific ECM degradation (Anchor 8 / validation):
+    //   Collagen provides 80% of mechanical stiffness; HA provides 20%.
+    //   ha_degrade_strength in [0,1]: 0 = intact HA, 1 = fully HA-depleted.
+    //   col_degrade_strength in [0,1]: 0 = intact collagen, 1 = fully collagen-depleted.
+    //   At defaults (both 0): mech_ecm_weight = 1.0 → same as before.
+    const double mech_col_frac = 0.80 * (1.0 - knobs.col_degrade_strength);
+    const double mech_ha_frac  = 0.20 * (1.0 - knobs.ha_degrade_strength);
+    const double mech_ecm_weight = clamp_unit(mech_col_frac + mech_ha_frac);
+    const double solid_stress = simple_pressure * (1.0 + local_ecm_val * compaction_mult * mech_ecm_weight);
     // Saturating brake: 35% max suppression at high solid stress (cells adapt
     // via cytoskeletal remodeling, preventing complete growth arrest from
     // mechanical stress alone — unlike chemical veto rule 1).
     const double solid_stress_brake =
-        clamp_unit(1.0 - (0.35 * compaction_mult) * std::min(1.0, solid_stress));
+        clamp_unit(1.0 - (0.35 * compaction_mult * mech_ecm_weight) * std::min(1.0, solid_stress));
 
     // Knob 3a scales pre-physical proliferation.
     const double pre_physical_prolif = growth_bin * effective_braking * contact_mult;
@@ -411,8 +420,17 @@ void tumor_phenotype_update(Cell* pCell, Phenotype& phenotype, double dt)
             // Dense HA + collagen raises IFP, reducing convective drug transport.
             //   (a) PEGPH20 (HA depletion) improves gemcitabine in preclinical PDAC.
             //   (b) PEGPH20 alone fails clinically — COL1A1 barrier remains intact.
-            // At ECM=0.1: 5% barrier. At ECM=0.8: 40% barrier.
-            const double ecm_delivery_barrier = clamp_unit(1.0 - 0.5 * local_ecm_val);
+            // At ECM=0.1: 5% barrier. At ECM=0.8: 40% barrier (defaults, both degradations=0).
+            //
+            // Component-specific ECM degradation (Anchor 8 / validation):
+            //   HA contributes 70% of the diffusion barrier; collagen contributes 30%.
+            //   ha_degrade_strength in [0,1]: reduces HA's diffusion contribution proportionally.
+            //   col_degrade_strength in [0,1]: reduces collagen's diffusion contribution proportionally.
+            //   At defaults (both 0): diffusion_ecm_weight = 1.0 → same as before.
+            const double diff_ha_frac  = 0.70 * (1.0 - knobs.ha_degrade_strength);
+            const double diff_col_frac = 0.30 * (1.0 - knobs.col_degrade_strength);
+            const double diffusion_ecm_weight = clamp_unit(diff_ha_frac + diff_col_frac);
+            const double ecm_delivery_barrier = clamp_unit(1.0 - 0.5 * local_ecm_val * diffusion_ecm_weight);
             const double effective_drug = clamp_nonnegative(drug) * drug_sensitivity
                                         * ecm_delivery_barrier;
             phenotype.death.rates[apoptosis_index] += effective_drug * 0.001;

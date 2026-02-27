@@ -46,3 +46,6 @@
   - Anchor 1 first (`ANCHOR_1_SELF_ASSEMBLY`)
   - Anchor 3 early (`ANCHOR_3_SHH_PARADOX`)
   - Anchor 10 final integration (`ANCHOR_10_SPATIAL_SANCTUARY`)
+- Validation protocol uses replicate medians (`--replicates-per-arm`, default `3`) and a
+  **34-test directional pass/fail matrix** (no calibration constants as pass gates).
+- Runtime summary reports median per-run wall time and projected **~60-run pre-EA HPC budget**.

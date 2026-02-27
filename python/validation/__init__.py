@@ -17,4 +17,6 @@ Modules:
                        8) two-component barrier proxy
                        9) density prognostic behavior
                        10) spatial sanctuary integration
+                       Includes a 34-test directional pass/fail matrix and
+                       replicate-median decision protocol.
 """

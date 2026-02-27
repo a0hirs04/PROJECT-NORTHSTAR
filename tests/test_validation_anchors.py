@@ -36,16 +36,40 @@ def test_anchor_suite_has_expected_order_and_dependencies(ea_test_paths, tmp_pat
     validator = _make_validator(ea_test_paths, tmp_path)
     specs = validator._scenario_specs()  # noqa: SLF001
 
-    assert len(specs) == 10
-    assert sorted(spec.anchor_id for spec in specs) == list(range(1, 11))
+    # 12 simulation anchors (1-10, three Anchor-8 arms) + 5 virtual Reality Checks = 17
+    assert len(specs) == 17
+    assert set(spec.anchor_id for spec in specs) == set(range(1, 16))
     assert specs[0].name == "ANCHOR_1_SELF_ASSEMBLY"
     assert specs[1].name == "ANCHOR_3_SHH_PARADOX"
-    assert specs[-1].name == "ANCHOR_10_SPATIAL_SANCTUARY"
+    assert specs[-1].name == "CHECK_5_SANCTUARY_REGROWTH"
 
     by_name = {spec.name: spec for spec in specs}
+
+    # Anchor 6 preserves its single-parent dependency
     assert by_name["ANCHOR_6_PERIPHERAL_EMT"].dependencies == ["ANCHOR_5_CENTRAL_HYPOXIA"]
-    assert by_name["ANCHOR_8_TWO_COMPONENT_BARRIER"].dependencies == ["ANCHOR_7_ECM_DEGRADATION_LIMITS"]
-    assert by_name["ANCHOR_10_SPATIAL_SANCTUARY"].dependencies == ["ANCHOR_9_BARRIER_DENSITY_PROGNOSTIC"]
+
+    # Anchor 8 three-arm independence structure
+    assert by_name["ANCHOR_8_HA_DEPLETED_DRUG"].dependencies == ["ANCHOR_7_ECM_DEGRADATION_LIMITS"]
+    assert by_name["ANCHOR_8_COL_DEPLETED_DRUG"].dependencies == ["ANCHOR_7_ECM_DEGRADATION_LIMITS"]
+    assert by_name["ANCHOR_8_BOTH_DEPLETED_DRUG"].dependencies == [
+        "ANCHOR_8_HA_DEPLETED_DRUG",
+        "ANCHOR_8_COL_DEPLETED_DRUG",
+    ]
+
+    # Anchor 10 includes the new Anchor 8 capstone arm
+    assert "ANCHOR_9_BARRIER_DENSITY_PROGNOSTIC" in by_name["ANCHOR_10_SPATIAL_SANCTUARY"].dependencies
+    assert "ANCHOR_8_BOTH_DEPLETED_DRUG" in by_name["ANCHOR_10_SPATIAL_SANCTUARY"].dependencies
+
+    # Reality Checks are virtual and have the right gate dependencies
+    assert by_name["CHECK_1_NATURAL_HISTORY"].virtual is True
+    assert by_name["CHECK_5_SANCTUARY_REGROWTH"].virtual is True
+    assert by_name["CHECK_5_SANCTUARY_REGROWTH"].dependencies == [
+        "CHECK_1_NATURAL_HISTORY",
+        "CHECK_2_CHEMO_FAILURE",
+        "CHECK_3_VISMODEGIB_PARADOX",
+        "CHECK_4_FITNESS_RANKING",
+        "ANCHOR_10_SPATIAL_SANCTUARY",
+    ]
 
 
 def test_dependency_gate_skips_all_downstream_when_anchor1_fails(ea_test_paths, tmp_path, monkeypatch):
@@ -59,13 +83,14 @@ def test_dependency_gate_skips_all_downstream_when_anchor1_fails(ea_test_paths, 
         return _make_result(spec, success=True)
 
     monkeypatch.setattr(validator, "_run_scenario", fake_run)
+    monkeypatch.setattr(validator, "_run_virtual_check", fake_run)
 
     summary = validator.run_all()
 
     assert calls == ["ANCHOR_1_SELF_ASSEMBLY"]
-    assert summary.total == 10
+    assert summary.total == 17
     assert summary.passed == 0
-    assert summary.failed == 10
+    assert summary.failed == 17
     for result in summary.scenario_results[1:]:
         assert result.exit_code == -2
         assert "failed dependencies" in result.details
@@ -82,17 +107,26 @@ def test_dependency_gate_skips_only_affected_branches(ea_test_paths, tmp_path, m
         return _make_result(spec, success=True)
 
     monkeypatch.setattr(validator, "_run_scenario", fake_run)
+    monkeypatch.setattr(validator, "_run_virtual_check", fake_run)
 
     summary = validator.run_all()
     by_name = {r.scenario: r for r in summary.scenario_results}
 
+    # A3 failure propagates to A7 and all three A8 arms
     assert "ANCHOR_7_ECM_DEGRADATION_LIMITS" not in calls
-    assert "ANCHOR_8_TWO_COMPONENT_BARRIER" not in calls
+    assert "ANCHOR_8_HA_DEPLETED_DRUG" not in calls
+    assert "ANCHOR_8_COL_DEPLETED_DRUG" not in calls
+    assert "ANCHOR_8_BOTH_DEPLETED_DRUG" not in calls
 
+    # Branches independent of A3 still run
     assert "ANCHOR_2_DRUG_PENETRATION_MATURITY" in calls
     assert "ANCHOR_9_BARRIER_DENSITY_PROGNOSTIC" in calls
-    assert "ANCHOR_10_SPATIAL_SANCTUARY" in calls
+
+    # A10 and checks that need A3/A7/A8 are skipped
+    assert "ANCHOR_10_SPATIAL_SANCTUARY" not in calls
 
     assert by_name["ANCHOR_7_ECM_DEGRADATION_LIMITS"].exit_code == -2
-    assert by_name["ANCHOR_8_TWO_COMPONENT_BARRIER"].exit_code == -2
-    assert by_name["ANCHOR_10_SPATIAL_SANCTUARY"].success is True
+    assert by_name["ANCHOR_8_HA_DEPLETED_DRUG"].exit_code == -2
+    assert by_name["ANCHOR_8_COL_DEPLETED_DRUG"].exit_code == -2
+    assert by_name["ANCHOR_8_BOTH_DEPLETED_DRUG"].exit_code == -2
+    assert by_name["ANCHOR_10_SPATIAL_SANCTUARY"].exit_code == -2
