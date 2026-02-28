@@ -27,6 +27,7 @@ int tgfb_index   = -1;
 int shh_index    = -1;
 int ecm_index    = -1;
 int drug_index   = -1;
+ECMInterventionState intervention_state;
 
 namespace
 {
@@ -34,14 +35,16 @@ namespace
 typedef void (*PhenotypeDispatchFn)(Cell*, Phenotype&, double);
 
 std::unordered_map<int, PhenotypeDispatchFn> g_dispatch_by_type;
+std::vector<double> g_ecm_ha_fraction_by_voxel;
+std::vector<double> g_effective_o2_diffusion_by_voxel;
+std::vector<double> g_effective_drug_diffusion_by_voxel;
+std::vector<double> g_effective_tgfb_diffusion_by_voxel;
+std::vector<double> g_effective_shh_diffusion_by_voxel;
+bool g_module_trace_enabled = false;
+std::vector<ModuleTraceEntry> g_module_trace_log;
 
 // Store whichever diffusion-decay solver was configured before we wrapped it.
 void (*g_base_diffusion_decay_solver)(Microenvironment&, double) = NULL;
-
-// Requested barrier constants.
-static const double ECM_BLOCKING_FACTOR   = 0.8;
-static const double DRUG_ECM_DECAY_COEFF  = 0.001; // local post-solve drug loss scaling
-static const double OXYGEN_ECM_DECAY_COEFF= 0.001; // local post-solve oxygen perfusion penalty
 
 TumorCalibrationProfiles g_knob_profiles;
 bool g_knob_profiles_loaded = false;
@@ -373,16 +376,23 @@ void apply_ecm_dependent_modifiers(Microenvironment& M, double dt)
     if (dt <= 0.0) return;
 
     static bool warned_missing_substrates = false;
-    if (oxygen_index < 0 || drug_index < 0 || ecm_index < 0)
+    if (oxygen_index < 0 || drug_index < 0 || tgfb_index < 0 || shh_index < 0 || ecm_index < 0)
     {
         if (!warned_missing_substrates)
         {
             std::cerr << "[ecm_dependent_diffusion] WARNING: missing substrate indices "
-                      << "(oxygen/drug/ecm_density). Skipping barrier modifier.\n";
+                      << "(oxygen/tgfb/shh/drug/ecm_density). Skipping barrier modifier.\n";
             warned_missing_substrates = true;
         }
         return;
     }
+
+    auto base_diffusion_or_zero = [&M](int substrate_index) -> double
+    {
+        if (substrate_index < 0) return 0.0;
+        if (substrate_index >= static_cast<int>(M.diffusion_coefficients.size())) return 0.0;
+        return std::max(0.0, M.diffusion_coefficients[substrate_index]);
+    };
 
     const unsigned int n_voxels = M.number_of_voxels();
     for (unsigned int n = 0; n < n_voxels; ++n)
@@ -390,30 +400,38 @@ void apply_ecm_dependent_modifiers(Microenvironment& M, double dt)
         std::vector<double>& rho = M.density_vector(static_cast<int>(n));
         if (ecm_index >= static_cast<int>(rho.size()) ||
             drug_index >= static_cast<int>(rho.size()) ||
-            oxygen_index >= static_cast<int>(rho.size()))
+            oxygen_index >= static_cast<int>(rho.size()) ||
+            tgfb_index >= static_cast<int>(rho.size()) ||
+            shh_index >= static_cast<int>(rho.size()))
         {
             continue;
         }
 
-        const double ecm = clamp_unit(rho[ecm_index]);
+        const double base_o2 = base_diffusion_or_zero(oxygen_index);
+        const double base_tgfb = base_diffusion_or_zero(tgfb_index);
+        const double base_shh = base_diffusion_or_zero(shh_index);
+        const double base_drug = base_diffusion_or_zero(drug_index);
 
-        // Drug barrier model:
-        //   D_drug(ecm) = D_base * (1 - 0.8 * ecm)
-        // With uniform substrate diffusion in this BioFVM mode, approximate by
-        // local post-diffusion attenuation.
-        const double blocking = 1.0 - ECM_BLOCKING_FACTOR * ecm;
-        (void)blocking;
-
-        double drug_multiplier = 1.0 - ECM_BLOCKING_FACTOR * ecm * DRUG_ECM_DECAY_COEFF * dt;
-        drug_multiplier = std::max(0.0, drug_multiplier);
-        rho[drug_index] = clamp_nonnegative(rho[drug_index] * drug_multiplier);
-
-        // Oxygen perfusion penalty in dense stroma:
-        //   o2_decay_boost = 1 + 2 * ecm
-        const double o2_decay_boost = 1.0 + 2.0 * ecm;
-        double oxygen_multiplier = 1.0 - (o2_decay_boost - 1.0) * OXYGEN_ECM_DECAY_COEFF * dt;
-        oxygen_multiplier = std::max(0.0, oxygen_multiplier);
-        rho[oxygen_index] = clamp_nonnegative(rho[oxygen_index] * oxygen_multiplier);
+        if (base_o2 > 0.0 && n < g_effective_o2_diffusion_by_voxel.size())
+        {
+            const double ratio = clamp_unit(g_effective_o2_diffusion_by_voxel[n] / base_o2);
+            rho[oxygen_index] = clamp_nonnegative(rho[oxygen_index] * ratio);
+        }
+        if (base_tgfb > 0.0 && n < g_effective_tgfb_diffusion_by_voxel.size())
+        {
+            const double ratio = clamp_unit(g_effective_tgfb_diffusion_by_voxel[n] / base_tgfb);
+            rho[tgfb_index] = clamp_nonnegative(rho[tgfb_index] * ratio);
+        }
+        if (base_shh > 0.0 && n < g_effective_shh_diffusion_by_voxel.size())
+        {
+            const double ratio = clamp_unit(g_effective_shh_diffusion_by_voxel[n] / base_shh);
+            rho[shh_index] = clamp_nonnegative(rho[shh_index] * ratio);
+        }
+        if (base_drug > 0.0 && n < g_effective_drug_diffusion_by_voxel.size())
+        {
+            const double ratio = clamp_unit(g_effective_drug_diffusion_by_voxel[n] / base_drug);
+            rho[drug_index] = clamp_nonnegative(rho[drug_index] * ratio);
+        }
     }
 }
 
@@ -452,6 +470,39 @@ void assert_microenvironment_write_allowed(ModulePhase phase, const char* module
                   << " attempted a microenvironment write during "
                   << phase_to_string(phase) << " phase.\n";
         assert(false && "Microenvironment writes are only allowed in WRITE phase");
+    }
+}
+
+void log_module_trace(const char* module_name,
+                      ModulePhase phase,
+                      std::initializer_list<const char*> field_reads,
+                      std::initializer_list<const char*> field_writes)
+{
+    if (!g_module_trace_enabled) return;
+
+    ModuleTraceEntry entry;
+    entry.module_name = module_name;
+    entry.phase = phase;
+
+    for (const char* field : field_reads)
+    {
+        if (field != NULL && field[0] != '\0')
+        {
+            entry.field_reads.push_back(field);
+        }
+    }
+
+    for (const char* field : field_writes)
+    {
+        if (field != NULL && field[0] != '\0')
+        {
+            entry.field_writes.push_back(field);
+        }
+    }
+
+    #pragma omp critical(module_trace_log_guard)
+    {
+        g_module_trace_log.push_back(entry);
     }
 }
 
@@ -496,7 +547,175 @@ double read_xml_double_or_default(const std::string& name, double default_value)
     return default_value;
 }
 
+void ensure_ecm_ha_fraction_storage(double default_fraction)
+{
+    const unsigned int n_voxels = microenvironment.number_of_voxels();
+    const double clamped_default = clamp_unit(default_fraction);
+    if (g_ecm_ha_fraction_by_voxel.size() != n_voxels)
+    {
+        g_ecm_ha_fraction_by_voxel.assign(n_voxels, clamped_default);
+    }
+}
+
+int get_cell_voxel_index(Cell* pCell)
+{
+    if (pCell == NULL) return -1;
+    std::vector<double> position = pCell->position;
+    return microenvironment.nearest_voxel_index(position);
+}
+
 } // namespace
+
+void set_module_trace_enabled(bool enabled)
+{
+    g_module_trace_enabled = enabled;
+}
+
+void clear_module_trace_log(void)
+{
+    #pragma omp critical(module_trace_log_guard)
+    {
+        g_module_trace_log.clear();
+    }
+}
+
+std::vector<ModuleTraceEntry> get_module_trace_log(void)
+{
+    std::vector<ModuleTraceEntry> copy;
+    #pragma omp critical(module_trace_log_guard)
+    {
+        copy = g_module_trace_log;
+    }
+    return copy;
+}
+
+void reset_ecm_ha_fraction_field(double default_fraction)
+{
+    const unsigned int n_voxels = microenvironment.number_of_voxels();
+    const double clamped_default = std::max(0.0, std::min(1.0, default_fraction));
+    g_ecm_ha_fraction_by_voxel.assign(n_voxels, clamped_default);
+}
+
+double get_ecm_ha_fraction(int voxel_index)
+{
+    if (voxel_index < 0) return 0.0;
+    if (voxel_index >= static_cast<int>(g_ecm_ha_fraction_by_voxel.size())) return 0.0;
+    return g_ecm_ha_fraction_by_voxel[voxel_index];
+}
+
+void set_ecm_ha_fraction(int voxel_index, double value)
+{
+    if (voxel_index < 0) return;
+    if (voxel_index >= static_cast<int>(g_ecm_ha_fraction_by_voxel.size())) return;
+    g_ecm_ha_fraction_by_voxel[voxel_index] = std::max(0.0, std::min(1.0, value));
+}
+
+void update_ecm_effective_diffusion_coefficients(Microenvironment& M)
+{
+    const unsigned int n_voxels = M.number_of_voxels();
+
+    auto base_diffusion_or_zero = [&M](int substrate_index) -> double
+    {
+        if (substrate_index < 0) return 0.0;
+        if (substrate_index >= static_cast<int>(M.diffusion_coefficients.size())) return 0.0;
+        return std::max(0.0, M.diffusion_coefficients[substrate_index]);
+    };
+
+    const double base_o2 = base_diffusion_or_zero(oxygen_index);
+    const double base_tgfb = base_diffusion_or_zero(tgfb_index);
+    const double base_shh = base_diffusion_or_zero(shh_index);
+    const double base_drug = base_diffusion_or_zero(drug_index);
+
+    g_effective_o2_diffusion_by_voxel.assign(n_voxels, base_o2);
+    g_effective_tgfb_diffusion_by_voxel.assign(n_voxels, base_tgfb);
+    g_effective_shh_diffusion_by_voxel.assign(n_voxels, base_shh);
+    g_effective_drug_diffusion_by_voxel.assign(n_voxels, base_drug);
+
+    if (ecm_index < 0)
+    {
+        return;
+    }
+
+    for (unsigned int n = 0; n < n_voxels; ++n)
+    {
+        const std::vector<double>& rho = M.density_vector(static_cast<int>(n));
+        if (ecm_index >= static_cast<int>(rho.size()))
+        {
+            continue;
+        }
+
+        const double ecm = clamp_unit(rho[ecm_index]);
+        const double ha_frac =
+            (n < g_ecm_ha_fraction_by_voxel.size()) ? clamp_unit(g_ecm_ha_fraction_by_voxel[n]) : 0.5;
+        const double col_frac = 1.0 - ha_frac;
+
+        if (base_o2 > 0.0)
+        {
+            const double weight_o2 = 0.6 * ha_frac + 0.3 * col_frac;
+            double effective = base_o2 * (1.0 - ecm * weight_o2);
+            effective = std::max(effective, base_o2 * 0.05);
+            g_effective_o2_diffusion_by_voxel[n] = effective;
+        }
+
+        if (base_drug > 0.0)
+        {
+            const double weight_drug = 0.8 * ha_frac + 0.3 * col_frac;
+            double effective = base_drug * (1.0 - ecm * weight_drug);
+            effective = std::max(effective, base_drug * 0.02);
+            g_effective_drug_diffusion_by_voxel[n] = effective;
+        }
+
+        if (base_tgfb > 0.0)
+        {
+            const double weight_tgfb = 0.7 * ha_frac + 0.4 * col_frac;
+            double effective = base_tgfb * (1.0 - ecm * weight_tgfb);
+            effective = std::max(effective, base_tgfb * 0.05);
+            g_effective_tgfb_diffusion_by_voxel[n] = effective;
+        }
+
+        if (base_shh > 0.0)
+        {
+            const double weight_shh = 0.7 * ha_frac + 0.4 * col_frac;
+            double effective = base_shh * (1.0 - ecm * weight_shh);
+            effective = std::max(effective, base_shh * 0.05);
+            g_effective_shh_diffusion_by_voxel[n] = effective;
+        }
+    }
+}
+
+double get_effective_diffusion_coefficient(int substrate_index, int voxel_index)
+{
+    if (voxel_index < 0) return 0.0;
+
+    if (substrate_index == oxygen_index &&
+        voxel_index < static_cast<int>(g_effective_o2_diffusion_by_voxel.size()))
+    {
+        return g_effective_o2_diffusion_by_voxel[voxel_index];
+    }
+    if (substrate_index == tgfb_index &&
+        voxel_index < static_cast<int>(g_effective_tgfb_diffusion_by_voxel.size()))
+    {
+        return g_effective_tgfb_diffusion_by_voxel[voxel_index];
+    }
+    if (substrate_index == shh_index &&
+        voxel_index < static_cast<int>(g_effective_shh_diffusion_by_voxel.size()))
+    {
+        return g_effective_shh_diffusion_by_voxel[voxel_index];
+    }
+    if (substrate_index == drug_index &&
+        voxel_index < static_cast<int>(g_effective_drug_diffusion_by_voxel.size()))
+    {
+        return g_effective_drug_diffusion_by_voxel[voxel_index];
+    }
+
+    if (substrate_index >= 0 &&
+        substrate_index < static_cast<int>(microenvironment.diffusion_coefficients.size()))
+    {
+        return std::max(0.0, microenvironment.diffusion_coefficients[substrate_index]);
+    }
+
+    return 0.0;
+}
 
 // SENSING PHASE (reads environment, writes nothing)
 void module1_oxygen_sensing(Cell* pCell, Phenotype& phenotype, double dt, ModulePhase phase)
@@ -504,6 +723,7 @@ void module1_oxygen_sensing(Cell* pCell, Phenotype& phenotype, double dt, Module
     (void)phenotype;
     (void)dt;
     assert_expected_phase("module1_oxygen_sensing", phase, ModulePhase::SENSING);
+    log_module_trace("module1_oxygen_sensing", phase, {"oxygen"}, {});
 
     if (pCell == NULL) return;
 
@@ -532,6 +752,7 @@ void module3_stromal_activation(Cell* pCell, Phenotype& phenotype, double dt, Mo
     (void)phenotype;
     (void)dt;
     assert_expected_phase("module3_stromal_activation", phase, ModulePhase::SENSING);
+    log_module_trace("module3_stromal_activation", phase, {"tgfb", "shh"}, {});
 
     if (pCell == NULL) return;
 
@@ -591,68 +812,632 @@ void module3_stromal_activation(Cell* pCell, Phenotype& phenotype, double dt, Mo
 
 void module7_drug_response(Cell* pCell, Phenotype& phenotype, double dt, ModulePhase phase)
 {
-    (void)pCell;
-    (void)phenotype;
-    (void)dt;
     assert_expected_phase("module7_drug_response", phase, ModulePhase::SENSING);
+    log_module_trace("module7_drug_response", phase, {"drug"}, {});
+
+    if (pCell == NULL) return;
+
+    Cell_Definition* pTumorDef = find_cell_definition("tumor_cell");
+    const bool is_tumor =
+        (pTumorDef != NULL) && (pCell->type == pTumorDef->type);
+    if (!is_tumor)
+    {
+        return;
+    }
+
+    if (drug_index < 0) return;
+
+    const std::vector<double>& densities = pCell->nearest_density_vector();
+    const double local_drug = read_density_value(densities, drug_index);
+
+    const double hif1a_active =
+        read_custom_data_value_or_default(pCell, "hif1a_active", 0.0);
+    double nrf2_active =
+        read_custom_data_value_or_default(pCell, "nrf2_active", 0.0);
+    double abcb1_active =
+        read_custom_data_value_or_default(pCell, "abcb1_active", 0.0);
+    double intracellular_drug =
+        read_custom_data_value_or_default(pCell, "intracellular_drug", 0.0);
+    double time_since_drug_exposure =
+        read_custom_data_value_or_default(pCell, "time_since_drug_exposure", -1.0);
+
+    const double drug_uptake_rate =
+        read_xml_double_or_default("drug_uptake_rate", 0.0);
+    const double drug_stress_threshold =
+        read_xml_double_or_default("drug_stress_threshold", 0.0);
+    const double efflux_induction_delay =
+        read_xml_double_or_default("efflux_induction_delay", 0.0);
+    const double efflux_strength =
+        read_xml_double_or_default("efflux_strength", 0.0);
+    const double nrf2_decay_rate =
+        read_xml_double_or_default("nrf2_decay_rate", 0.0);
+    const double drug_natural_decay_rate =
+        read_xml_double_or_default("drug_natural_decay_rate", 0.0);
+    const double hif1a_nrf2_priming_bonus =
+        read_xml_double_or_default("hif1a_nrf2_priming_bonus", 0.0);
+
+    // Step 1: Drug uptake.
+    if (local_drug > 0.0)
+    {
+        const double uptake = drug_uptake_rate * local_drug * dt;
+        intracellular_drug = intracellular_drug + uptake;
+        intracellular_drug = std::min(1.0, intracellular_drug);
+
+        if (time_since_drug_exposure < 0.0)
+        {
+            time_since_drug_exposure = 0.0;
+        }
+    }
+
+    // Step 2: Intracellular drug decay.
+    intracellular_drug = intracellular_drug * (1.0 - drug_natural_decay_rate * dt);
+    intracellular_drug = std::max(0.0, intracellular_drug);
+
+    // Step 3: Stress sensing (NRF2 activation).
+    double stress_signal = intracellular_drug;
+    if (hif1a_active == 1.0)
+    {
+        stress_signal = stress_signal + hif1a_nrf2_priming_bonus;
+    }
+
+    if (stress_signal > drug_stress_threshold)
+    {
+        nrf2_active = 1.0;
+    }
+    else
+    {
+        if (nrf2_active == 1.0)
+        {
+            nrf2_active = nrf2_active - nrf2_decay_rate * dt;
+            nrf2_active = std::max(0.0, nrf2_active);
+            if (nrf2_active < 0.5)
+            {
+                nrf2_active = 0.0;
+            }
+        }
+    }
+
+    // Step 4: Efflux activation (ABCB1).
+    if (nrf2_active >= 1.0 && time_since_drug_exposure >= 0.0)
+    {
+        if (time_since_drug_exposure >= efflux_induction_delay)
+        {
+            abcb1_active = 1.0;
+        }
+    }
+
+    // Step 5: Efflux pump action.
+    if (abcb1_active == 1.0)
+    {
+        const double efflux_amount = efflux_strength * intracellular_drug * dt;
+        intracellular_drug = intracellular_drug - efflux_amount;
+        intracellular_drug = std::max(0.0, intracellular_drug);
+    }
+
+    // Step 6: Advance exposure clock.
+    if (time_since_drug_exposure >= 0.0)
+    {
+        time_since_drug_exposure = time_since_drug_exposure + dt;
+    }
+
+    // Step 7: Drug uptake from environment (sink effect via PhysiCell uptake).
+    if (drug_index >= 0 &&
+        drug_index < static_cast<int>(phenotype.secretion.uptake_rates.size()))
+    {
+        if (local_drug > 0.0)
+        {
+            phenotype.secretion.uptake_rates[drug_index] = drug_uptake_rate;
+        }
+        else
+        {
+            phenotype.secretion.uptake_rates[drug_index] = 0.0;
+        }
+    }
+
+    intracellular_drug = std::min(1.0, std::max(0.0, intracellular_drug));
+
+    set_custom_data_if_present(pCell, "intracellular_drug", intracellular_drug);
+    set_custom_data_if_present(pCell, "nrf2_active", nrf2_active);
+    set_custom_data_if_present(pCell, "abcb1_active", abcb1_active);
+    set_custom_data_if_present(pCell, "time_since_drug_exposure", time_since_drug_exposure);
 }
 
 // DECISION PHASE (reads module outputs + environment, writes nothing to fields)
 void module5_emt_engine(Cell* pCell, Phenotype& phenotype, double dt, ModulePhase phase)
 {
-    (void)pCell;
-    (void)phenotype;
     (void)dt;
     assert_expected_phase("module5_emt_engine", phase, ModulePhase::DECISION);
+    log_module_trace("module5_emt_engine", phase, {"tgfb"}, {});
+
+    if (pCell == NULL) return;
+
+    Cell_Definition* pTumorDef = find_cell_definition("tumor_cell");
+    const bool is_tumor =
+        (pTumorDef != NULL) && (pCell->type == pTumorDef->type);
+    if (!is_tumor)
+    {
+        return;
+    }
+
+    const std::vector<double>& densities = pCell->nearest_density_vector();
+    const double local_tgfb = read_density_value(densities, tgfb_index);
+    const double hif1a_active =
+        read_custom_data_value_or_default(pCell, "hif1a_active", 0.0);
+
+    const double emt_induction_threshold =
+        read_xml_double_or_default("emt_induction_threshold", 0.0);
+    int emt_phenotype_extent = 1;
+    if (parameters.ints.find_index("emt_phenotype_extent") >= 0)
+    {
+        emt_phenotype_extent = parameters.ints("emt_phenotype_extent");
+    }
+    const double hif1a_emt_boost =
+        read_xml_double_or_default("hif1a_emt_boost", 0.0);
+    const double motility_epithelial =
+        read_xml_double_or_default("motility_epithelial", 0.0);
+    const double motility_mesenchymal_low =
+        read_xml_double_or_default("motility_mesenchymal_low", 0.0);
+    const double motility_mesenchymal_med =
+        read_xml_double_or_default("motility_mesenchymal_med", 0.0);
+    const double motility_mesenchymal_high =
+        read_xml_double_or_default("motility_mesenchymal_high", 0.0);
+    const double adhesion_epithelial =
+        read_xml_double_or_default("adhesion_epithelial", 0.0);
+    const double adhesion_mesenchymal_low =
+        read_xml_double_or_default("adhesion_mesenchymal_low", 0.0);
+    const double adhesion_mesenchymal_med =
+        read_xml_double_or_default("adhesion_mesenchymal_med", 0.0);
+    const double adhesion_mesenchymal_high =
+        read_xml_double_or_default("adhesion_mesenchymal_high", 0.0);
+
+    double induction_signal = local_tgfb;
+    if (hif1a_active == 1.0)
+    {
+        induction_signal = induction_signal + hif1a_emt_boost;
+    }
+
+    if (induction_signal > emt_induction_threshold)
+    {
+        set_custom_data_if_present(pCell, "zeb1_active", 1.0);
+        set_custom_data_if_present(pCell, "cdh1_expressed", 0.0);
+
+        if (emt_phenotype_extent == 1)
+        {
+            phenotype.motility.migration_speed = motility_mesenchymal_low;
+            phenotype.mechanics.cell_cell_adhesion_strength = adhesion_mesenchymal_low;
+            set_custom_data_if_present(pCell, "mmp2_active", 0.0);
+            set_custom_data_if_present(pCell, "emt_extent", 1.0);
+        }
+
+        if (emt_phenotype_extent == 2)
+        {
+            phenotype.motility.migration_speed = motility_mesenchymal_med;
+            phenotype.mechanics.cell_cell_adhesion_strength = adhesion_mesenchymal_med;
+            set_custom_data_if_present(pCell, "mmp2_active", 1.0);
+            set_custom_data_if_present(pCell, "emt_extent", 2.0);
+        }
+
+        if (emt_phenotype_extent == 3)
+        {
+            phenotype.motility.migration_speed = motility_mesenchymal_high;
+            phenotype.mechanics.cell_cell_adhesion_strength = adhesion_mesenchymal_high;
+            set_custom_data_if_present(pCell, "mmp2_active", 1.0);
+            set_custom_data_if_present(pCell, "emt_extent", 3.0);
+        }
+    }
+    else
+    {
+        set_custom_data_if_present(pCell, "zeb1_active", 0.0);
+        set_custom_data_if_present(pCell, "cdh1_expressed", 1.0);
+        set_custom_data_if_present(pCell, "mmp2_active", 0.0);
+        set_custom_data_if_present(pCell, "emt_extent", 0.0);
+        phenotype.motility.migration_speed = motility_epithelial;
+        phenotype.mechanics.cell_cell_adhesion_strength = adhesion_epithelial;
+    }
 }
 
 void module4_proliferation_death(Cell* pCell, Phenotype& phenotype, double dt, ModulePhase phase)
 {
-    (void)pCell;
-    (void)phenotype;
     (void)dt;
     assert_expected_phase("module4_proliferation_death", phase, ModulePhase::DECISION);
+    log_module_trace("module4_proliferation_death", phase, {"tgfb"}, {});
+
+    if (pCell == NULL) return;
+
+    const std::vector<double>& densities = pCell->nearest_density_vector();
+    const double local_tgfb = read_density_value(densities, tgfb_index);
+
+    const double hif1a_active =
+        read_custom_data_value_or_default(pCell, "hif1a_active", 0.0);
+    const double zeb1_active =
+        read_custom_data_value_or_default(pCell, "zeb1_active", 0.0);
+    const double acta2_active =
+        read_custom_data_value_or_default(pCell, "acta2_active", 0.0);
+    const double gli1_active =
+        read_custom_data_value_or_default(pCell, "gli1_active", 0.0);
+    const double abcb1_active =
+        read_custom_data_value_or_default(pCell, "abcb1_active", 0.0);
+    const double intracellular_drug =
+        read_custom_data_value_or_default(pCell, "intracellular_drug", 0.0);
+    const double mechanical_pressure =
+        read_custom_data_value_or_default(pCell, "mechanical_pressure", 0.0);
+    const double smad4_state =
+        read_custom_data_value_or_default(pCell, "SMAD4", 0.0);
+
+    const int apoptosis_index =
+        phenotype.death.find_death_model_index(PhysiCell_constants::apoptosis_death_model);
+    if (apoptosis_index < 0 ||
+        apoptosis_index >= static_cast<int>(phenotype.death.rates.size()))
+    {
+        return;
+    }
+
+    Cell_Definition* pTumorDef = find_cell_definition("tumor_cell");
+    Cell_Definition* pStromaDef = find_cell_definition("stromal_cell");
+
+    const bool is_tumor =
+        (pTumorDef != NULL) && (pCell->type == pTumorDef->type);
+    const bool is_stromal =
+        (pStromaDef != NULL) && (pCell->type == pStromaDef->type);
+
+    if (is_tumor)
+    {
+        const double base_proliferation_rate =
+            read_xml_double_or_default("base_proliferation_rate", 0.0);
+        const double apoptosis_resistance =
+            read_xml_double_or_default("apoptosis_resistance", 0.0);
+        const double go_grow_penalty =
+            read_xml_double_or_default("go_grow_penalty", 0.0);
+        const double hypoxia_proliferation_modifier =
+            read_xml_double_or_default("hypoxia_proliferation_modifier", 0.0);
+        const double hypoxia_death_resistance_bonus =
+            read_xml_double_or_default("hypoxia_death_resistance_bonus", 0.0);
+        const double contact_inhibition_threshold =
+            read_xml_double_or_default("contact_inhibition_threshold", 0.0);
+        const double drug_kill_coefficient =
+            read_xml_double_or_default("drug_kill_coefficient", 0.0);
+        const double efflux_drug_reduction =
+            read_xml_double_or_default("efflux_drug_reduction", 0.0);
+        const double tgfb_brake_sensitivity =
+            read_xml_double_or_default("tgfb_brake_sensitivity", 0.0);
+
+        double proliferation = base_proliferation_rate;
+
+        if (zeb1_active == 1.0)
+        {
+            proliferation = proliferation * (1.0 - go_grow_penalty);
+        }
+
+        if (hif1a_active == 1.0)
+        {
+            proliferation = proliferation * (1.0 - hypoxia_proliferation_modifier);
+        }
+
+        // E09: TGF-beta growth arrest is SMAD4-dependent and only active in SMAD4-WT.
+        if (smad4_state > 0.5)
+        {
+            const double tgfb_brake = clamp_unit(std::max(0.0, local_tgfb) * tgfb_brake_sensitivity);
+            proliferation = proliferation * (1.0 - tgfb_brake);
+        }
+
+        if (mechanical_pressure > contact_inhibition_threshold)
+        {
+            proliferation = 0.0;
+        }
+
+        phenotype.cycle.data.transition_rate(0, 0) = proliferation;
+
+        double effective_drug = intracellular_drug;
+        if (abcb1_active == 1.0)
+        {
+            effective_drug = effective_drug * (1.0 - efflux_drug_reduction);
+        }
+
+        const double base_death_rate = (1.0 - apoptosis_resistance) * 0.001;
+
+        double death_resistance_modifier = 0.0;
+        if (hif1a_active == 1.0)
+        {
+            death_resistance_modifier = hypoxia_death_resistance_bonus;
+        }
+
+        const double drug_kill_rate = effective_drug * drug_kill_coefficient;
+
+        const double total_apoptosis_rate = std::max(
+            0.0,
+            base_death_rate * (1.0 - death_resistance_modifier) + drug_kill_rate);
+
+        phenotype.death.rates[apoptosis_index] = total_apoptosis_rate;
+    }
+
+    if (is_stromal)
+    {
+        const double caf_proliferation_rate =
+            read_xml_double_or_default("caf_proliferation_rate", 0.0);
+        const double gli1_proliferation_boost =
+            read_xml_double_or_default("gli1_proliferation_boost", 1.0);
+        const double psc_proliferation_rate =
+            read_xml_double_or_default("psc_proliferation_rate", 0.0);
+
+        if (acta2_active == 1.0)
+        {
+            double caf_rate = caf_proliferation_rate;
+            if (gli1_active == 1.0)
+            {
+                caf_rate = caf_rate * gli1_proliferation_boost;
+            }
+            phenotype.cycle.data.transition_rate(0, 0) = caf_rate;
+            phenotype.death.rates[apoptosis_index] = 0.0;
+        }
+        else
+        {
+            phenotype.cycle.data.transition_rate(0, 0) = psc_proliferation_rate;
+            phenotype.death.rates[apoptosis_index] = 0.0;
+        }
+    }
 }
 
 // WRITE PHASE (writes to microenvironment fields)
 void module2_paracrine_secretion(Cell* pCell, Phenotype& phenotype, double dt, ModulePhase phase)
 {
-    (void)pCell;
-    (void)phenotype;
     (void)dt;
     assert_expected_phase("module2_paracrine_secretion", phase, ModulePhase::WRITE);
-    // Placeholder guard for future field writes in this module.
     assert_microenvironment_write_allowed(phase, "module2_paracrine_secretion");
+    log_module_trace("module2_paracrine_secretion", phase, {}, {"tgfb", "shh"});
+
+    if (pCell == NULL) return;
+
+    Cell_Definition* pTumorDef = find_cell_definition("tumor_cell");
+    Cell_Definition* pStromaDef = find_cell_definition("stromal_cell");
+
+    const bool is_tumor =
+        (pTumorDef != NULL) && (pCell->type == pTumorDef->type);
+    const bool is_stromal =
+        (pStromaDef != NULL) && (pCell->type == pStromaDef->type);
+
+    const double hif1a_active =
+        read_custom_data_value_or_default(pCell, "hif1a_active", 0.0);
+    const double acta2_active =
+        read_custom_data_value_or_default(pCell, "acta2_active", 0.0);
+
+    const double tgfb_secretion_rate =
+        read_xml_double_or_default("tgfb_secretion_rate", 0.0);
+    const double shh_secretion_rate =
+        read_xml_double_or_default("shh_secretion_rate", 0.0);
+    const double hif1a_tgfb_amplification_factor =
+        read_xml_double_or_default("hif1a_tgfb_amplification_factor", 1.0);
+    const double caf_tgfb_secretion_rate =
+        read_xml_double_or_default("caf_tgfb_secretion_rate", 0.0);
+
+    if (is_tumor)
+    {
+        double tgfb_out = tgfb_secretion_rate;
+        double shh_out  = shh_secretion_rate;
+        if (hif1a_active == 1.0)
+        {
+            tgfb_out = tgfb_out * hif1a_tgfb_amplification_factor;
+        }
+
+        if (tgfb_index >= 0 &&
+            tgfb_index < static_cast<int>(phenotype.secretion.secretion_rates.size()))
+        {
+            phenotype.secretion.secretion_rates[tgfb_index] = tgfb_out;
+        }
+        if (shh_index >= 0 &&
+            shh_index < static_cast<int>(phenotype.secretion.secretion_rates.size()))
+        {
+            phenotype.secretion.secretion_rates[shh_index] = shh_out;
+        }
+    }
+
+    if (is_stromal && acta2_active == 1.0)
+    {
+        if (tgfb_index >= 0 &&
+            tgfb_index < static_cast<int>(phenotype.secretion.secretion_rates.size()))
+        {
+            phenotype.secretion.secretion_rates[tgfb_index] = caf_tgfb_secretion_rate;
+        }
+        if (shh_index >= 0 &&
+            shh_index < static_cast<int>(phenotype.secretion.secretion_rates.size()))
+        {
+            phenotype.secretion.secretion_rates[shh_index] = 0.0;
+        }
+    }
+
+    if (is_stromal && acta2_active == 0.0)
+    {
+        if (tgfb_index >= 0 &&
+            tgfb_index < static_cast<int>(phenotype.secretion.secretion_rates.size()))
+        {
+            phenotype.secretion.secretion_rates[tgfb_index] = 0.0;
+        }
+        if (shh_index >= 0 &&
+            shh_index < static_cast<int>(phenotype.secretion.secretion_rates.size()))
+        {
+            phenotype.secretion.secretion_rates[shh_index] = 0.0;
+        }
+    }
 }
 
 void module6_ecm_production(Cell* pCell, Phenotype& phenotype, double dt, ModulePhase phase)
 {
-    (void)pCell;
     (void)phenotype;
-    (void)dt;
     assert_expected_phase("module6_ecm_production", phase, ModulePhase::WRITE);
-    // Placeholder guard for future field writes in this module.
     assert_microenvironment_write_allowed(phase, "module6_ecm_production");
+    log_module_trace("module6_ecm_production", phase, {"ecm_density", "ecm_ha_fraction"}, {"ecm_density", "ecm_ha_fraction"});
+
+    if (pCell == NULL) return;
+    if (ecm_index < 0) return;
+
+    const double ecm_ha_fraction_default =
+        read_xml_double_or_default("ecm_ha_fraction_default", 0.5);
+    ensure_ecm_ha_fraction_storage(ecm_ha_fraction_default);
+
+    const int voxel_index = get_cell_voxel_index(pCell);
+    if (voxel_index < 0 ||
+        voxel_index >= static_cast<int>(microenvironment.number_of_voxels()))
+    {
+        return;
+    }
+
+    std::vector<double>& rho = microenvironment.density_vector(voxel_index);
+    if (ecm_index >= static_cast<int>(rho.size())) return;
+
+    double ecm_density = clamp_unit(rho[ecm_index]);
+    double ecm_ha_fraction = clamp_unit(g_ecm_ha_fraction_by_voxel[voxel_index]);
+
+    const double acta2_active =
+        read_custom_data_value_or_default(pCell, "acta2_active", 0.0);
+    const double gli1_active =
+        read_custom_data_value_or_default(pCell, "gli1_active", 0.0);
+    const double mmp2_active =
+        read_custom_data_value_or_default(pCell, "mmp2_active", 0.0);
+
+    Cell_Definition* pTumorDef = find_cell_definition("tumor_cell");
+    Cell_Definition* pStromaDef = find_cell_definition("stromal_cell");
+    const bool is_tumor =
+        (pTumorDef != NULL) && (pCell->type == pTumorDef->type);
+    const bool is_stromal =
+        (pStromaDef != NULL) && (pCell->type == pStromaDef->type);
+
+    const double ecm_production_rate_base =
+        read_xml_double_or_default("ecm_production_rate_base", 0.0);
+    const double ecm_production_rate_boosted =
+        read_xml_double_or_default("ecm_production_rate_boosted", 0.0);
+    const double mmp2_degradation_rate =
+        read_xml_double_or_default("mmp2_degradation_rate", 0.0);
+    const double ecm_natural_decay_rate =
+        read_xml_double_or_default("ecm_natural_decay_rate", 0.0);
+    (void)ecm_natural_decay_rate;
+
+    // PRODUCTION (stromal cells only)
+    if (is_stromal && acta2_active == 1.0)
+    {
+        double production = ecm_production_rate_base;
+        if (gli1_active == 1.0)
+        {
+            production = ecm_production_rate_boosted;
+        }
+
+        const double new_ecm = production * dt;
+        const double new_ha  = new_ecm * ecm_ha_fraction_default;
+        const double new_col = new_ecm * (1.0 - ecm_ha_fraction_default);
+
+        const double old_density = ecm_density;
+        const double old_ha_total = old_density * ecm_ha_fraction;
+        const double old_col_total = old_density * (1.0 - ecm_ha_fraction);
+
+        const double total_ha  = old_ha_total + new_ha;
+        const double total_col = old_col_total + new_col;
+        double new_density = total_ha + total_col;
+
+        new_density = std::min(1.0, std::max(0.0, new_density));
+
+        if (new_density > 0.0)
+        {
+            ecm_ha_fraction = total_ha / new_density;
+        }
+        ecm_density = new_density;
+    }
+
+    // DEGRADATION BY MMP2 (tumor cells only)
+    if (is_tumor && mmp2_active == 1.0)
+    {
+        const double degradation = mmp2_degradation_rate * dt;
+        ecm_density = ecm_density - degradation;
+    }
+
+    // TODO: Natural ECM decay should be applied once per voxel per step.
+    // For now, we skip per-cell natural decay and handle turnover in ECM PDE decay.
+
+    // EXTERNAL INTERVENTIONS
+    if (intervention_state.ha_degrade_active)
+    {
+        const double ha_loss = intervention_state.ha_degrade_strength * dt;
+        const double old_ha = ecm_density * ecm_ha_fraction;
+        const double new_ha_val = std::max(0.0, old_ha - ha_loss);
+        const double old_col_val = ecm_density * (1.0 - ecm_ha_fraction);
+        ecm_density = new_ha_val + old_col_val;
+        if (ecm_density > 0.0)
+        {
+            ecm_ha_fraction = new_ha_val / ecm_density;
+        }
+    }
+
+    if (intervention_state.col_degrade_active)
+    {
+        const double col_loss = intervention_state.col_degrade_strength * dt;
+        const double old_ha_val2 = ecm_density * ecm_ha_fraction;
+        const double old_col_val2 = ecm_density * (1.0 - ecm_ha_fraction);
+        const double new_col_val = std::max(0.0, old_col_val2 - col_loss);
+        ecm_density = old_ha_val2 + new_col_val;
+        if (ecm_density > 0.0)
+        {
+            ecm_ha_fraction = old_ha_val2 / ecm_density;
+        }
+    }
+
+    ecm_density = std::max(0.0, ecm_density);
+    ecm_density = std::min(1.0, ecm_density);
+    ecm_ha_fraction = std::max(0.0, ecm_ha_fraction);
+    ecm_ha_fraction = std::min(1.0, ecm_ha_fraction);
+
+    rho[ecm_index] = ecm_density;
+    g_ecm_ha_fraction_by_voxel[voxel_index] = ecm_ha_fraction;
 }
 
 void module8_mechanical_compaction(Cell* pCell, Phenotype& phenotype, double dt, ModulePhase phase)
 {
-    (void)pCell;
     (void)phenotype;
-    (void)dt;
     assert_expected_phase("module8_mechanical_compaction", phase, ModulePhase::WRITE);
-    // Placeholder guard for future field writes in this module.
     assert_microenvironment_write_allowed(phase, "module8_mechanical_compaction");
+    log_module_trace("module8_mechanical_compaction", phase, {"ecm_density", "ecm_ha_fraction"}, {"ecm_density"});
+
+    if (pCell == NULL) return;
+    if (ecm_index < 0) return;
+
+    const int voxel_index = get_cell_voxel_index(pCell);
+    if (voxel_index < 0 ||
+        voxel_index >= static_cast<int>(microenvironment.number_of_voxels()))
+    {
+        return;
+    }
+
+    std::vector<double>& rho = microenvironment.density_vector(voxel_index);
+    if (ecm_index >= static_cast<int>(rho.size())) return;
+
+    const double cell_density_proxy = pCell->state.simple_pressure;
+    const double ecm_at_voxel = rho[ecm_index];
+    const double collagen_fraction = 1.0 - get_ecm_ha_fraction(voxel_index);
+    const double ecm_stiffness = ecm_at_voxel * collagen_fraction;
+    const double mechanical_compaction_strength =
+        read_xml_double_or_default("mechanical_compaction_strength", 0.0);
+    const double solid_stress =
+        cell_density_proxy * ecm_stiffness * mechanical_compaction_strength;
+
+    set_custom_data_if_present(pCell, "mechanical_pressure", solid_stress);
+
+    if (solid_stress > 0.0 && ecm_at_voxel > 0.0)
+    {
+        const double compaction_ecm_increment =
+            read_xml_double_or_default("compaction_ecm_increment", 0.0);
+        const double compaction = solid_stress * compaction_ecm_increment * dt;
+        rho[ecm_index] = std::min(1.0, ecm_at_voxel + compaction);
+    }
 }
 
 void ecm_dependent_diffusion(double dt)
 {
+    update_ecm_effective_diffusion_coefficients(microenvironment);
     apply_ecm_dependent_modifiers(microenvironment, dt);
 }
 
 void ecm_dependent_diffusion_solver(Microenvironment& M, double dt)
 {
-    // Run the base diffusion/decay solver first.
+    // Recompute voxel-wise effective diffusion coefficients after cell modules
+    // have updated ECM, then run the PDE solver and apply local barrier scaling.
+    update_ecm_effective_diffusion_coefficients(M);
+
     if (g_base_diffusion_decay_solver != NULL &&
         g_base_diffusion_decay_solver != ecm_dependent_diffusion_solver)
     {
@@ -670,7 +1455,7 @@ void ecm_dependent_diffusion_solver(Microenvironment& M, double dt)
         }
     }
 
-    // Then apply ECM-driven barrier modifiers voxel-wise.
+    // Apply ECM-driven barrier modifiers voxel-wise.
     apply_ecm_dependent_modifiers(M, dt);
 }
 
@@ -701,6 +1486,8 @@ void setup_microenvironment(void)
     shh_index    = microenvironment.find_density_index("shh");
     ecm_index    = microenvironment.find_density_index("ecm_density");
     drug_index   = microenvironment.find_density_index("drug");
+
+    reset_ecm_ha_fraction_field(read_xml_double_or_default("ecm_ha_fraction_default", 0.5));
 
     register_ecm_dependent_diffusion_solver();
 
@@ -781,6 +1568,15 @@ void create_cell_types(void)
         ensure_custom_scalar(pTumor, "is_mesenchymal", "dimensionless", 0.0);
         ensure_custom_scalar(pTumor, "drug_sensitivity", "dimensionless", 1.0);
         ensure_custom_scalar(pTumor, "hif1a_active", "dimensionless", 0.0);
+        ensure_custom_scalar(pTumor, "zeb1_active", "dimensionless", 0.0);
+        ensure_custom_scalar(pTumor, "cdh1_expressed", "dimensionless", 1.0);
+        ensure_custom_scalar(pTumor, "mmp2_active", "dimensionless", 0.0);
+        ensure_custom_scalar(pTumor, "emt_extent", "dimensionless", 0.0);
+        ensure_custom_scalar(pTumor, "abcb1_active", "dimensionless", 0.0);
+        ensure_custom_scalar(pTumor, "nrf2_active", "dimensionless", 0.0);
+        ensure_custom_scalar(pTumor, "intracellular_drug", "dimensionless", 0.0);
+        ensure_custom_scalar(pTumor, "mechanical_pressure", "dimensionless", 0.0);
+        ensure_custom_scalar(pTumor, "time_since_drug_exposure", "hour", -1.0);
     }
     else
     {
@@ -799,6 +1595,15 @@ void create_cell_types(void)
         ensure_custom_scalar(pStroma, "hif1a_active", "dimensionless", 0.0);
         ensure_custom_scalar(pStroma, "acta2_active", "dimensionless", 0.0);
         ensure_custom_scalar(pStroma, "gli1_active", "dimensionless", 0.0);
+        ensure_custom_scalar(pStroma, "zeb1_active", "dimensionless", 0.0);
+        ensure_custom_scalar(pStroma, "cdh1_expressed", "dimensionless", 1.0);
+        ensure_custom_scalar(pStroma, "mmp2_active", "dimensionless", 0.0);
+        ensure_custom_scalar(pStroma, "emt_extent", "dimensionless", 0.0);
+        ensure_custom_scalar(pStroma, "abcb1_active", "dimensionless", 0.0);
+        ensure_custom_scalar(pStroma, "nrf2_active", "dimensionless", 0.0);
+        ensure_custom_scalar(pStroma, "intracellular_drug", "dimensionless", 0.0);
+        ensure_custom_scalar(pStroma, "mechanical_pressure", "dimensionless", 0.0);
+        ensure_custom_scalar(pStroma, "time_since_drug_exposure", "hour", -1.0);
     }
     else
     {
