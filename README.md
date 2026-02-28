@@ -30,7 +30,7 @@ It is a disciplined engineering pipeline that produces **testable hypotheses and
 
 ---
 
-## Project roadmap (Phases)
+## Project roadmap
 
 ### Phase 0 — Constitution (Mission + Non-negotiables)
 Defines hard constraints:
@@ -39,7 +39,7 @@ Defines hard constraints:
 - Safety/collateral limits
 - Versioning + reproducibility requirements
 
-### Phase 1 — Stroma Barrier World Spec (✅ COMPLETE)
+### Phase 1 — Stroma Barrier World Spec
 A locked, versioned spec describing:
 - Actors (cell types / world objects)
 - State variables
@@ -85,10 +85,3 @@ Prove it’s a platform:
 - Replayability
 - Documentation + versioned release criteria
 
----
-
-## What’s in this repository
-
-> **NOTE:** repo structure may change as implementation progresses.
-
-Suggested layout:
