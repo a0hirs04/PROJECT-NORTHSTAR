@@ -1231,6 +1231,9 @@ void module5_emt_engine(Cell* pCell, Phenotype& phenotype, double dt, ModulePhas
         phenotype.motility.migration_speed = motility_epithelial;
         phenotype.mechanics.cell_cell_adhesion_strength = adhesion_epithelial;
     }
+
+    // Sync is_mesenchymal to mirror zeb1_active so evaluators can read either name.
+    pCell->custom_data["is_mesenchymal"] = pCell->custom_data["zeb1_active"];
 }
 
 void module4_proliferation_death(Cell* pCell, Phenotype& phenotype, double dt, ModulePhase phase)
