@@ -1,0 +1,114 @@
+============================================================
+  Phase-1 RC1  —  Known-Good Baseline Manifest
+  *** REALITY CHECK 1: PASS (8/8 aggregate, 4/5 quorum) ***
+============================================================
+
+Date:          2026-03-04
+Git tag:       Phase-1-v1.0-RC1
+Git commit:    9410837f473012d5924b878edf19109f3812e2a9
+
+------------------------------------------------------------
+  File Provenance
+------------------------------------------------------------
+
+custom_modules/custom.cpp
+  Last changed : bb6128a ("some more cuz the last one sucked")
+  SHA256        : e24e90dde6dedf564e89cd52836f5aeab1d13149e3e2b1768b21803f3245463c
+
+config/PhysiCell_settings.xml  [copy → PhysiCell_settings.xml]
+  Last changed : bb6128a ("some more cuz the last one sucked")
+  SHA256        : b68af035eb60812d2e21df4518d9252a97527537b94d9da881307f71cf7ff31d
+
+evaluate_rc1.py  [copy → evaluate_rc1.py]
+  SHA256        : 521f8eb70115b57e8c64293d1faee9cc6ca0f57d190b9b65d77f0b82b2675597
+
+eval_output.txt  — full stdout of `python evaluate_rc1.py` on 2026-03-04
+
+------------------------------------------------------------
+  Simulation Parameters
+------------------------------------------------------------
+
+Seeds:         [42, 99, 137, 256, 1001]
+Quorum:        4 / 5 replicates
+Sim time:      20160 min  (14 days)
+Domain:        2000 × 2000 µm, dx = 20 µm, 2D
+Save interval: ~60 min  (337 snapshots per run)
+PhysiCell:     1.14.2  (Stroma_world/PhysiCell)
+Binary:        stroma_world  (build from tag)
+
+------------------------------------------------------------
+  4-Fix Self-Limiting EMT  —  Exact Parameter Values
+------------------------------------------------------------
+
+Fix A: EMT Proliferation/Death Tradeoff
+  go_grow_penalty              = 0.95   (was 0.30; 95% proliferation cut when ZEB1=1)
+  emt_death_increase           = 0.0005 (additive apoptosis rate 1/min when ZEB1=1)
+
+Fix B: Hysteresis + Activation Delay
+  emt_induction_threshold      = 0.30   (locked; ON threshold)
+  emt_off_threshold            = 0.15   (hysteresis OFF threshold)
+  emt_activation_delay         = 360.0  (min of sustained signal before EMT activates)
+  custom_data: emt_signal_time = 0.0    (per-cell timer)
+
+Fix C: CAF-Contact Gate on ECM-EMT Boost
+  ecm_emt_require_caf_contact  = 1.0   (ECM boost only when activated CAF neighbor present)
+
+Fix D: Dense ECM Blocks Motility
+  ecm_motility_block_threshold = 0.8   (ECM density at which mesenchymal motility → 0)
+
+ECM-EMT Ramp+Cap
+  ecm_emt_threshold            = 0.3
+  ecm_emt_ramp                 = 0.3
+  ecm_emt_strength             = 0.4
+  ecm_emt_cap                  = 0.30  (raised from 0.25; safe because of A-D)
+
+Locked / Unchanged
+  emt_induction_threshold      = 0.30
+  crowding_base_pressure       = 0.02
+  host_death_ceiling           = 50000
+  base_proliferation_rate      = 0.00048
+  contact_inhibition_threshold = 0.5
+  emt_phenotype_extent         = 3  (HIGH)
+  mechanical_compaction_strength = 0.6
+
+------------------------------------------------------------
+  Aggregate Results
+------------------------------------------------------------
+
+  [PASS] C1  Barrier self-assembles       5/5
+  [PASS] C2  Spatial ECM gradient         5/5
+  [PASS] C3  Central hypoxia              5/5
+  [PASS] C4  EMT peripheral > core        4/5  (seed 1001: tie 0.20=0.20)
+  [PASS] C5  Tumor-stroma ratio           5/5
+  [PASS] C6  No numerical instability     5/5
+  [PASS] C7  CAF count increases          5/5
+  [PASS] C8  TGF-β gradient               5/5
+
+Per-Replicate Summary
+  seed=42   8/8  tumor=58   r=115µm  EMT periph=0.652 core=0.435
+  seed=99   8/8  tumor=51   r=92µm   EMT periph=0.619 core=0.143
+  seed=137  8/8  tumor=78   r=96µm   EMT periph=0.452 core=0.129
+  seed=256  8/8  tumor=72   r=148µm  EMT periph=0.483 core=0.103
+  seed=1001 7/8  tumor=62   r=77µm   EMT periph=0.200 core=0.200  [C4 tie]
+
+------------------------------------------------------------
+  Reproduction
+------------------------------------------------------------
+
+  git checkout Phase-1-v1.0-RC1
+  PHYSICELL_DIR=Stroma_world/PhysiCell make -j$(nproc)
+  # submit: hpc/submit_array.sh or build/rc1_4fix/submit_remaining.sh
+  python evaluate_rc1.py
+
+  Verify config integrity:
+    sha256sum config/PhysiCell_settings.xml
+    # expected: b68af035eb60812d2e21df4518d9252a97527537b94d9da881307f71cf7ff31d
+
+------------------------------------------------------------
+  Files in this release folder
+------------------------------------------------------------
+
+  MANIFEST.txt              — this file
+  PhysiCell_settings.xml    — exact config snapshot
+  evaluate_rc1.py           — exact evaluator snapshot
+  eval_output.txt           — full stdout of evaluation run

@@ -1,0 +1,91 @@
+========================================================================
+  REALITY CHECK 1 — Evaluation of completed HPC runs
+========================================================================
+
+  Evaluating replicate 1 (seed=42)  [337 snapshots]...
+    Parsing final snapshot for seed=42...
+    t=20160min  tumor=58  stroma=1442  activated_cafs=1071  tumor_radius=115um
+
+  Evaluating replicate 2 (seed=99)  [337 snapshots]...
+    Parsing final snapshot for seed=99...
+    t=20160min  tumor=51  stroma=1282  activated_cafs=911  tumor_radius=92um
+
+  Evaluating replicate 3 (seed=137)  [337 snapshots]...
+    Parsing final snapshot for seed=137...
+    t=20160min  tumor=78  stroma=1281  activated_cafs=910  tumor_radius=96um
+
+  Evaluating replicate 4 (seed=256)  [337 snapshots]...
+    Parsing final snapshot for seed=256...
+    t=20160min  tumor=72  stroma=1232  activated_cafs=861  tumor_radius=148um
+
+  Evaluating replicate 5 (seed=1001)  [337 snapshots]...
+    Parsing final snapshot for seed=1001...
+    t=20160min  tumor=62  stroma=1221  activated_cafs=850  tumor_radius=77um
+
+========================================================================
+  PER-REPLICATE RESULTS
+========================================================================
+
+  Replicate 1  (seed=42)  — ALL PASS
+    [PASS] 1. Barrier self-assembles: peritumoral_ecm=0.9732 > 0.5
+    [PASS] 2. Spatial ECM gradient: ECM_near=0.8871 > ECM_edge=0.0593
+    [PASS] 3. Central hypoxia develops: O2_centroid=0.01 < 0.5*O2_boundary=12.27
+    [PASS] 4. EMT peripheral, not global: EMT_periph=0.6522 > EMT_core=0.4348
+    [PASS] 5. Tumor-stroma ratio PDAC-like: tumor_frac=0.0387 (< 0.50) tumor=58 stroma=1442
+    [PASS] 6. No numerical instability: clean
+    [PASS] 7. CAF count increases: activated_cafs=1071
+    [PASS] 8. TGF-b gradient near tumor: TGFb_near=0.003020 > TGFb_edge=0.000465
+
+  Replicate 2  (seed=99)  — ALL PASS
+    [PASS] 1. Barrier self-assembles: peritumoral_ecm=0.9994 > 0.5
+    [PASS] 2. Spatial ECM gradient: ECM_near=0.9717 > ECM_edge=0.0515
+    [PASS] 3. Central hypoxia develops: O2_centroid=0.01 < 0.5*O2_boundary=12.47
+    [PASS] 4. EMT peripheral, not global: EMT_periph=0.6190 > EMT_core=0.1429
+    [PASS] 5. Tumor-stroma ratio PDAC-like: tumor_frac=0.0383 (< 0.50) tumor=51 stroma=1282
+    [PASS] 6. No numerical instability: clean
+    [PASS] 7. CAF count increases: activated_cafs=911
+    [PASS] 8. TGF-b gradient near tumor: TGFb_near=0.003360 > TGFb_edge=0.000432
+
+  Replicate 3  (seed=137)  — ALL PASS
+    [PASS] 1. Barrier self-assembles: peritumoral_ecm=0.9951 > 0.5
+    [PASS] 2. Spatial ECM gradient: ECM_near=0.8973 > ECM_edge=0.0519
+    [PASS] 3. Central hypoxia develops: O2_centroid=0.04 < 0.5*O2_boundary=12.44
+    [PASS] 4. EMT peripheral, not global: EMT_periph=0.4516 > EMT_core=0.1290
+    [PASS] 5. Tumor-stroma ratio PDAC-like: tumor_frac=0.0574 (< 0.50) tumor=78 stroma=1281
+    [PASS] 6. No numerical instability: clean
+    [PASS] 7. CAF count increases: activated_cafs=910
+    [PASS] 8. TGF-b gradient near tumor: TGFb_near=0.005092 > TGFb_edge=0.000486
+
+  Replicate 4  (seed=256)  — ALL PASS
+    [PASS] 1. Barrier self-assembles: peritumoral_ecm=0.7947 > 0.5
+    [PASS] 2. Spatial ECM gradient: ECM_near=0.7009 > ECM_edge=0.0520
+    [PASS] 3. Central hypoxia develops: O2_centroid=0.03 < 0.5*O2_boundary=12.46
+    [PASS] 4. EMT peripheral, not global: EMT_periph=0.4828 > EMT_core=0.1034
+    [PASS] 5. Tumor-stroma ratio PDAC-like: tumor_frac=0.0552 (< 0.50) tumor=72 stroma=1232
+    [PASS] 6. No numerical instability: clean
+    [PASS] 7. CAF count increases: activated_cafs=861
+    [PASS] 8. TGF-b gradient near tumor: TGFb_near=0.003579 > TGFb_edge=0.000441
+
+  Replicate 5  (seed=1001)  — SOME FAIL
+    [PASS] 1. Barrier self-assembles: peritumoral_ecm=0.9994 > 0.5
+    [PASS] 2. Spatial ECM gradient: ECM_near=0.9565 > ECM_edge=0.0490
+    [PASS] 3. Central hypoxia develops: O2_centroid=0.02 < 0.5*O2_boundary=12.55
+    [FAIL] 4. EMT peripheral, not global: EMT_periph=0.2000 <= EMT_core=0.2000
+    [PASS] 5. Tumor-stroma ratio PDAC-like: tumor_frac=0.0483 (< 0.50) tumor=62 stroma=1221
+    [PASS] 6. No numerical instability: clean
+    [PASS] 7. CAF count increases: activated_cafs=850
+    [PASS] 8. TGF-b gradient near tumor: TGFb_near=0.003634 > TGFb_edge=0.000389
+
+========================================================================
+  AGGREGATE  (>=4/5 replicates must pass each criterion)
+========================================================================
+  [PASS] 1. Barrier self-assembles  (5/5 replicates)
+  [PASS] 2. Spatial ECM gradient  (5/5 replicates)
+  [PASS] 3. Central hypoxia develops  (5/5 replicates)
+  [PASS] 4. EMT peripheral, not global  (4/5 replicates)
+  [PASS] 5. Tumor-stroma ratio PDAC-like  (5/5 replicates)
+  [PASS] 6. No numerical instability  (5/5 replicates)
+  [PASS] 7. CAF count increases  (5/5 replicates)
+  [PASS] 8. TGF-b gradient near tumor  (5/5 replicates)
+
+  *** REALITY CHECK 1: PASS ***
