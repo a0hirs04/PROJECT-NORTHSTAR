@@ -2199,6 +2199,76 @@ void custom_function(Cell* pCell, Phenotype& phenotype, double dt)
         if (ceiling_triggered.load(std::memory_order_relaxed)) return;
     }
 
+    // ---- DRUG SCHEDULING: timed Dirichlet BC on/off ----
+    // drug_start_time: simulation time to enable drug boundary condition
+    // drug_end_time:   simulation time to withdraw drug (set BC back to 0)
+    // Only one thread per timestep executes each transition.
+    {
+        static std::atomic<bool> drug_on_triggered(false);
+        static std::atomic<bool> drug_off_triggered(false);
+        const double sim_time = PhysiCell_globals.current_time;
+
+        const double drug_start = read_xml_double_or_default("drug_start_time", 1e18);
+        const double drug_end   = read_xml_double_or_default("drug_end_time",   1e18);
+
+        if (!drug_on_triggered.load(std::memory_order_relaxed) &&
+            sim_time >= drug_start)
+        {
+            bool expected = false;
+            if (drug_on_triggered.compare_exchange_strong(
+                    expected, true, std::memory_order_acq_rel))
+            {
+                if (drug_index >= 0)
+                {
+                    const double drug_conc =
+                        read_xml_double_or_default("drug_concentration", 1.0);
+                    const int n_vox = (int)microenvironment.mesh.voxels.size();
+                    for (int n = 0; n < n_vox; n++)
+                    {
+                        if (microenvironment.mesh.voxels[n].is_Dirichlet)
+                        {
+                            microenvironment.update_dirichlet_node(
+                                n, drug_index, drug_conc);
+                        }
+                    }
+                    std::cerr << "[DRUG_SCHEDULE] t=" << sim_time
+                              << " Drug ON  concentration=" << drug_conc << "\n";
+                }
+            }
+        }
+
+        if (drug_on_triggered.load(std::memory_order_relaxed) &&
+            !drug_off_triggered.load(std::memory_order_relaxed) &&
+            sim_time >= drug_end)
+        {
+            bool expected = false;
+            if (drug_off_triggered.compare_exchange_strong(
+                    expected, true, std::memory_order_acq_rel))
+            {
+                if (drug_index >= 0)
+                {
+                    const int n_vox = (int)microenvironment.mesh.voxels.size();
+                    // Zero Dirichlet BC value so diffusion drives drug out
+                    for (int n = 0; n < n_vox; n++)
+                    {
+                        if (microenvironment.mesh.voxels[n].is_Dirichlet)
+                        {
+                            microenvironment.update_dirichlet_node(
+                                n, drug_index, 0.0);
+                        }
+                    }
+                    // Instantly clear drug density (simulate washout)
+                    for (int n = 0; n < n_vox; n++)
+                    {
+                        microenvironment(n)[drug_index] = 0.0;
+                    }
+                    std::cerr << "[DRUG_SCHEDULE] t=" << sim_time
+                              << " Drug WITHDRAWN\n";
+                }
+            }
+        }
+    }
+
     Cell_Definition* pTumorDef = find_cell_definition("tumor_cell");
     Cell_Definition* pStromaDef = find_cell_definition("stromal_cell");
     if (pTumorDef != NULL && pCell->type == pTumorDef->type)

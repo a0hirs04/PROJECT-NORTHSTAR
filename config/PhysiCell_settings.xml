@@ -799,6 +799,8 @@
         <!-- Drug administration -->
         <drug_start_time type="double" units="min"
             description="Simulation time at which drug Dirichlet BCs are enabled (t=7200 = day 5)">7200</drug_start_time>
+        <drug_end_time type="double" units="min"
+            description="Simulation time at which drug is withdrawn (Dirichlet BC zeroed, interior cleared)">1e18</drug_end_time>
         <drug_concentration type="double" units="dimensionless"
             description="Drug boundary concentration when administered">1.0</drug_concentration>
 
