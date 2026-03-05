@@ -804,6 +804,12 @@
         <drug_concentration type="double" units="dimensionless"
             description="Drug boundary concentration when administered">1.0</drug_concentration>
 
+        <!-- SHH inhibition intervention (RC3 / vismodegib proxy) -->
+        <shh_inhibition_start_time type="double" units="min"
+            description="Simulation time at which tumor SHH secretion inhibition starts">1e18</shh_inhibition_start_time>
+        <shh_inhibition_strength type="double" units="dimensionless"
+            description="Fractional inhibition of tumor SHH secretion after start time (0-1)">0.0</shh_inhibition_strength>
+
         <!-- 13-knob calibration profile selector -->
         <calibration_profile type="string" units="none"
             description="Tumor calibration profile (AsPC-1 default, PANC-1 for Knob 2 comparator)">AsPC-1</calibration_profile>
