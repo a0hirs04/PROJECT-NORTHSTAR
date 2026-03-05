@@ -1,0 +1,3 @@
+[submodule "Stroma_world/PhysiCell"]
+path = Stroma_world/PhysiCell
+url = git@github.com:a0hirs04/PhysiCell.git
