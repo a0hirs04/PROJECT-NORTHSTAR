@@ -490,6 +490,8 @@ def _report(results: List[RunResult]) -> int:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run Reality Check 3")
     parser.add_argument("--dry-run", action="store_true", help="Plan all runs and print paths without submitting")
+    parser.add_argument("--evaluate-only", action="store_true",
+                        help="Evaluate existing output (no submission, no cleanup)")
     args = parser.parse_args()
 
     if not BINARY.exists():
@@ -508,6 +510,18 @@ def main() -> int:
     print(f"SLURM: partition={SLURM_PARTITION} cpus={SLURM_CPUS} mem={SLURM_MEM} time={SLURM_TIME}")
     print(f"Quorum: >= {QUORUM}/{NUM_REPLICATES}")
     print("=" * 78)
+
+    if args.evaluate_only:
+        if not work_dir.exists():
+            print(f"ERROR: work_dir {work_dir} does not exist — nothing to evaluate")
+            return 1
+        specs = _make_run_specs(work_dir)
+        print("Evaluate-only mode — skipping submission, reading existing output ...")
+        results: List[RunResult] = []
+        for spec in specs:
+            print(f"Evaluating arm {spec.arm.key} rep {spec.replicate_index+1} seed={spec.seed} ...")
+            results.append(_evaluate_run(spec, "COMPLETED", 0))
+        return _report(results)
 
     specs = _prepare_runs(work_dir)
 
