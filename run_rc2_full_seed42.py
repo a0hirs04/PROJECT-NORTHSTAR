@@ -19,8 +19,8 @@ BINARY = PROJECT_ROOT / "stroma_world"
 BASE_CONFIG = PROJECT_ROOT / "config" / "PhysiCell_settings.xml"
 
 SEED = 42
-SLURM_PARTITION = "compute"
-SLURM_CPUS = 128
+SLURM_PARTITION = "cpu384g"
+SLURM_CPUS = 32
 SLURM_MEM = "128G"
 SLURM_TIME = "06:00:00"
 SAVE_INTERVAL = 360  # minutes
