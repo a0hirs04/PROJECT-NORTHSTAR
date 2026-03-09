@@ -27,12 +27,12 @@
     </domain>
 
     <!-- ==================== OVERALL TIME SETTINGS ====================
-         max_time : 14400 min = 10 days
+         max_time : 70560 min = 49 days
          dt_diffusion : 0.01 min (stability for fastest diffuser: oxygen D=100000)
          dt_mechanics : 0.1 min  (standard PhysiCell default)
          dt_phenotype : 6 min    (standard PhysiCell default) -->
     <overall>
-        <max_time units="min">14400</max_time>
+        <max_time units="min">70560</max_time>
         <time_units>min</time_units>
         <space_units>micron</space_units>
         <dt_diffusion units="min">0.01</dt_diffusion>
@@ -798,9 +798,9 @@
 
         <!-- Drug administration -->
         <drug_start_time type="double" units="min"
-            description="Simulation time at which drug Dirichlet BCs are enabled (t=7200 = day 5)">7200</drug_start_time>
+            description="Simulation time at which drug Dirichlet BCs are enabled (t=7200 = day 5)">30240</drug_start_time>
         <drug_end_time type="double" units="min"
-            description="Simulation time at which drug is withdrawn (Dirichlet BC zeroed, interior cleared)">1e18</drug_end_time>
+            description="Simulation time at which drug is withdrawn (Dirichlet BC zeroed, interior cleared)">50400</drug_end_time>
         <drug_concentration type="double" units="dimensionless"
             description="Drug boundary concentration when administered">1.0</drug_concentration>
 
@@ -844,7 +844,7 @@
         <contact_inhibition_threshold type="double" units="dimensionless"
             description="Mechanical pressure threshold above which tumor proliferation is arrested">0.5</contact_inhibition_threshold>
         <drug_kill_coefficient type="double" units="1/min"
-            description="Maps effective intracellular drug to apoptosis rate contribution">0.00015</drug_kill_coefficient>
+            description="Maps effective intracellular drug to apoptosis rate contribution">0.0002</drug_kill_coefficient>
         <efflux_drug_reduction type="double" units="dimensionless"
             description="Fractional reduction in effective drug when abcb1_active=1">0.7</efflux_drug_reduction>
         <caf_proliferation_rate type="double" units="1/min"

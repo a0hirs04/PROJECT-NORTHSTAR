@@ -16,9 +16,9 @@ from python.wrapper.output_parser import OutputParser
 
 # ---------------------------------------------------------------------------
 OUT_DIR = PROJECT_ROOT / "build" / "rc2_full_seed42" / "replicate_01_seed42" / "output"
-T_PRE       = 20160.0   # day 14
-T_TREAT_END = 40320.0   # day 28
-T_POST      = 60480.0   # day 42
+T_PRE       = 30240.0   # day 21
+T_TREAT_END = 50400.0   # day 35
+T_POST      = 70560.0   # day 49
 SAVE_INTERVAL = 360
 
 
@@ -137,17 +137,17 @@ def main():
     print("  RC2 EVALUATION — seed 42 (single replicate)")
     print("=" * 72)
 
-    print(f"\n  Parsing snap {snap_idx_pre} (day 14, pre-treatment)...")
+    print(f"\n  Parsing snap {snap_idx_pre} (day 21, pre-treatment)...")
     s_pre = parse_snap(parser, get_snap(snap_idx_pre))
     print(f"    tumor={s_pre['n_tumor']}  stroma={s_pre['n_stroma']}  "
           f"caf={s_pre['n_caf']}  peri_ecm={s_pre['peri_ecm']:.4f}")
 
-    print(f"  Parsing snap {snap_idx_treat} (day 28, treatment end)...")
+    print(f"  Parsing snap {snap_idx_treat} (day 35, treatment end)...")
     s_treat = parse_snap(parser, get_snap(snap_idx_treat))
     print(f"    tumor={s_treat['n_tumor']}  stroma={s_treat['n_stroma']}  "
           f"caf={s_treat['n_caf']}  peri_ecm={s_treat['peri_ecm']:.4f}")
 
-    print(f"  Parsing snap {snap_idx_post} (day 42, post-withdrawal)...")
+    print(f"  Parsing snap {snap_idx_post} (day 49, post-withdrawal)...")
     s_post = parse_snap(parser, get_snap(snap_idx_post))
     print(f"    tumor={s_post['n_tumor']}  stroma={s_post['n_stroma']}  "
           f"caf={s_post['n_caf']}  peri_ecm={s_post['peri_ecm']:.4f}")
@@ -157,7 +157,7 @@ def main():
     print("=" * 72)
     print("  TUMOR TIMELINE")
     print("=" * 72)
-    timeline_days = [14, 17, 21, 24, 28, 31, 35, 42]
+    timeline_days = [21, 24, 28, 31, 35, 38, 42, 49]
     print(f"  {'Day':>5}  {'Tumor':>6}  {'ABCB1%':>7}  {'ZEB1%':>6}  Phase")
     print(f"  {'---':>5}  {'-----':>6}  {'------':>7}  {'-----':>6}  -----")
     for day in timeline_days:
