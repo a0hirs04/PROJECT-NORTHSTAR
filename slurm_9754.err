@@ -1,0 +1,41 @@
+[ThresholdConfig] Loaded from XML:  HIF1A O2=15 mmHg  Necrosis O2=5 mmHg  TGFB=0.1  SHH=0.05
+[setup_microenvironment] Loaded calibration profile: AsPC-1
+[setup_microenvironment] Substrate indices: oxygen=0 tgfb=1 shh=2 ecm_density=4 drug=3
+[setup_microenvironment] Completed in 79.7257 ms
+[create_cell_types] Completed in 198.957 ms
+
+================================================================
+ §8.1  Baseline Validation Suite — Tumor-Intrinsic Traits v1.0 
+================================================================
+  [PASS]  Trait 1:  Constitutive Paracrine Secretion
+  [PASS]  Trait 2:  TGF-beta Insensitivity (Arrest Arm Only)
+  [PASS]  Trait 3:  Rapid Proliferation / Broken Checkpoints
+  [PASS]  Trait 4:  Apoptotic Resistance at Baseline
+  [PASS]  Trait 5:  Inducible EMT Under Stress  (Spatial)
+  [PASS]  Trait 6:  Hypoxia-Responsive Phenotype Switching
+  [PASS]  Trait 7:  Drug-Inducible Efflux  (Not Constitutive)
+  [PASS]  Trait 8:  ECM Compaction  (Passive / Mechanical)
+  [PASS]  Trait 9:  13-Knob Partition + AsPC-1/PANC-1 Knob 2
+  [PASS]  Trait 10:  SHH Paradox Fast Invariants
+----------------------------------------------------------------
+  Result: 10/10 passed — ALL PASS.  Baseline is validated.
+================================================================
+
+[setup_tissue] No intervention JSON provided; using active calibration defaults.
+[setup_tissue] Placed tumor=50 stromal=500 cluster_radius=100um stroma_ring=[100,300]um in 7.26087 ms
+
+[DIAG_T360_STROMAL] === One-time stromal diagnostic at t=366 ===
+[DIAG_T360_STROMAL] Total live stromal: 504  PSCs(acta2=0): 371  CAFs(acta2=1): 133
+[DIAG_T360_STROMAL] PSC #0  ID=140  transition_rate(0,0)=0  acta2_active=0  activation_mode=0
+[DIAG_T360_STROMAL] PSC #1  ID=473  transition_rate(0,0)=0  acta2_active=0  activation_mode=0
+[DIAG_T360_STROMAL] PSC #2  ID=465  transition_rate(0,0)=0  acta2_active=0  activation_mode=0
+[DIAG_T360_STROMAL] PSC #3  ID=75  transition_rate(0,0)=0  acta2_active=0  activation_mode=0
+[DIAG_T360_STROMAL] PSC #4  ID=443  transition_rate(0,0)=0  acta2_active=0  activation_mode=0
+[DIAG_T360_STROMAL] CAF #0  ID=55  transition_rate(0,0)=0.0001  acta2_active=1  activation_mode=1
+[DIAG_T360_STROMAL] CAF #1  ID=62  transition_rate(0,0)=0.0001  acta2_active=1  activation_mode=1
+[DIAG_T360_STROMAL] CAF #2  ID=69  transition_rate(0,0)=0.0001  acta2_active=1  activation_mode=1
+[DIAG_T360_STROMAL] === end diagnostic ===
+
+[perf] custom_function avg = 6.92825 us over 50000 calls
+[perf] custom_function avg = 6.98062 us over 100000 calls
+[perf] custom_function avg = 7.12752 us over 150000 calls

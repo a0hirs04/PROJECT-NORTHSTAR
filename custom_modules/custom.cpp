@@ -1473,6 +1473,7 @@ void module4_proliferation_death(Cell* pCell, Phenotype& phenotype, double dt, M
         }
 
         phenotype.cycle.data.transition_rate(0, 0) = proliferation;
+        set_custom_data_if_present(pCell, "final_prolif_rate", proliferation);
 
         double effective_drug = intracellular_drug;
         if (abcb1_active == 1.0)
@@ -1978,6 +1979,7 @@ void create_cell_types(void)
         ensure_custom_scalar(pTumor, "nrf2_active", "dimensionless", 0.0);
         ensure_custom_scalar(pTumor, "intracellular_drug", "dimensionless", 0.0);
         ensure_custom_scalar(pTumor, "mechanical_pressure", "dimensionless", 0.0);
+        ensure_custom_scalar(pTumor, "final_prolif_rate", "1/min", 0.0);
         ensure_custom_scalar(pTumor, "time_since_drug_exposure", "hour", -1.0);
         ensure_custom_scalar(pTumor, "time_alive", "min", 0.0);
     }
