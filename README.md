@@ -1,10 +1,10 @@
 # PROJECT-NORTHSTAR
 
-# Stroma World (PDAC Barrier Counterfactual Evolution Engine)
+# Stroma World (PDAC Barrier Engine)
 
 **Author:** Muniir Hirsi
 
-A simulation-first research platform for discovering **stroma-aware** anti-PDAC strategies using a **counterfactual evolution** framework.
+A simulation-first research platform for discovering **stroma-aware** anti-PDAC strategies.
 
 ---
 
