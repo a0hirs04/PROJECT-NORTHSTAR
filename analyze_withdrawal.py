@@ -18,7 +18,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from python.wrapper.output_parser import OutputParser
 
 # ── Configuration ─────────────────────────────────────────────────────────────
-OUT_DIR = PROJECT_ROOT / "build" / "rc2_fixD_seed42" / "replicate_01_seed42" / "output"
+OUT_DIR = PROJECT_ROOT / "build" / "rc2_fixG_seed42" / "replicate_01_seed42" / "output"
 SAVE_INTERVAL = 360  # minutes between snapshots
 HIF1A_BOOST = 0.14   # current hif1a_emt_boost
 ECM_CAP = 0.10        # current ecm_emt_cap
@@ -204,7 +204,7 @@ def main():
     print("=" * 80)
     print("  RC2 WITHDRAWAL PHASE — DETAILED CELL-STATE ANALYSIS")
     print(f"  Run: hif1a_boost={HIF1A_BOOST}, ecm_cap={ECM_CAP}, off_thresh={EMT_OFF}")
-    print(f"  dkc=0.0002, ggp=0.95, emt_death=0.00005, 50 tumor cells")
+    print(f"  Fix-G: crowding_base=0.3, tumor_CI=15.0, stromal_CI=0.8, dkc=0.0002")
     print("=" * 80)
 
     # ── Summary table ─────────────────────────────────────────────────────
@@ -247,8 +247,8 @@ def main():
     print("=" * 80)
     print("  PER-CELL PRESSURE DECOMPOSITION (withdrawal phase)")
     print("  Formula: mechanical_pressure = simple_pressure × (crowding_base + ecm × collagen_frac × compaction_strength)")
-    print("           crowding_base=0.02, compaction_strength=0.6, collagen_frac=0.4")
-    print("           contact_inhibition_threshold=0.5")
+    print("           crowding_base=0.3, compaction_strength=0.6, collagen_frac=0.4")
+    print("           tumor contact_inhibition_threshold=15.0, stromal=0.8")
     print("=" * 80)
 
     for day in DETAIL_DAYS:
@@ -298,7 +298,7 @@ def main():
             hif = c["hif1a"]
 
             # Compute ECM amplification factor: crowding_base + ecm * collagen_frac * compaction_strength
-            ecm_amp = 0.02 + ecm_local * 0.4 * 0.6 if math.isfinite(ecm_local) else math.nan
+            ecm_amp = 0.3 + ecm_local * 0.4 * 0.6 if math.isfinite(ecm_local) else math.nan
 
             sp_s = f"{sp:.5f}" if math.isfinite(sp) else "N/A"
             mp_s = f"{mp:.5f}" if math.isfinite(mp) else "N/A"
@@ -322,7 +322,7 @@ def main():
             print(f"  │  simple_pressure:  min={min(sps):.4f}  mean={np.mean(sps):.4f}  max={max(sps):.4f}")
         if mps:
             print(f"  │  mech_pressure:    min={min(mps):.4f}  mean={np.mean(mps):.4f}  max={max(mps):.4f}  "
-                  f"(contact_inhib @ 0.5)")
+                  f"(tumor CI @ 15.0, stroma CI @ 0.8)")
         if ecms:
             print(f"  │  local ECM:        min={min(ecms):.4f}  mean={np.mean(ecms):.4f}  max={max(ecms):.4f}")
         if nbrs_all:
@@ -332,15 +332,15 @@ def main():
         if sps and ecms:
             mean_sp = np.mean(sps)
             mean_ecm_v = np.mean(ecms)
-            ecm_amp_factor = 0.02 + mean_ecm_v * 0.4 * 0.6
-            pure_crowd = mean_sp * 0.02  # pressure from crowding_base alone
+            ecm_amp_factor = 0.3 + mean_ecm_v * 0.4 * 0.6
+            pure_crowd = mean_sp * 0.3  # pressure from crowding_base alone
             ecm_contrib = mean_sp * mean_ecm_v * 0.4 * 0.6  # pressure from ECM amplification
             print(f"  │")
             print(f"  │  DECOMPOSITION (mean):")
             print(f"  │    crowding_base contribution:  {pure_crowd:.5f}  ({100*pure_crowd/(pure_crowd+ecm_contrib) if (pure_crowd+ecm_contrib) > 0 else 0:.0f}%)")
             print(f"  │    ECM amplification:           {ecm_contrib:.5f}  ({100*ecm_contrib/(pure_crowd+ecm_contrib) if (pure_crowd+ecm_contrib) > 0 else 0:.0f}%)")
-            print(f"  │    total mech_pressure ≈ sp × ({0.02:.2f} + {mean_ecm_v:.3f}×0.4×0.6) = {mean_sp:.4f} × {ecm_amp_factor:.4f} = {mean_sp*ecm_amp_factor:.5f}")
-            if np.mean(mps) > 0.5 and np.mean(nbrs_all) < 3:
+            print(f"  │    total mech_pressure ≈ sp × ({0.3:.2f} + {mean_ecm_v:.3f}×0.4×0.6) = {mean_sp:.4f} × {ecm_amp_factor:.4f} = {mean_sp*ecm_amp_factor:.5f}")
+            if np.mean(mps) > 5.0 and np.mean(nbrs_all) < 3:
                 print(f"  │")
                 print(f"  │  ⚠  HIGH PRESSURE ({np.mean(mps):.3f}) with FEW NEIGHBORS ({np.mean(nbrs_all):.1f})")
                 print(f"  │     → Pressure is from ECM stiffness, NOT cell crowding")

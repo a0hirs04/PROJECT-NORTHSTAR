@@ -15,7 +15,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from python.wrapper.output_parser import OutputParser
 
 # ---------------------------------------------------------------------------
-OUT_DIR = PROJECT_ROOT / "build" / "rc2_fixE_seed42" / "replicate_01_seed42" / "output"
+OUT_DIR = PROJECT_ROOT / "build" / "rc2_fixJ_seed42" / "replicate_01_seed42" / "output"
 T_PRE       = 20160.0   # day 14
 T_TREAT_END = 40320.0   # day 28
 T_POST      = 60480.0   # day 42
@@ -192,7 +192,7 @@ def main():
     # ---- Day 31 survivor diagnostic: pressure vs proliferation ----------
     print()
     print("=" * 72)
-    print("  DAY 31 SURVIVOR DIAGNOSTIC  (contact_inhibition_threshold = 0.8)")
+    print("  DAY 31 SURVIVOR DIAGNOSTIC  (tumor CI=25.0, stromal CI=0.8)")
     print("=" * 72)
     day31_idx = int(31 * 1440.0 / SAVE_INTERVAL)
     day31_fname = OUT_DIR / f"output{day31_idx:08d}.xml"
