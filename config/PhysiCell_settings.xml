@@ -955,6 +955,8 @@
             description="Fix D: ECM density at which EMT motility drops to zero (linear ramp)">0.8</ecm_motility_block_threshold>
         <host_death_ceiling type="int" units="cells"
             description="Max live tumor cells before simulation halts (safety valve)">50000</host_death_ceiling>
+        <drug_kill_multiplier type="double" units="dimensionless"
+            description="Amplification factor for drug kill rate in the apoptosis equation">5.0</drug_kill_multiplier>
 
     </user_parameters>
 

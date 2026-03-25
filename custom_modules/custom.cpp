@@ -241,7 +241,7 @@ void tumor_division_callback(Cell* pParent, Cell* pChild)
         double noisy =
             parent_value * resistance_inheritance_factor +
             NormalRandom(0.0, resistance_inheritance_noise_std);
-        noisy = std::max(noisy, 0.15); // HARD FLOOR: Prevent lineage amnesia
+        noisy = std::max(noisy, 0.0); // No free shield — survival must be earned
         return clamp_unit(noisy);
     };
 
@@ -1295,7 +1295,7 @@ void module7_drug_response(Cell* pCell, Phenotype& phenotype, double dt, ModuleP
         // A. NRF2 — transcription factor (fast: t_1/2 ~ 20 min = tau * ln2)
         const double nrf2_tau = 20.0;
         const double stress = intracellular_drug + (hif1a_active > 0.5 ? 0.5 : 0.0);
-        const double nrf2_production = (stress > 1e-4) ? 0.05 : 0.0;
+        const double nrf2_production = (stress > drug_stress_threshold) ? 0.05 : 0.0;
         nrf2_active += nrf2_production * dt;
         nrf2_active *= std::exp(-dt / nrf2_tau);
         nrf2_active = clamp_unit(nrf2_active);
@@ -1775,6 +1775,8 @@ void module4_proliferation_death(Cell* pCell, Phenotype& phenotype, double dt, M
         }
 
         const double drug_kill_rate = effective_drug * drug_kill_coefficient;
+        const double drug_kill_multiplier =
+            read_xml_double_or_default("drug_kill_multiplier", 5.0);
 
         // Fix A: EMT cells pay a death-rate cost (anoikis-like apoptosis)
         const double emt_death_increase =
@@ -1787,7 +1789,7 @@ void module4_proliferation_death(Cell* pCell, Phenotype& phenotype, double dt, M
 
         const double total_apoptosis_rate = std::max(
             0.0,
-            base_death_rate * (1.0 - death_resistance_modifier) + drug_kill_rate + emt_death_penalty);
+            base_death_rate * (1.0 - death_resistance_modifier) + (drug_kill_multiplier * drug_kill_rate) + emt_death_penalty);
 
         phenotype.death.rates[apoptosis_index] = total_apoptosis_rate;
     }
