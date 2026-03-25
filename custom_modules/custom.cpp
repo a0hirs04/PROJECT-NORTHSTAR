@@ -1191,6 +1191,31 @@ void module7_drug_response(Cell* pCell, Phenotype& phenotype, double dt, ModuleP
     const std::vector<double>& densities = pCell->nearest_density_vector();
     const double local_drug = read_density_value(densities, drug_index);
 
+    // ── ONE-TIME DIAGNOSTIC: dump custom_data layout when drug first appears ──
+    {
+        static bool _cdd_once = false;
+        if (!_cdd_once && local_drug > 0.01)
+        {
+            _cdd_once = true;
+            std::cerr << "[CUSTOM_DATA_DEBUG] drug present. cell_type="
+                      << pCell->type_name
+                      << " n_vars=" << pCell->custom_data.variables.size()
+                      << "\n";
+            for (int _i = 0; _i < (int)pCell->custom_data.variables.size(); _i++)
+                std::cerr << "  [" << _i << "] "
+                          << pCell->custom_data.variables[_i].name
+                          << " = " << pCell->custom_data.variables[_i].value
+                          << "\n";
+            const char* _keys[] = {"intracellular_drug","nrf2_active","abcb1_active",
+                                   "NRF2","ABCB1","time_since_drug_exposure",
+                                   "mechanical_pressure","drug_uptake_rate",NULL};
+            for (int _k = 0; _keys[_k]; _k++)
+                std::cerr << "  idx[" << _keys[_k] << "]="
+                          << pCell->custom_data.find_variable_index(_keys[_k]) << "\n";
+        }
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
     const double hif1a_active =
         read_custom_data_value_or_default(pCell, "hif1a_active", 0.0);
     double nrf2_active =
