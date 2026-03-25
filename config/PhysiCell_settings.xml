@@ -956,7 +956,7 @@
         <host_death_ceiling type="int" units="cells"
             description="Max live tumor cells before simulation halts (safety valve)">50000</host_death_ceiling>
         <drug_kill_multiplier type="double" units="dimensionless"
-            description="Amplification factor for drug kill rate in the apoptosis equation">5.0</drug_kill_multiplier>
+            description="Amplification factor for drug kill rate in the apoptosis equation">1.0</drug_kill_multiplier>
 
     </user_parameters>
 

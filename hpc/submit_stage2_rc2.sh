@@ -70,7 +70,7 @@ src, dst, out_dir, seed, cpus = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[
 T_PRE      = 20160.0   # day 14  — drug ON
 T_TREAT_END= 40320.0   # day 28  — drug OFF / withdrawal
 T_POST     = 60480.0   # day 42  — end of regrowth window
-DRUG_CONC  = 1.0       # full-strength (10x micro-sim)
+DRUG_CONC  = 0.10      # matched to sweep-validated concentration
 SAVE_INT   = 360       # 6 h between snapshots
 
 tree = ET.parse(src)
