@@ -2,7 +2,7 @@
 """
 sweep_resistance.py — Parallel parameter sweep for drug resistance tuning.
 
-Launches 9 SLURM Stage 1 micro-sim jobs (3 thresholds x 3 multipliers).
+Launches 12 SLURM Stage 1 micro-sim jobs (4 kill multipliers x 3 production rates).
 All jobs run simultaneously on HPC compute nodes.
 
 Usage:
@@ -42,9 +42,9 @@ SAVE_INTERVAL = 360
 # Round 1 (km=2-10, ap=0.0005): total kill — drug too fast for resistance
 # Round 2 (km=0.1-1.0, ap=0.001-0.01): total survival — 100% ABCB1, ic=0
 # Round 3: narrow the transition zone between kill and survival
-KILL_MULTIPLIERS = [1.0, 1.5, 2.0]
-ABCB1_PRODUCTION_RATES = [0.0005, 0.001, 0.002]
-FIXED_STRESS_THRESHOLD = 0.03  # Keep fixed at XML default
+KILL_MULTIPLIERS = [1.0, 1.2, 1.5, 1.8]
+ABCB1_PRODUCTION_RATES = [0.0008, 0.001, 0.0015]
+FIXED_STRESS_THRESHOLD = 0.02
 
 
 def _set(root: ET.Element, xpath: str, value: str) -> None:

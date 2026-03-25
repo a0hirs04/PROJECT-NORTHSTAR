@@ -239,7 +239,7 @@ void tumor_division_callback(Cell* pParent, Cell* pChild)
     const auto inherited_with_noise = [&](double parent_value) -> double
     {
         double noisy =
-            parent_value * resistance_inheritance_factor +
+            parent_value +
             NormalRandom(0.0, resistance_inheritance_noise_std);
         noisy = std::max(noisy, 0.0); // No free shield — survival must be earned
         return clamp_unit(noisy);
@@ -273,11 +273,11 @@ void tumor_division_callback(Cell* pParent, Cell* pChild)
     write_custom_if_present(
         pChild,
         "nrf2_withdrawal_anchor",
-        clamp_unit(parent_nrf2_anchor * resistance_inheritance_factor));
+        clamp_unit(parent_nrf2_anchor));
     write_custom_if_present(
         pChild,
         "abcb1_withdrawal_anchor",
-        clamp_unit(parent_abcb1_anchor * resistance_inheritance_factor));
+        clamp_unit(parent_abcb1_anchor));
     write_custom_if_present(pChild, "emt_extent", 0.0);
     write_custom_if_present(pChild, "emt_activation_time", 0.0);
     write_custom_if_present(pChild, "emt_signal_time", 0.0);
