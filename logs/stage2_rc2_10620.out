@@ -1,0 +1,8149 @@
+[stage2] build start: Wed Mar 25 10:38:11 UTC 2026
+make BUILD=release build-mode
+make[1]: Entering directory '/home/a0hirs04/PROJECT-NORTHSTAR'
+cp build/bin/release/stroma_world stroma_world
+make[1]: Leaving directory '/home/a0hirs04/PROJECT-NORTHSTAR'
+[stage2] build done:  Wed Mar 25 10:38:11 UTC 2026
+[stage2] config written → /home/a0hirs04/PROJECT-NORTHSTAR/build/rc2_full_seed42/replicate_01_seed42/config.xml
+[stage2] simulation start: Wed Mar 25 10:38:12 UTC 2026
+Using config file /home/a0hirs04/PROJECT-NORTHSTAR/build/rc2_full_seed42/replicate_01_seed42/config.xml ... 
+Setting up RNG with seed 42
+1
+dc? 1
+User parameters in XML config file: 
+Bool parameters:: 
+
+Int parameters:: 
+number_of_tumor_cells: 50 [none]
+number_of_stromal_cells: 500 [none]
+emt_phenotype_extent: 3 [dimensionless]
+host_death_ceiling: 50000 [cells]
+
+Double parameters:: 
+tumor_cluster_radius: 100 [micron]
+stroma_inner_radius: 100 [micron]
+stroma_outer_radius: 300 [micron]
+mechanics_voxel_size: 30 [micron]
+tgfb_activation_threshold: 0.1 [dimensionless]
+shh_activation_threshold: 1e-05 [dimensionless]
+oxygen_necrosis_threshold: 5 [mmHg]
+oxygen_hypoxia_threshold: 15 [mmHg]
+drug_start_time: 20160 [min]
+drug_end_time: 40320 [min]
+drug_concentration: 0.1 [dimensionless]
+shh_inhibition_start_time: 1e+18 [min]
+shh_inhibition_strength: 0 [dimensionless]
+tgfb_secretion_rate: 0.8 [dimensionless]
+shh_secretion_rate: 0.7 [dimensionless]
+hif1a_tgfb_amplification_factor: 1.5 [dimensionless]
+caf_tgfb_secretion_rate: 0.3 [dimensionless]
+tgfb_brake_sensitivity: 0.05 [dimensionless]
+proliferation_rate: 0.75 [dimensionless]
+checkpoint_integrity: 0.05 [dimensionless]
+apoptosis_resistance: 0.85 [dimensionless]
+base_proliferation_rate: 0.00048 [1/min]
+go_grow_penalty: 0.95 [dimensionless]
+hypoxia_proliferation_modifier: 0.2 [dimensionless]
+hypoxia_death_resistance_bonus: 0.1 [dimensionless]
+contact_inhibition_threshold: 25 [dimensionless]
+stromal_contact_inhibition_threshold: 0.8 [dimensionless]
+drug_kill_coefficient: 0.05 [1/min]
+efflux_drug_reduction: 0.7 [dimensionless]
+caf_proliferation_rate: 0.0001 [1/min]
+caf_base_death_rate: 0 [1/min]
+caf_crowded_death_rate: 0 [1/min]
+gli1_proliferation_boost: 1.3 [dimensionless]
+psc_proliferation_rate: 0 [1/min]
+ecm_production_rate_base: 0.01 [1/min]
+ecm_production_rate_boosted: 0.015 [1/min]
+ecm_ha_fraction_default: 0.6 [dimensionless]
+mmp2_degradation_rate: 0.005 [1/min]
+ecm_natural_decay_rate: 0.0001 [1/min]
+drug_uptake_rate: 0.1 [1/hour]
+drug_stress_threshold: 0.03 [dimensionless]
+nrf2_decay_rate: 0.01 [1/hour]
+nrf2_persistence_threshold: 0.003 [dimensionless]
+drug_natural_decay_rate: 0 [1/hour]
+hif1a_nrf2_priming_bonus: 0.02 [dimensionless]
+emt_induction_threshold: 0.3 [dimensionless]
+hif1a_emt_boost: 0.02 [dimensionless]
+motility_epithelial: 0.1 [micron/min]
+motility_mesenchymal_low: 0.5 [micron/min]
+motility_mesenchymal_med: 1 [micron/min]
+motility_mesenchymal_high: 2 [micron/min]
+adhesion_epithelial: 5 [dimensionless]
+adhesion_mesenchymal_low: 3 [dimensionless]
+adhesion_mesenchymal_med: 1.5 [dimensionless]
+adhesion_mesenchymal_high: 0.5 [dimensionless]
+hypoxia_response_threshold: 0.35 [dimensionless]
+efflux_induction_delay: 0.5 [dimensionless]
+efflux_strength: 0.7 [dimensionless]
+abcb1_production_rate: 0.0005 [1/min]
+abcb1_decay_tau: 1620 [min]
+abcb1_max_daily_drop_fraction: 0.25 [dimensionless]
+abcb1_inheritance_floor: 0.6 [dimensionless]
+mechanical_compaction_strength: 0.6 [dimensionless]
+compaction_ecm_increment: 0.01 [dimensionless]
+crowding_base_pressure: 0.3 [dimensionless]
+stromal_contact_emt_boost: 0 [dimensionless]
+ecm_emt_threshold: 0.3 [dimensionless]
+ecm_emt_ramp: 0.3 [dimensionless]
+ecm_emt_strength: 0.4 [dimensionless]
+ecm_emt_cap: 0.3 [dimensionless]
+ecm_reversion_weight: 0.3 [dimensionless]
+emt_death_increase: 5e-05 [1/min]
+emt_off_threshold: 0.1 [dimensionless]
+emt_activation_delay: 360 [min]
+emt_persistence_time: 7200 [min]
+ecm_emt_require_caf_contact: 1 [dimensionless]
+ecm_motility_block_threshold: 0.8 [dimensionless]
+drug_kill_multiplier: 1 [dimensionless]
+
+String parameters:: 
+calibration_profile: AsPC-1 [none]
+tumor_calibration_knobs_json: config/tumor_calibration_knobs.json [none]
+emt_phenotype_extent: HIGH [none]
+hypoxia_phenotype_shift: HIGH [none]
+
+
+which boundaries?
+1 1 1 1 1 1
+
+Microenvironment summary: microenvironment: 
+
+Mesh information: 
+type: uniform Cartesian
+Domain: [-1000,1000] micron x [-1000,1000] micron x [-10,10] micron
+   resolution: dx = 20 micron
+   voxels: 10000
+   voxel faces: 0
+   volume: 8e+07 cubic micron
+Densities: (5 total)
+   oxygen:
+     units: mmHg
+     diffusion coefficient: 100000 micron^2 / min
+     decay rate: 0.1 min^-1
+     diffusion length scale: 1000 micron
+     initial condition: 38 mmHg
+     boundary condition: 38 mmHg (enabled: false)
+   tgfb:
+     units: dimensionless
+     diffusion coefficient: 1000 micron^2 / min
+     decay rate: 0.01 min^-1
+     diffusion length scale: 316.228 micron
+     initial condition: 0 dimensionless
+     boundary condition: 0 dimensionless (enabled: false)
+   shh:
+     units: dimensionless
+     diffusion coefficient: 1000 micron^2 / min
+     decay rate: 0.01 min^-1
+     diffusion length scale: 316.228 micron
+     initial condition: 0 dimensionless
+     boundary condition: 0 dimensionless (enabled: false)
+   drug:
+     units: dimensionless
+     diffusion coefficient: 5000 micron^2 / min
+     decay rate: 0.002 min^-1
+     diffusion length scale: 1581.14 micron
+     initial condition: 0 dimensionless
+     boundary condition: 0 dimensionless (enabled: false)
+   ecm_density:
+     units: dimensionless
+     diffusion coefficient: 0 micron^2 / min
+     decay rate: 0.0001 min^-1
+     diffusion length scale: 0 micron
+     initial condition: 0 dimensionless
+     boundary condition: 0 dimensionless (enabled: false)
+
+virtual_wall_at_domain_edge: enabled
+Pre-processing type 0 named tumor_cell
+Pre-processing type 1 named stromal_cell
+Processing tumor_cell ... 
+Note: setting cell definition to 2D based on microenvironment domain settings ... 
+  --------- attachment_elastic_constant = 0.01
+Processing stromal_cell ... 
+Note: setting cell definition to 2D based on microenvironment domain settings ... 
+copying data ... 
+tumor_cell to stromal_cell
+  --------- attachment_elastic_constant = 0.01
+Signals: 
+=======
+0 : oxygen
+1 : tgfb
+2 : shh
+3 : drug
+4 : ecm_density
+5 : intracellular oxygen
+6 : intracellular tgfb
+7 : intracellular shh
+8 : intracellular drug
+9 : intracellular ecm_density
+10 : oxygen gradient
+11 : tgfb gradient
+12 : shh gradient
+13 : drug gradient
+14 : ecm_density gradient
+15 : pressure
+16 : volume
+17 : contact with tumor_cell
+18 : contact with stromal_cell
+19 : contact with live cell
+20 : contact with dead cell
+21 : contact with apoptotic cell
+22 : contact with necrotic cell
+23 : contact with other dead cell
+24 : contact with basement membrane
+25 : damage
+26 : damage delivered
+27 : attacking
+28 : dead
+29 : total attack time
+30 : time
+31 : custom:KRAS
+32 : custom:MYC
+33 : custom:EGFR
+34 : custom:TP53
+35 : custom:CDKN2A
+36 : custom:SMAD4
+37 : custom:RB1
+38 : custom:BCL_XL
+39 : custom:BAX
+40 : custom:ZEB1
+41 : custom:CDH1
+42 : custom:MMP2
+43 : custom:TGFB1_expr
+44 : custom:SHH_expr
+45 : custom:HIF1A
+46 : custom:NRF2
+47 : custom:ABCB1
+48 : custom:is_mesenchymal
+49 : custom:stress_level
+50 : custom:drug_sensitivity
+51 : custom:apoptosis_threshold
+52 : custom:cell_id
+53 : custom:parent_id
+54 : custom:gene_state_KRAS
+55 : custom:gene_state_TP53
+56 : custom:gene_state_CDKN2A
+57 : custom:gene_state_SMAD4
+58 : custom:gene_state_BCL_XL
+59 : custom:gene_state_MYC
+60 : custom:gene_state_EGFR
+61 : custom:gene_state_RB1
+62 : custom:gene_state_BAX
+63 : custom:gene_state_ZEB1
+64 : custom:gene_state_CDH1
+65 : custom:gene_state_MMP2
+66 : custom:gene_state_TGFB1
+67 : custom:gene_state_SHH
+68 : custom:gene_state_HIF1A
+69 : custom:gene_state_NRF2
+70 : custom:gene_state_ABCB1
+71 : custom:gene_state_HAS2
+72 : custom:gene_state_COL1A1
+73 : custom:gene_state_GLI1
+74 : custom:gene_state_ACTA2
+75 : custom:hif1a_active
+76 : custom:zeb1_active
+77 : custom:cdh1_expressed
+78 : custom:nrf2_active
+79 : custom:abcb1_active
+80 : custom:mmp2_active
+81 : custom:intracellular_drug
+82 : custom:time_since_drug_exposure
+83 : custom:time_alive
+84 : custom:emt_extent
+85 : custom:mechanical_pressure
+86 : custom:emt_signal_time
+87 : custom:emt_activation_time
+88 : apoptotic
+89 : necrotic
+
+
+Behaviors: 
+=========
+0 : oxygen secretion
+1 : tgfb secretion
+2 : shh secretion
+3 : drug secretion
+4 : ecm_density secretion
+5 : oxygen secretion target
+6 : tgfb secretion target
+7 : shh secretion target
+8 : drug secretion target
+9 : ecm_density secretion target
+10 : oxygen uptake
+11 : tgfb uptake
+12 : shh uptake
+13 : drug uptake
+14 : ecm_density uptake
+15 : oxygen export
+16 : tgfb export
+17 : shh export
+18 : drug export
+19 : ecm_density export
+20 : cycle entry
+21 : exit from cycle phase 1
+22 : exit from cycle phase 2
+23 : exit from cycle phase 3
+24 : exit from cycle phase 4
+25 : exit from cycle phase 5
+26 : apoptosis
+27 : necrosis
+28 : migration speed
+29 : migration bias
+30 : migration persistence time
+31 : chemotactic response to oxygen
+32 : chemotactic response to tgfb
+33 : chemotactic response to shh
+34 : chemotactic response to drug
+35 : chemotactic response to ecm_density
+36 : cell-cell adhesion
+37 : cell-cell adhesion elastic constant
+38 : adhesive affinity to tumor_cell
+39 : adhesive affinity to stromal_cell
+40 : relative maximum adhesion distance
+41 : cell-cell repulsion
+42 : cell-BM adhesion
+43 : cell-BM repulsion
+44 : phagocytose apoptotic cell
+45 : phagocytose necrotic cell
+46 : phagocytose other dead cell
+47 : phagocytose tumor_cell
+48 : phagocytose stromal_cell
+49 : attack tumor_cell
+50 : attack stromal_cell
+51 : fuse to tumor_cell
+52 : fuse to stromal_cell
+53 : transition to tumor_cell
+54 : transition to stromal_cell
+55 : asymmetric division to tumor_cell
+56 : asymmetric division to stromal_cell
+57 : custom:KRAS
+58 : custom:MYC
+59 : custom:EGFR
+60 : custom:TP53
+61 : custom:CDKN2A
+62 : custom:SMAD4
+63 : custom:RB1
+64 : custom:BCL_XL
+65 : custom:BAX
+66 : custom:ZEB1
+67 : custom:CDH1
+68 : custom:MMP2
+69 : custom:TGFB1_expr
+70 : custom:SHH_expr
+71 : custom:HIF1A
+72 : custom:NRF2
+73 : custom:ABCB1
+74 : custom:is_mesenchymal
+75 : custom:stress_level
+76 : custom:drug_sensitivity
+77 : custom:apoptosis_threshold
+78 : custom:cell_id
+79 : custom:parent_id
+80 : custom:gene_state_KRAS
+81 : custom:gene_state_TP53
+82 : custom:gene_state_CDKN2A
+83 : custom:gene_state_SMAD4
+84 : custom:gene_state_BCL_XL
+85 : custom:gene_state_MYC
+86 : custom:gene_state_EGFR
+87 : custom:gene_state_RB1
+88 : custom:gene_state_BAX
+89 : custom:gene_state_ZEB1
+90 : custom:gene_state_CDH1
+91 : custom:gene_state_MMP2
+92 : custom:gene_state_TGFB1
+93 : custom:gene_state_SHH
+94 : custom:gene_state_HIF1A
+95 : custom:gene_state_NRF2
+96 : custom:gene_state_ABCB1
+97 : custom:gene_state_HAS2
+98 : custom:gene_state_COL1A1
+99 : custom:gene_state_GLI1
+100 : custom:gene_state_ACTA2
+101 : custom:hif1a_active
+102 : custom:zeb1_active
+103 : custom:cdh1_expressed
+104 : custom:nrf2_active
+105 : custom:abcb1_active
+106 : custom:mmp2_active
+107 : custom:intracellular_drug
+108 : custom:time_since_drug_exposure
+109 : custom:time_alive
+110 : custom:emt_extent
+111 : custom:mechanical_pressure
+112 : custom:emt_signal_time
+113 : custom:emt_activation_time
+114 : is_movable
+115 : immunogenicity to tumor_cell
+116 : immunogenicity to stromal_cell
+117 : cell attachment rate
+118 : cell detachment rate
+119 : maximum number of cell attachments
+120 : attack damage rate
+121 : attack duration
+122 : damage rate
+123 : damage repair rate
+
+
+ruleset
+	Ruleset disabled ... 
+Behavioral rules for cell type tumor_cell:
+===================================================
+
+Behavioral rules for cell type stromal_cell:
+===================================================
+
+Exporting rules to file /home/a0hirs04/PROJECT-NORTHSTAR/build/rc2_full_seed42/replicate_01_seed42/output/cell_rules_parsed.csv (v3 format) ... 
+Done!
+
+0 :: type:0 name: tumor_cell
+	 cycle model: Live (code=5)
+		Phase 0: Live
+		Cycle transitions: 
+		-----------------
+		Live --> Live w mean duration 100 min
+	 death models: 
+		0 : Apoptosis (code=100) with rate 0.00015 1/min
+		death phase transitions: 
+		------------------------
+		Apoptotic --> Debris w mean duration 516 min
+		1 : Necrosis (code=101) with rate 0 1/min
+		death phase transitions: 
+		------------------------
+		Necrotic (swelling) --> Necrotic (lysed) w mean duration 1e-16 min
+		Necrotic (lysed) --> Debris w mean duration 86400 min
+	 key functions: 
+		 migration bias rule: false
+		 custom rule: false
+		 phenotype rule: true
+		 volume update function: true
+		 mechanics function: true
+		 contact function: false
+		 cell division function: true
+	motility (enabled: true in 2D)
+		speed: 0.1 micron/min
+		bias: 0 
+		persistence time: 10 min
+		chemotaxis (enabled: false)
+			along 1 * grad(oxygen) 
+	mechanics:
+		cell_cell_adhesion_strength: 5
+		cell_cell_repulsion_strength: 10
+		rel max adhesion dist: 1.25
+		cell_BM_adhesion_strength: 4
+		cell_BM_repulsion_strength: 100
+		attachment_elastic_constant: 0.01
+		attachment_rate: 0
+		detachment_rate: 0
+	custom data: 
+		KRAS: 1 dimensionless
+		MYC: 0 dimensionless
+		EGFR: 1 dimensionless
+		TP53: 0 dimensionless
+		CDKN2A: 0 dimensionless
+		SMAD4: 0 dimensionless
+		RB1: 0 dimensionless
+		BCL_XL: 0 dimensionless
+		BAX: 0 dimensionless
+		ZEB1: 0 dimensionless
+		CDH1: 0 dimensionless
+		MMP2: 0 dimensionless
+		TGFB1_expr: 0 dimensionless
+		SHH_expr: 0 dimensionless
+		HIF1A: 0 dimensionless
+		NRF2: 0 dimensionless
+		ABCB1: 0 dimensionless
+		is_mesenchymal: 0 dimensionless
+		stress_level: 0 dimensionless
+		drug_sensitivity: 1 dimensionless
+		apoptosis_threshold: 0.5 dimensionless
+		cell_id: -1 none
+		parent_id: -1 none
+		gene_state_KRAS: 1 none
+		gene_state_TP53: 2 none
+		gene_state_CDKN2A: 2 none
+		gene_state_SMAD4: 2 none
+		gene_state_BCL_XL: 1 none
+		gene_state_MYC: 0 none
+		gene_state_EGFR: 0 none
+		gene_state_RB1: 0 none
+		gene_state_BAX: 0 none
+		gene_state_ZEB1: 0 none
+		gene_state_CDH1: 0 none
+		gene_state_MMP2: 0 none
+		gene_state_TGFB1: 0 none
+		gene_state_SHH: 0 none
+		gene_state_HIF1A: 0 none
+		gene_state_NRF2: 0 none
+		gene_state_ABCB1: 0 none
+		gene_state_HAS2: 0 none
+		gene_state_COL1A1: 0 none
+		gene_state_GLI1: 0 none
+		gene_state_ACTA2: 0 none
+		hif1a_active: 0 dimensionless
+		zeb1_active: 0 dimensionless
+		cdh1_expressed: 1 dimensionless
+		nrf2_active: 0 dimensionless
+		abcb1_active: 0 dimensionless
+		mmp2_active: 0 dimensionless
+		intracellular_drug: 0 dimensionless
+		time_since_drug_exposure: -1 hour
+		time_alive: 0 min
+		emt_extent: 0 dimensionless
+		mechanical_pressure: 0 dimensionless
+		emt_signal_time: 0 min
+		emt_activation_time: 0 min
+		final_prolif_rate: 0 1/min
+		time_since_drug_withdrawal: -1 hour
+		in_resistance_memory: 0 dimensionless
+		nrf2_withdrawal_anchor: 0 dimensionless
+		abcb1_withdrawal_anchor: 0 dimensionless
+	custom vector data: 
+			NOTE: custom vector data will eventually be merged with custom data
+1 :: type:1 name: stromal_cell
+	 cycle model: Live (code=5)
+		Phase 0: Live
+		Cycle transitions: 
+		-----------------
+		Live --> Live w mean duration inf min
+	 death models: 
+		0 : Apoptosis (code=100) with rate 0 1/min
+		death phase transitions: 
+		------------------------
+		Apoptotic --> Debris w mean duration 516 min
+		1 : Necrosis (code=101) with rate 0 1/min
+		death phase transitions: 
+		------------------------
+		Necrotic (swelling) --> Necrotic (lysed) w mean duration 1e-16 min
+		Necrotic (lysed) --> Debris w mean duration 86400 min
+	 key functions: 
+		 migration bias rule: false
+		 custom rule: false
+		 phenotype rule: true
+		 volume update function: true
+		 mechanics function: true
+		 contact function: false
+		 cell division function: true
+	motility (enabled: true in 2D)
+		speed: 0.05 micron/min
+		bias: 0 
+		persistence time: 10 min
+		chemotaxis (enabled: false)
+			along 1 * grad(oxygen) 
+	mechanics:
+		cell_cell_adhesion_strength: 0.8
+		cell_cell_repulsion_strength: 10
+		rel max adhesion dist: 1.25
+		cell_BM_adhesion_strength: 4
+		cell_BM_repulsion_strength: 100
+		attachment_elastic_constant: 0.01
+		attachment_rate: 0
+		detachment_rate: 0
+	custom data: 
+		cell_id: -1 none
+		parent_id: -1 none
+		gene_state_SMAD4: 0 none
+		gene_state_ACTA2: 0 none
+		gene_state_GLI1: 0 none
+		gene_state_HAS2: 0 none
+		gene_state_COL1A1: 0 none
+		gene_state_TGFB1: 0 none
+		gene_state_SHH: 0 none
+		acta2_active: 0 dimensionless
+		gli1_active: 0 dimensionless
+		activation_mode: 0 dimensionless
+		hif1a_active: 0 dimensionless
+		ecm_production_rate: 0 dimensionless
+		tgfb_secretion_active: 0 dimensionless
+		time_alive: 0 min
+		mechanical_pressure: 0 dimensionless
+		_stromal_reserved_0: 0 none
+		_stromal_reserved_1: 0 none
+		_stromal_reserved_2: 0 none
+		_stromal_reserved_3: 0 none
+		_stromal_reserved_4: 0 none
+		_stromal_reserved_5: 0 none
+		_stromal_reserved_6: 0 none
+		_stromal_reserved_7: 0 none
+		_stromal_reserved_8: 0 none
+		_stromal_reserved_9: 0 none
+		_stromal_reserved_10: 0 none
+		_stromal_reserved_11: 0 none
+		_stromal_reserved_12: 0 none
+		_stromal_reserved_13: 0 none
+		_stromal_reserved_14: 0 none
+		_stromal_reserved_15: 0 none
+		_stromal_reserved_16: 0 none
+		_stromal_reserved_17: 0 none
+		_stromal_reserved_18: 0 none
+		_stromal_reserved_19: 0 none
+		_stromal_reserved_20: 0 none
+		_stromal_reserved_21: 0 none
+		_stromal_reserved_22: 0 none
+		_stromal_reserved_23: 0 none
+		_stromal_reserved_24: 0 none
+		_stromal_reserved_25: 0 none
+		_stromal_reserved_26: 0 none
+		_stromal_reserved_27: 0 none
+		_stromal_reserved_28: 0 none
+		_stromal_reserved_29: 0 none
+		_stromal_reserved_30: 0 none
+		_stromal_reserved_31: 0 none
+		_stromal_reserved_32: 0 none
+		_stromal_reserved_33: 0 none
+		_stromal_reserved_34: 0 none
+		_stromal_reserved_35: 0 none
+		_stromal_reserved_36: 0 none
+		_stromal_reserved_37: 0 none
+		_stromal_reserved_38: 0 none
+		_stromal_reserved_39: 0 none
+		_stromal_reserved_40: 0 none
+		_stromal_reserved_41: 0 none
+		_stromal_reserved_42: 0 none
+		_stromal_reserved_43: 0 none
+		_stromal_reserved_44: 0 none
+	custom vector data: 
+			NOTE: custom vector data will eventually be merged with custom data
+Using PhysiCell version 1.14.2
+	Please cite DOI: 10.1371/journal.pcbi.1005991
+	Project website: http://physicell.org
+
+See ALL_CITATIONS.txt for this list.
+current simulated time: 0 min (max: 60480 min)
+total agents: 550
+interval wall time: 0 days, 0 hours, 0 minutes, and 2.5341e-05 seconds 
+total wall time: 0 days, 0 hours, 0 minutes, and 3.4171e-05 seconds 
+
+
+Using method diffusion_decay_solver__constant_coefficients_LOD_2D (2D LOD with Thomas Algorithm) ... 
+
+current simulated time: 360 min (max: 60480 min)
+total agents: 567
+interval wall time: 0 days, 0 hours, 0 minutes, and 17.2825 seconds 
+total wall time: 0 days, 0 hours, 0 minutes, and 17.2825 seconds 
+
+current simulated time: 720 min (max: 60480 min)
+total agents: 585
+interval wall time: 0 days, 0 hours, 0 minutes, and 17.2515 seconds 
+total wall time: 0 days, 0 hours, 0 minutes, and 34.534 seconds 
+
+current simulated time: 1080 min (max: 60480 min)
+total agents: 594
+interval wall time: 0 days, 0 hours, 0 minutes, and 17.3317 seconds 
+total wall time: 0 days, 0 hours, 0 minutes, and 51.8657 seconds 
+
+current simulated time: 1440 min (max: 60480 min)
+total agents: 614
+interval wall time: 0 days, 0 hours, 0 minutes, and 18.0768 seconds 
+total wall time: 0 days, 0 hours, 1 minutes, and 9.94254 seconds 
+
+current simulated time: 1800 min (max: 60480 min)
+total agents: 630
+interval wall time: 0 days, 0 hours, 0 minutes, and 18.0728 seconds 
+total wall time: 0 days, 0 hours, 1 minutes, and 28.0154 seconds 
+
+current simulated time: 2160 min (max: 60480 min)
+total agents: 645
+interval wall time: 0 days, 0 hours, 0 minutes, and 18.1005 seconds 
+total wall time: 0 days, 0 hours, 1 minutes, and 46.1159 seconds 
+
+current simulated time: 2520 min (max: 60480 min)
+total agents: 668
+interval wall time: 0 days, 0 hours, 0 minutes, and 18.1101 seconds 
+total wall time: 0 days, 0 hours, 2 minutes, and 4.22596 seconds 
+
+current simulated time: 2880 min (max: 60480 min)
+total agents: 686
+interval wall time: 0 days, 0 hours, 0 minutes, and 18.06 seconds 
+total wall time: 0 days, 0 hours, 2 minutes, and 22.286 seconds 
+
+current simulated time: 3240 min (max: 60480 min)
+total agents: 706
+interval wall time: 0 days, 0 hours, 0 minutes, and 18.1112 seconds 
+total wall time: 0 days, 0 hours, 2 minutes, and 40.3972 seconds 
+
+current simulated time: 3600 min (max: 60480 min)
+total agents: 722
+interval wall time: 0 days, 0 hours, 0 minutes, and 18.3671 seconds 
+total wall time: 0 days, 0 hours, 2 minutes, and 58.7643 seconds 
+
+current simulated time: 3960 min (max: 60480 min)
+total agents: 732
+interval wall time: 0 days, 0 hours, 0 minutes, and 18.2247 seconds 
+total wall time: 0 days, 0 hours, 3 minutes, and 16.989 seconds 
+
+current simulated time: 4320 min (max: 60480 min)
+total agents: 748
+interval wall time: 0 days, 0 hours, 0 minutes, and 18.2466 seconds 
+total wall time: 0 days, 0 hours, 3 minutes, and 35.2356 seconds 
+
+current simulated time: 4680 min (max: 60480 min)
+total agents: 779
+interval wall time: 0 days, 0 hours, 0 minutes, and 18.3528 seconds 
+total wall time: 0 days, 0 hours, 3 minutes, and 53.5884 seconds 
+
+current simulated time: 5040 min (max: 60480 min)
+total agents: 793
+interval wall time: 0 days, 0 hours, 0 minutes, and 18.3906 seconds 
+total wall time: 0 days, 0 hours, 4 minutes, and 11.979 seconds 
+
+current simulated time: 5400 min (max: 60480 min)
+total agents: 804
+interval wall time: 0 days, 0 hours, 0 minutes, and 18.3936 seconds 
+total wall time: 0 days, 0 hours, 4 minutes, and 30.3726 seconds 
+
+current simulated time: 5760 min (max: 60480 min)
+total agents: 822
+interval wall time: 0 days, 0 hours, 0 minutes, and 18.4128 seconds 
+total wall time: 0 days, 0 hours, 4 minutes, and 48.7854 seconds 
+
+current simulated time: 6120 min (max: 60480 min)
+total agents: 845
+interval wall time: 0 days, 0 hours, 0 minutes, and 18.442 seconds 
+total wall time: 0 days, 0 hours, 5 minutes, and 7.22739 seconds 
+
+current simulated time: 6480 min (max: 60480 min)
+total agents: 868
+interval wall time: 0 days, 0 hours, 0 minutes, and 18.4575 seconds 
+total wall time: 0 days, 0 hours, 5 minutes, and 25.6849 seconds 
+
+current simulated time: 6840 min (max: 60480 min)
+total agents: 886
+interval wall time: 0 days, 0 hours, 0 minutes, and 18.4848 seconds 
+total wall time: 0 days, 0 hours, 5 minutes, and 44.1697 seconds 
+
+current simulated time: 7200 min (max: 60480 min)
+total agents: 912
+interval wall time: 0 days, 0 hours, 0 minutes, and 18.5191 seconds 
+total wall time: 0 days, 0 hours, 6 minutes, and 2.68888 seconds 
+
+current simulated time: 7560 min (max: 60480 min)
+total agents: 931
+interval wall time: 0 days, 0 hours, 0 minutes, and 18.8634 seconds 
+total wall time: 0 days, 0 hours, 6 minutes, and 21.5523 seconds 
+
+current simulated time: 7920 min (max: 60480 min)
+total agents: 954
+interval wall time: 0 days, 0 hours, 0 minutes, and 19.0783 seconds 
+total wall time: 0 days, 0 hours, 6 minutes, and 40.6306 seconds 
+
+current simulated time: 8280 min (max: 60480 min)
+total agents: 987
+interval wall time: 0 days, 0 hours, 0 minutes, and 19.1419 seconds 
+total wall time: 0 days, 0 hours, 6 minutes, and 59.7726 seconds 
+
+current simulated time: 8640 min (max: 60480 min)
+total agents: 1031
+interval wall time: 0 days, 0 hours, 0 minutes, and 19.2318 seconds 
+total wall time: 0 days, 0 hours, 7 minutes, and 19.0044 seconds 
+
+current simulated time: 9000 min (max: 60480 min)
+total agents: 1061
+interval wall time: 0 days, 0 hours, 0 minutes, and 19.3446 seconds 
+total wall time: 0 days, 0 hours, 7 minutes, and 38.349 seconds 
+
+current simulated time: 9360 min (max: 60480 min)
+total agents: 1091
+interval wall time: 0 days, 0 hours, 0 minutes, and 19.3886 seconds 
+total wall time: 0 days, 0 hours, 7 minutes, and 57.7376 seconds 
+
+current simulated time: 9720 min (max: 60480 min)
+total agents: 1144
+interval wall time: 0 days, 0 hours, 0 minutes, and 19.3803 seconds 
+total wall time: 0 days, 0 hours, 8 minutes, and 17.1179 seconds 
+
+current simulated time: 10080 min (max: 60480 min)
+total agents: 1197
+interval wall time: 0 days, 0 hours, 0 minutes, and 19.5212 seconds 
+total wall time: 0 days, 0 hours, 8 minutes, and 36.6392 seconds 
+
+current simulated time: 10440 min (max: 60480 min)
+total agents: 1221
+interval wall time: 0 days, 0 hours, 0 minutes, and 20.9507 seconds 
+total wall time: 0 days, 0 hours, 8 minutes, and 57.5899 seconds 
+
+current simulated time: 10800 min (max: 60480 min)
+total agents: 1246
+interval wall time: 0 days, 0 hours, 0 minutes, and 21.209 seconds 
+total wall time: 0 days, 0 hours, 9 minutes, and 18.7988 seconds 
+
+current simulated time: 11160 min (max: 60480 min)
+total agents: 1282
+interval wall time: 0 days, 0 hours, 0 minutes, and 21.2531 seconds 
+total wall time: 0 days, 0 hours, 9 minutes, and 40.052 seconds 
+
+current simulated time: 11520 min (max: 60480 min)
+total agents: 1317
+interval wall time: 0 days, 0 hours, 0 minutes, and 21.2478 seconds 
+total wall time: 0 days, 0 hours, 10 minutes, and 1.29978 seconds 
+
+current simulated time: 11880 min (max: 60480 min)
+total agents: 1358
+interval wall time: 0 days, 0 hours, 0 minutes, and 21.3026 seconds 
+total wall time: 0 days, 0 hours, 10 minutes, and 22.6024 seconds 
+
+current simulated time: 12240 min (max: 60480 min)
+total agents: 1405
+interval wall time: 0 days, 0 hours, 0 minutes, and 21.3919 seconds 
+total wall time: 0 days, 0 hours, 10 minutes, and 43.9943 seconds 
+
+current simulated time: 12600 min (max: 60480 min)
+total agents: 1409
+interval wall time: 0 days, 0 hours, 0 minutes, and 21.4482 seconds 
+total wall time: 0 days, 0 hours, 11 minutes, and 5.44252 seconds 
+
+current simulated time: 12960 min (max: 60480 min)
+total agents: 1445
+interval wall time: 0 days, 0 hours, 0 minutes, and 21.4853 seconds 
+total wall time: 0 days, 0 hours, 11 minutes, and 26.9278 seconds 
+
+current simulated time: 13320 min (max: 60480 min)
+total agents: 1471
+interval wall time: 0 days, 0 hours, 0 minutes, and 21.5077 seconds 
+total wall time: 0 days, 0 hours, 11 minutes, and 48.4355 seconds 
+
+current simulated time: 13680 min (max: 60480 min)
+total agents: 1500
+interval wall time: 0 days, 0 hours, 0 minutes, and 21.5971 seconds 
+total wall time: 0 days, 0 hours, 12 minutes, and 10.0326 seconds 
+
+current simulated time: 14040 min (max: 60480 min)
+total agents: 1550
+interval wall time: 0 days, 0 hours, 0 minutes, and 21.6394 seconds 
+total wall time: 0 days, 0 hours, 12 minutes, and 31.672 seconds 
+
+current simulated time: 14400 min (max: 60480 min)
+total agents: 1576
+interval wall time: 0 days, 0 hours, 0 minutes, and 21.7677 seconds 
+total wall time: 0 days, 0 hours, 12 minutes, and 53.4397 seconds 
+
+current simulated time: 14760 min (max: 60480 min)
+total agents: 1624
+interval wall time: 0 days, 0 hours, 0 minutes, and 21.8199 seconds 
+total wall time: 0 days, 0 hours, 13 minutes, and 15.2595 seconds 
+
+current simulated time: 15120 min (max: 60480 min)
+total agents: 1674
+interval wall time: 0 days, 0 hours, 0 minutes, and 21.9214 seconds 
+total wall time: 0 days, 0 hours, 13 minutes, and 37.181 seconds 
+
+current simulated time: 15480 min (max: 60480 min)
+total agents: 1725
+interval wall time: 0 days, 0 hours, 0 minutes, and 21.9582 seconds 
+total wall time: 0 days, 0 hours, 13 minutes, and 59.1391 seconds 
+
+current simulated time: 15840 min (max: 60480 min)
+total agents: 1776
+interval wall time: 0 days, 0 hours, 0 minutes, and 22.0677 seconds 
+total wall time: 0 days, 0 hours, 14 minutes, and 21.2069 seconds 
+
+current simulated time: 16200 min (max: 60480 min)
+total agents: 1819
+interval wall time: 0 days, 0 hours, 0 minutes, and 22.1491 seconds 
+total wall time: 0 days, 0 hours, 14 minutes, and 43.356 seconds 
+
+current simulated time: 16560 min (max: 60480 min)
+total agents: 1872
+interval wall time: 0 days, 0 hours, 0 minutes, and 22.1949 seconds 
+total wall time: 0 days, 0 hours, 15 minutes, and 5.55089 seconds 
+
+current simulated time: 16920 min (max: 60480 min)
+total agents: 1918
+interval wall time: 0 days, 0 hours, 0 minutes, and 22.289 seconds 
+total wall time: 0 days, 0 hours, 15 minutes, and 27.8399 seconds 
+
+current simulated time: 17280 min (max: 60480 min)
+total agents: 1971
+interval wall time: 0 days, 0 hours, 0 minutes, and 22.3724 seconds 
+total wall time: 0 days, 0 hours, 15 minutes, and 50.2123 seconds 
+
+current simulated time: 17640 min (max: 60480 min)
+total agents: 2038
+interval wall time: 0 days, 0 hours, 0 minutes, and 22.4712 seconds 
+total wall time: 0 days, 0 hours, 16 minutes, and 12.6835 seconds 
+
+current simulated time: 18000 min (max: 60480 min)
+total agents: 2088
+interval wall time: 0 days, 0 hours, 0 minutes, and 22.5969 seconds 
+total wall time: 0 days, 0 hours, 16 minutes, and 35.2804 seconds 
+
+current simulated time: 18360 min (max: 60480 min)
+total agents: 2147
+interval wall time: 0 days, 0 hours, 0 minutes, and 22.6278 seconds 
+total wall time: 0 days, 0 hours, 16 minutes, and 57.9082 seconds 
+
+current simulated time: 18720 min (max: 60480 min)
+total agents: 2202
+interval wall time: 0 days, 0 hours, 0 minutes, and 22.7354 seconds 
+total wall time: 0 days, 0 hours, 17 minutes, and 20.6436 seconds 
+
+current simulated time: 19080 min (max: 60480 min)
+total agents: 2247
+interval wall time: 0 days, 0 hours, 0 minutes, and 22.765 seconds 
+total wall time: 0 days, 0 hours, 17 minutes, and 43.4086 seconds 
+
+current simulated time: 19440 min (max: 60480 min)
+total agents: 2286
+interval wall time: 0 days, 0 hours, 0 minutes, and 22.8376 seconds 
+total wall time: 0 days, 0 hours, 18 minutes, and 6.2462 seconds 
+
+current simulated time: 19800 min (max: 60480 min)
+total agents: 2330
+interval wall time: 0 days, 0 hours, 0 minutes, and 22.9348 seconds 
+total wall time: 0 days, 0 hours, 18 minutes, and 29.181 seconds 
+
+current simulated time: 20160 min (max: 60480 min)
+total agents: 2379
+interval wall time: 0 days, 0 hours, 0 minutes, and 23.0451 seconds 
+total wall time: 0 days, 0 hours, 18 minutes, and 52.2261 seconds 
+
+current simulated time: 20520 min (max: 60480 min)
+total agents: 2416
+interval wall time: 0 days, 0 hours, 0 minutes, and 23.065 seconds 
+total wall time: 0 days, 0 hours, 19 minutes, and 15.2911 seconds 
+
+current simulated time: 20880 min (max: 60480 min)
+total agents: 2416
+interval wall time: 0 days, 0 hours, 0 minutes, and 23.1438 seconds 
+total wall time: 0 days, 0 hours, 19 minutes, and 38.4349 seconds 
+
+current simulated time: 21240 min (max: 60480 min)
+total agents: 2413
+interval wall time: 0 days, 0 hours, 0 minutes, and 23.1109 seconds 
+total wall time: 0 days, 0 hours, 20 minutes, and 1.54584 seconds 
+
+current simulated time: 21600 min (max: 60480 min)
+total agents: 2415
+interval wall time: 0 days, 0 hours, 0 minutes, and 23.0548 seconds 
+total wall time: 0 days, 0 hours, 20 minutes, and 24.6006 seconds 
+
+current simulated time: 21960 min (max: 60480 min)
+total agents: 2435
+interval wall time: 0 days, 0 hours, 0 minutes, and 23.1032 seconds 
+total wall time: 0 days, 0 hours, 20 minutes, and 47.7039 seconds 
+
+current simulated time: 22320 min (max: 60480 min)
+total agents: 2474
+interval wall time: 0 days, 0 hours, 0 minutes, and 23.1476 seconds 
+total wall time: 0 days, 0 hours, 21 minutes, and 10.8515 seconds 
+
+current simulated time: 22680 min (max: 60480 min)
+total agents: 2508
+interval wall time: 0 days, 0 hours, 0 minutes, and 23.1911 seconds 
+total wall time: 0 days, 0 hours, 21 minutes, and 34.0425 seconds 
+
+current simulated time: 23040 min (max: 60480 min)
+total agents: 2563
+interval wall time: 0 days, 0 hours, 0 minutes, and 23.2181 seconds 
+total wall time: 0 days, 0 hours, 21 minutes, and 57.2606 seconds 
+
+current simulated time: 23400 min (max: 60480 min)
+total agents: 2619
+interval wall time: 0 days, 0 hours, 0 minutes, and 23.3143 seconds 
+total wall time: 0 days, 0 hours, 22 minutes, and 20.5749 seconds 
+
+current simulated time: 23760 min (max: 60480 min)
+total agents: 2665
+interval wall time: 0 days, 0 hours, 0 minutes, and 23.4295 seconds 
+total wall time: 0 days, 0 hours, 22 minutes, and 44.0043 seconds 
+
+current simulated time: 24120 min (max: 60480 min)
+total agents: 2711
+interval wall time: 0 days, 0 hours, 0 minutes, and 23.4846 seconds 
+total wall time: 0 days, 0 hours, 23 minutes, and 7.48892 seconds 
+
+current simulated time: 24480 min (max: 60480 min)
+total agents: 2746
+interval wall time: 0 days, 0 hours, 0 minutes, and 23.4971 seconds 
+total wall time: 0 days, 0 hours, 23 minutes, and 30.9861 seconds 
+
+current simulated time: 24840 min (max: 60480 min)
+total agents: 2782
+interval wall time: 0 days, 0 hours, 0 minutes, and 23.5715 seconds 
+total wall time: 0 days, 0 hours, 23 minutes, and 54.5576 seconds 
+
+current simulated time: 25200 min (max: 60480 min)
+total agents: 2842
+interval wall time: 0 days, 0 hours, 0 minutes, and 23.6746 seconds 
+total wall time: 0 days, 0 hours, 24 minutes, and 18.2322 seconds 
+
+current simulated time: 25560 min (max: 60480 min)
+total agents: 2904
+interval wall time: 0 days, 0 hours, 0 minutes, and 23.7846 seconds 
+total wall time: 0 days, 0 hours, 24 minutes, and 42.0168 seconds 
+
+current simulated time: 25920 min (max: 60480 min)
+total agents: 2951
+interval wall time: 0 days, 0 hours, 0 minutes, and 23.895 seconds 
+total wall time: 0 days, 0 hours, 25 minutes, and 5.91174 seconds 
+
+current simulated time: 26280 min (max: 60480 min)
+total agents: 3014
+interval wall time: 0 days, 0 hours, 0 minutes, and 23.9104 seconds 
+total wall time: 0 days, 0 hours, 25 minutes, and 29.8222 seconds 
+
+current simulated time: 26640 min (max: 60480 min)
+total agents: 3084
+interval wall time: 0 days, 0 hours, 0 minutes, and 24.0162 seconds 
+total wall time: 0 days, 0 hours, 25 minutes, and 53.8384 seconds 
+
+current simulated time: 27000 min (max: 60480 min)
+total agents: 3162
+interval wall time: 0 days, 0 hours, 0 minutes, and 24.1415 seconds 
+total wall time: 0 days, 0 hours, 26 minutes, and 17.9799 seconds 
+
+current simulated time: 27360 min (max: 60480 min)
+total agents: 3233
+interval wall time: 0 days, 0 hours, 0 minutes, and 24.2438 seconds 
+total wall time: 0 days, 0 hours, 26 minutes, and 42.2237 seconds 
+
+current simulated time: 27720 min (max: 60480 min)
+total agents: 3303
+interval wall time: 0 days, 0 hours, 0 minutes, and 24.3839 seconds 
+total wall time: 0 days, 0 hours, 27 minutes, and 6.60767 seconds 
+
+current simulated time: 28080 min (max: 60480 min)
+total agents: 3352
+interval wall time: 0 days, 0 hours, 0 minutes, and 24.49 seconds 
+total wall time: 0 days, 0 hours, 27 minutes, and 31.0977 seconds 
+
+current simulated time: 28440 min (max: 60480 min)
+total agents: 3409
+interval wall time: 0 days, 0 hours, 0 minutes, and 24.521 seconds 
+total wall time: 0 days, 0 hours, 27 minutes, and 55.6187 seconds 
+
+current simulated time: 28800 min (max: 60480 min)
+total agents: 3491
+interval wall time: 0 days, 0 hours, 0 minutes, and 24.6538 seconds 
+total wall time: 0 days, 0 hours, 28 minutes, and 20.2725 seconds 
+
+current simulated time: 29160 min (max: 60480 min)
+total agents: 3574
+interval wall time: 0 days, 0 hours, 0 minutes, and 24.8194 seconds 
+total wall time: 0 days, 0 hours, 28 minutes, and 45.0919 seconds 
+
+current simulated time: 29520 min (max: 60480 min)
+total agents: 3656
+interval wall time: 0 days, 0 hours, 0 minutes, and 24.8903 seconds 
+total wall time: 0 days, 0 hours, 29 minutes, and 9.98218 seconds 
+
+current simulated time: 29880 min (max: 60480 min)
+total agents: 3726
+interval wall time: 0 days, 0 hours, 0 minutes, and 25.1379 seconds 
+total wall time: 0 days, 0 hours, 29 minutes, and 35.1201 seconds 
+
+current simulated time: 30240 min (max: 60480 min)
+total agents: 3801
+interval wall time: 0 days, 0 hours, 0 minutes, and 25.1838 seconds 
+total wall time: 0 days, 0 hours, 30 minutes, and 0.303898 seconds 
+
+current simulated time: 30600 min (max: 60480 min)
+total agents: 3860
+interval wall time: 0 days, 0 hours, 0 minutes, and 25.2414 seconds 
+total wall time: 0 days, 0 hours, 30 minutes, and 25.5453 seconds 
+
+current simulated time: 30960 min (max: 60480 min)
+total agents: 3908
+interval wall time: 0 days, 0 hours, 0 minutes, and 25.2998 seconds 
+total wall time: 0 days, 0 hours, 30 minutes, and 50.8451 seconds 
+
+current simulated time: 31320 min (max: 60480 min)
+total agents: 3990
+interval wall time: 0 days, 0 hours, 0 minutes, and 25.4523 seconds 
+total wall time: 0 days, 0 hours, 31 minutes, and 16.2974 seconds 
+
+current simulated time: 31680 min (max: 60480 min)
+total agents: 4074
+interval wall time: 0 days, 0 hours, 0 minutes, and 25.5843 seconds 
+total wall time: 0 days, 0 hours, 31 minutes, and 41.8817 seconds 
+
+current simulated time: 32040 min (max: 60480 min)
+total agents: 4160
+interval wall time: 0 days, 0 hours, 0 minutes, and 25.6894 seconds 
+total wall time: 0 days, 0 hours, 32 minutes, and 7.5711 seconds 
+
+current simulated time: 32400 min (max: 60480 min)
+total agents: 4230
+interval wall time: 0 days, 0 hours, 0 minutes, and 25.8359 seconds 
+total wall time: 0 days, 0 hours, 32 minutes, and 33.407 seconds 
+
+current simulated time: 32760 min (max: 60480 min)
+total agents: 4289
+interval wall time: 0 days, 0 hours, 0 minutes, and 25.9418 seconds 
+total wall time: 0 days, 0 hours, 32 minutes, and 59.3488 seconds 
+
+current simulated time: 33120 min (max: 60480 min)
+total agents: 4350
+interval wall time: 0 days, 0 hours, 0 minutes, and 26.0678 seconds 
+total wall time: 0 days, 0 hours, 33 minutes, and 25.4167 seconds 
+
+current simulated time: 33480 min (max: 60480 min)
+total agents: 4426
+interval wall time: 0 days, 0 hours, 0 minutes, and 26.1432 seconds 
+total wall time: 0 days, 0 hours, 33 minutes, and 51.5599 seconds 
+
+current simulated time: 33840 min (max: 60480 min)
+total agents: 4507
+interval wall time: 0 days, 0 hours, 0 minutes, and 26.2744 seconds 
+total wall time: 0 days, 0 hours, 34 minutes, and 17.8343 seconds 
+
+current simulated time: 34200 min (max: 60480 min)
+total agents: 4583
+interval wall time: 0 days, 0 hours, 0 minutes, and 26.423 seconds 
+total wall time: 0 days, 0 hours, 34 minutes, and 44.2573 seconds 
+
+current simulated time: 34560 min (max: 60480 min)
+total agents: 4686
+interval wall time: 0 days, 0 hours, 0 minutes, and 26.5021 seconds 
+total wall time: 0 days, 0 hours, 35 minutes, and 10.7593 seconds 
+
+current simulated time: 34920 min (max: 60480 min)
+total agents: 4747
+interval wall time: 0 days, 0 hours, 0 minutes, and 26.7705 seconds 
+total wall time: 0 days, 0 hours, 35 minutes, and 37.5298 seconds 
+
+current simulated time: 35280 min (max: 60480 min)
+total agents: 4833
+interval wall time: 0 days, 0 hours, 0 minutes, and 26.8369 seconds 
+total wall time: 0 days, 0 hours, 36 minutes, and 4.36674 seconds 
+
+current simulated time: 35640 min (max: 60480 min)
+total agents: 4912
+interval wall time: 0 days, 0 hours, 0 minutes, and 27.0408 seconds 
+total wall time: 0 days, 0 hours, 36 minutes, and 31.4075 seconds 
+
+current simulated time: 36000 min (max: 60480 min)
+total agents: 4979
+interval wall time: 0 days, 0 hours, 0 minutes, and 27.1348 seconds 
+total wall time: 0 days, 0 hours, 36 minutes, and 58.5423 seconds 
+
+current simulated time: 36360 min (max: 60480 min)
+total agents: 5061
+interval wall time: 0 days, 0 hours, 0 minutes, and 27.2897 seconds 
+total wall time: 0 days, 0 hours, 37 minutes, and 25.8321 seconds 
+
+current simulated time: 36720 min (max: 60480 min)
+total agents: 5118
+interval wall time: 0 days, 0 hours, 0 minutes, and 27.2791 seconds 
+total wall time: 0 days, 0 hours, 37 minutes, and 53.1112 seconds 
+
+current simulated time: 37080 min (max: 60480 min)
+total agents: 5194
+interval wall time: 0 days, 0 hours, 0 minutes, and 27.9217 seconds 
+total wall time: 0 days, 0 hours, 38 minutes, and 21.0328 seconds 
+
+current simulated time: 37440 min (max: 60480 min)
+total agents: 5291
+interval wall time: 0 days, 0 hours, 0 minutes, and 27.9534 seconds 
+total wall time: 0 days, 0 hours, 38 minutes, and 48.9863 seconds 
+
+current simulated time: 37800 min (max: 60480 min)
+total agents: 5363
+interval wall time: 0 days, 0 hours, 0 minutes, and 27.8155 seconds 
+total wall time: 0 days, 0 hours, 39 minutes, and 16.8018 seconds 
+
+current simulated time: 38160 min (max: 60480 min)
+total agents: 5476
+interval wall time: 0 days, 0 hours, 0 minutes, and 27.8868 seconds 
+total wall time: 0 days, 0 hours, 39 minutes, and 44.6886 seconds 
+
+current simulated time: 38520 min (max: 60480 min)
+total agents: 5548
+interval wall time: 0 days, 0 hours, 0 minutes, and 28.0505 seconds 
+total wall time: 0 days, 0 hours, 40 minutes, and 12.7392 seconds 
+
+current simulated time: 38880 min (max: 60480 min)
+total agents: 5620
+interval wall time: 0 days, 0 hours, 0 minutes, and 28.1532 seconds 
+total wall time: 0 days, 0 hours, 40 minutes, and 40.8924 seconds 
+
+current simulated time: 39240 min (max: 60480 min)
+total agents: 5702
+interval wall time: 0 days, 0 hours, 0 minutes, and 28.2492 seconds 
+total wall time: 0 days, 0 hours, 41 minutes, and 9.14163 seconds 
+
+current simulated time: 39600 min (max: 60480 min)
+total agents: 5798
+interval wall time: 0 days, 0 hours, 0 minutes, and 28.3327 seconds 
+total wall time: 0 days, 0 hours, 41 minutes, and 37.4744 seconds 
+
+current simulated time: 39960 min (max: 60480 min)
+total agents: 5860
+interval wall time: 0 days, 0 hours, 0 minutes, and 28.5062 seconds 
+total wall time: 0 days, 0 hours, 42 minutes, and 5.98061 seconds 
+
+current simulated time: 40320 min (max: 60480 min)
+total agents: 5956
+interval wall time: 0 days, 0 hours, 0 minutes, and 28.6151 seconds 
+total wall time: 0 days, 0 hours, 42 minutes, and 34.5958 seconds 
+
+current simulated time: 40680 min (max: 60480 min)
+total agents: 6074
+interval wall time: 0 days, 0 hours, 0 minutes, and 28.8078 seconds 
+total wall time: 0 days, 0 hours, 43 minutes, and 3.4036 seconds 
+
+current simulated time: 41040 min (max: 60480 min)
+total agents: 6177
+interval wall time: 0 days, 0 hours, 0 minutes, and 28.9827 seconds 
+total wall time: 0 days, 0 hours, 43 minutes, and 32.3863 seconds 
+
+current simulated time: 41400 min (max: 60480 min)
+total agents: 6284
+interval wall time: 0 days, 0 hours, 0 minutes, and 29.1944 seconds 
+total wall time: 0 days, 0 hours, 44 minutes, and 1.58077 seconds 
+
+current simulated time: 41760 min (max: 60480 min)
+total agents: 6378
+interval wall time: 0 days, 0 hours, 0 minutes, and 28.3074 seconds 
+total wall time: 0 days, 0 hours, 44 minutes, and 29.8882 seconds 
+
+current simulated time: 42120 min (max: 60480 min)
+total agents: 6474
+interval wall time: 0 days, 0 hours, 0 minutes, and 27.8136 seconds 
+total wall time: 0 days, 0 hours, 44 minutes, and 57.7019 seconds 
+
+current simulated time: 42480 min (max: 60480 min)
+total agents: 6599
+interval wall time: 0 days, 0 hours, 0 minutes, and 28.0016 seconds 
+total wall time: 0 days, 0 hours, 45 minutes, and 25.7035 seconds 
+
+current simulated time: 42840 min (max: 60480 min)
+total agents: 6681
+interval wall time: 0 days, 0 hours, 0 minutes, and 28.1076 seconds 
+total wall time: 0 days, 0 hours, 45 minutes, and 53.8111 seconds 
+
+current simulated time: 43200 min (max: 60480 min)
+total agents: 6787
+interval wall time: 0 days, 0 hours, 0 minutes, and 28.2696 seconds 
+total wall time: 0 days, 0 hours, 46 minutes, and 22.0808 seconds 
+
+current simulated time: 43560 min (max: 60480 min)
+total agents: 6929
+interval wall time: 0 days, 0 hours, 0 minutes, and 28.4395 seconds 
+total wall time: 0 days, 0 hours, 46 minutes, and 50.5203 seconds 
+
+current simulated time: 43920 min (max: 60480 min)
+total agents: 7035
+interval wall time: 0 days, 0 hours, 0 minutes, and 28.6516 seconds 
+total wall time: 0 days, 0 hours, 47 minutes, and 19.1719 seconds 
+
+2493.84 vs 9.29087e-06 dead: 0
+0 Live
+2493.84 vs 9.29087e-06 dead: 0
+0 Live
+2493.85 vs 9.29087e-06 dead: 0
+0 Live
+2493.85 vs 9.29087e-06 dead: 0
+0 Live
+2493.85 vs 9.29087e-06 dead: 0
+0 Live
+2493.86 vs 9.29087e-06 dead: 0
+0 Live
+2493.86 vs 9.29087e-06 dead: 0
+0 Live
+2493.87 vs 9.29087e-06 dead: 0
+0 Live
+current simulated time: 44280 min (max: 60480 min)
+total agents: 7140
+interval wall time: 0 days, 0 hours, 0 minutes, and 28.7411 seconds 
+total wall time: 0 days, 0 hours, 47 minutes, and 47.913 seconds 
+
+current simulated time: 44640 min (max: 60480 min)
+total agents: 7244
+interval wall time: 0 days, 0 hours, 0 minutes, and 28.8576 seconds 
+total wall time: 0 days, 0 hours, 48 minutes, and 16.7707 seconds 
+
+2492.38 vs 1.85817e-05 dead: 0
+0 Live
+2492.42 vs 1.85817e-05 dead: 0
+0 Live
+2492.46 vs 1.85817e-05 dead: 0
+0 Live
+2492.51 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 9.29087e-06 dead: 0
+0 Live
+2493.01 vs 1.85817e-05 dead: 0
+0 Live
+2493.04 vs 1.85817e-05 dead: 0
+0 Live
+2493.07 vs 1.85817e-05 dead: 0
+0 Live
+2493.09 vs 1.85817e-05 dead: 0
+0 Live
+current simulated time: 45000 min (max: 60480 min)
+total agents: 7363
+interval wall time: 0 days, 0 hours, 0 minutes, and 29.0523 seconds 
+total wall time: 0 days, 0 hours, 48 minutes, and 45.823 seconds 
+
+2493.6 vs 1.85817e-05 dead: 0
+0 Live
+2493.62 vs 1.85817e-05 dead: 0
+0 Live
+2493.63 vs 1.85817e-05 dead: 0
+0 Live
+2493.64 vs 1.85817e-05 dead: 0
+0 Live
+2493.65 vs 1.85817e-05 dead: 0
+0 Live
+2493.7 vs 1.85817e-05 dead: 0
+0 Live
+2493.71 vs 1.85817e-05 dead: 0
+0 Live
+2493.72 vs 1.85817e-05 dead: 0
+0 Live
+2493.72 vs 1.85817e-05 dead: 0
+0 Live
+2493.78 vs 1.85817e-05 dead: 0
+0 Live
+2493.78 vs 1.85817e-05 dead: 0
+0 Live
+2493.82 vs 1.85817e-05 dead: 0
+0 Live
+2493.82 vs 1.85817e-05 dead: 0
+0 Live
+2493.83 vs 1.85817e-05 dead: 0
+0 Live
+2493.85 vs 1.85817e-05 dead: 0
+0 Live
+2493.85 vs 1.85817e-05 dead: 0
+0 Live
+2493.85 vs 1.85817e-05 dead: 0
+0 Live
+2493.86 vs 1.85817e-05 dead: 0
+0 Live
+2493.86 vs 1.85817e-05 dead: 0
+0 Live
+2493.89 vs 1.85817e-05 dead: 0
+0 Live
+2493.89 vs 1.85817e-05 dead: 0
+0 Live
+2493.89 vs 1.85817e-05 dead: 0
+0 Live
+2493.89 vs 1.85817e-05 dead: 0
+0 Live
+2493.9 vs 1.85817e-05 dead: 0
+0 Live
+2493.9 vs 1.85817e-05 dead: 0
+0 Live
+current simulated time: 45360 min (max: 60480 min)
+total agents: 7463
+interval wall time: 0 days, 0 hours, 0 minutes, and 29.2147 seconds 
+total wall time: 0 days, 0 hours, 49 minutes, and 15.0377 seconds 
+
+2493.9 vs 1.85817e-05 dead: 0
+0 Live
+2493.91 vs 1.85817e-05 dead: 0
+0 Live
+2493.92 vs 1.85817e-05 dead: 0
+0 Live
+2493.93 vs 1.85817e-05 dead: 0
+0 Live
+2493.93 vs 1.85817e-05 dead: 0
+0 Live
+2493.93 vs 1.85817e-05 dead: 0
+0 Live
+2493.93 vs 1.85817e-05 dead: 0
+0 Live
+2493.93 vs 1.85817e-05 dead: 0
+0 Live
+2493.94 vs 1.85817e-05 dead: 0
+0 Live
+2493.94 vs 1.85817e-05 dead: 0
+0 Live
+2493.94 vs 1.85817e-05 dead: 0
+0 Live
+2493.94 vs 1.85817e-05 dead: 0
+0 Live
+2493.95 vs 1.85817e-05 dead: 0
+0 Live
+2493.95 vs 1.85817e-05 dead: 0
+0 Live
+2493.95 vs 1.85817e-05 dead: 0
+0 Live
+2493.95 vs 1.85817e-05 dead: 0
+0 Live
+2493.95 vs 1.85817e-05 dead: 0
+0 Live
+2493.95 vs 1.85817e-05 dead: 0
+0 Live
+2493.95 vs 1.85817e-05 dead: 0
+0 Live
+2493.96 vs 1.85817e-05 dead: 0
+0 Live
+2493.96 vs 1.85817e-05 dead: 0
+0 Live
+2493.96 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+current simulated time: 45720 min (max: 60480 min)
+total agents: 7538
+interval wall time: 0 days, 0 hours, 0 minutes, and 29.3694 seconds 
+total wall time: 0 days, 0 hours, 49 minutes, and 44.4071 seconds 
+
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2492.4 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2492.44 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2492.49 vs 1.4517e-07 dead: 0
+0 Live
+2492.53 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2492.57 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2492.64 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2492.68 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2492.72 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2492.75 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2492.79 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2492.82 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2492.85 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2492.88 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2492.91 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2492.94 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2492.97 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2493 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2493.03 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.05 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.08 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.11 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.13 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.15 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.96 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.96 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.96 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.97 vs 5.8068e-07 dead: 0
+0 Live
+2493.97 vs 5.8068e-07 dead: 0
+0 Live
+2493.97 vs 5.8068e-07 dead: 0
+0 Live
+2493.97 vs 5.8068e-07 dead: 0
+0 Live
+2493.97 vs 5.8068e-07 dead: 0
+0 Live
+2493.97 vs 5.8068e-07 dead: 0
+0 Live
+2493.97 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.97 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.97 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+current simulated time: 46080 min (max: 60480 min)
+total agents: 7612
+interval wall time: 0 days, 0 hours, 0 minutes, and 29.4795 seconds 
+total wall time: 0 days, 0 hours, 50 minutes, and 13.8866 seconds 
+
+2493.97 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.97 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.98 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.98 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.98 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.98 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.98 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2489.92 vs 2.32272e-06 dead: 0
+0 Live
+2490.03 vs 2.32272e-06 dead: 0
+0 Live
+2490.14 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2490.25 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2490.35 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.98 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2490.45 vs 2.32272e-06 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2490.55 vs 2.32272e-06 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2490.64 vs 2.32272e-06 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2490.74 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2490.82 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.94 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.94 vs 1.4517e-07 dead: 0
+0 Live
+2491.24 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.94 vs 1.4517e-07 dead: 0
+0 Live
+2491.31 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.95 vs 1.4517e-07 dead: 0
+0 Live
+2491.39 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.95 vs 1.4517e-07 dead: 0
+0 Live
+2491.46 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.95 vs 1.4517e-07 dead: 0
+0 Live
+2491.53 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.95 vs 1.4517e-07 dead: 0
+0 Live
+2491.59 vs 2.32272e-06 dead: 0
+0 Live
+2493.95 vs 1.4517e-07 dead: 0
+0 Live
+2491.66 vs 2.32272e-06 dead: 0
+0 Live
+2493.95 vs 1.4517e-07 dead: 0
+0 Live
+2491.72 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.95 vs 1.4517e-07 dead: 0
+0 Live
+2491.79 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.95 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.96 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.96 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.96 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.96 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.96 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.96 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.96 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.96 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.96 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.97 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.97 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.97 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.97 vs 1.4517e-07 dead: 0
+0 Live
+2493.97 vs 1.4517e-07 dead: 0
+0 Live
+2493.97 vs 1.4517e-07 dead: 0
+0 Live
+2493.97 vs 1.4517e-07 dead: 0
+0 Live
+2493.97 vs 1.4517e-07 dead: 0
+0 Live
+2493.97 vs 1.4517e-07 dead: 0
+0 Live
+2493.97 vs 1.4517e-07 dead: 0
+0 Live
+2493.97 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+current simulated time: 46440 min (max: 60480 min)
+total agents: 7738
+interval wall time: 0 days, 0 hours, 0 minutes, and 29.6114 seconds 
+total wall time: 0 days, 0 hours, 50 minutes, and 43.498 seconds 
+
+2493.97 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.98 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.98 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.98 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.98 vs 4.64544e-06 dead: 0
+0 Live
+2493.98 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.98 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+current simulated time: 46800 min (max: 60480 min)
+total agents: 7851
+interval wall time: 0 days, 0 hours, 0 minutes, and 29.805 seconds 
+total wall time: 0 days, 0 hours, 51 minutes, and 13.303 seconds 
+
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+current simulated time: 47160 min (max: 60480 min)
+total agents: 7968
+interval wall time: 0 days, 0 hours, 0 minutes, and 30.0466 seconds 
+total wall time: 0 days, 0 hours, 51 minutes, and 43.3496 seconds 
+
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+current simulated time: 47520 min (max: 60480 min)
+total agents: 8112
+interval wall time: 0 days, 0 hours, 0 minutes, and 30.2234 seconds 
+total wall time: 0 days, 0 hours, 52 minutes, and 13.573 seconds 
+
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+current simulated time: 47880 min (max: 60480 min)
+total agents: 8256
+interval wall time: 0 days, 0 hours, 0 minutes, and 30.4664 seconds 
+total wall time: 0 days, 0 hours, 52 minutes, and 44.0394 seconds 
+
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.98 vs 9.29087e-06 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.98 vs 9.29087e-06 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.98 vs 9.29087e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.98 vs 9.29087e-06 dead: 0
+0 Live
+2493.98 vs 9.29087e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2493.98 vs 9.29087e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2493.98 vs 9.29087e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2493.98 vs 9.29087e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2493.98 vs 9.29087e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2493.98 vs 9.29087e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2493.98 vs 9.29087e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2493.98 vs 9.29087e-06 dead: 0
+0 Live
+2493.98 vs 9.29087e-06 dead: 0
+0 Live
+2493.98 vs 9.29087e-06 dead: 0
+0 Live
+2493.98 vs 9.29087e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.98 vs 9.29087e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 9.29087e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 9.29087e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 9.29087e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 9.29087e-06 dead: 0
+0 Live
+2493.99 vs 9.29087e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+current simulated time: 48240 min (max: 60480 min)
+total agents: 8368
+interval wall time: 0 days, 0 hours, 0 minutes, and 30.6809 seconds 
+total wall time: 0 days, 0 hours, 53 minutes, and 14.7203 seconds 
+
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 7.4327e-05 dead: 0
+0 Live
+2493.99 vs 7.4327e-05 dead: 0
+0 Live
+2493.99 vs 7.4327e-05 dead: 0
+0 Live
+2493.99 vs 7.4327e-05 dead: 0
+0 Live
+2493.99 vs 7.4327e-05 dead: 0
+0 Live
+2493.99 vs 7.4327e-05 dead: 0
+0 Live
+2493.99 vs 7.4327e-05 dead: 0
+0 Live
+2493.99 vs 7.4327e-05 dead: 0
+0 Live
+2493.99 vs 7.4327e-05 dead: 0
+0 Live
+2493.99 vs 7.4327e-05 dead: 0
+0 Live
+2493.99 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+current simulated time: 48600 min (max: 60480 min)
+total agents: 8487
+interval wall time: 0 days, 0 hours, 0 minutes, and 30.8698 seconds 
+total wall time: 0 days, 0 hours, 53 minutes, and 45.5901 seconds 
+
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+current simulated time: 48960 min (max: 60480 min)
+total agents: 8588
+interval wall time: 0 days, 0 hours, 0 minutes, and 30.9404 seconds 
+total wall time: 0 days, 0 hours, 54 minutes, and 16.5305 seconds 
+
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+current simulated time: 49320 min (max: 60480 min)
+total agents: 8720
+interval wall time: 0 days, 0 hours, 0 minutes, and 31.0272 seconds 
+total wall time: 0 days, 0 hours, 54 minutes, and 47.5577 seconds 
+
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+current simulated time: 49680 min (max: 60480 min)
+total agents: 8847
+interval wall time: 0 days, 0 hours, 0 minutes, and 31.2784 seconds 
+total wall time: 0 days, 0 hours, 55 minutes, and 18.8361 seconds 
+
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.99 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.99 vs 4.64544e-06 dead: 0
+0 Live
+2493.99 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2493.99 vs 4.64544e-06 dead: 0
+0 Live
+current simulated time: 50040 min (max: 60480 min)
+total agents: 8962
+interval wall time: 0 days, 0 hours, 0 minutes, and 31.3928 seconds 
+total wall time: 0 days, 0 hours, 55 minutes, and 50.2289 seconds 
+
+2493.99 vs 4.64544e-06 dead: 0
+0 Live
+2493.99 vs 4.64544e-06 dead: 0
+0 Live
+2493.99 vs 4.64544e-06 dead: 0
+0 Live
+2493.99 vs 4.64544e-06 dead: 0
+0 Live
+2493.99 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.99 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2493.99 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2493.99 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2493.99 vs 4.64544e-06 dead: 0
+0 Live
+2493.99 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+2494 vs 4.64544e-06 dead: 0
+0 Live
+current simulated time: 50400 min (max: 60480 min)
+total agents: 9083
+interval wall time: 0 days, 0 hours, 0 minutes, and 31.7598 seconds 
+total wall time: 0 days, 0 hours, 56 minutes, and 21.9887 seconds 
+
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+current simulated time: 50760 min (max: 60480 min)
+total agents: 9195
+interval wall time: 0 days, 0 hours, 0 minutes, and 31.8108 seconds 
+total wall time: 0 days, 0 hours, 56 minutes, and 53.7995 seconds 
+
+2486.1 vs 7.2585e-08 dead: 0
+0 Live
+2486.32 vs 7.2585e-08 dead: 0
+0 Live
+2486.53 vs 7.2585e-08 dead: 0
+0 Live
+2486.74 vs 2494 vs 7.2585e-08 dead: 5.8068e-07 dead: 00
+
+0 Live
+0 Live
+2494 vs 5.8068e-07 dead: 2486.94 vs 07.2585e-08 dead: 0
+
+0 Live
+0 Live
+2487.13 vs 7.2585e-08 dead: 02494 vs 
+5.8068e-07 dead: 0 Live
+0
+0 Live
+2487.32 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2487.5 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 2487.68 vs 7.2585e-08 dead: 00
+
+0 Live
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2487.86 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2488.02 vs 7.2585e-08 dead: 0
+0 Live
+2488.19 vs 7.2585e-08 dead: 2494 vs 05.8068e-07 dead: 
+0
+0 Live
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2472.44 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2473.04 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2473.62 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2474.18 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2474.73 vs 7.2585e-08 dead: 0
+0 Live
+2475.26 vs 7.2585e-08 dead: 0
+0 Live
+2475.77 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2490.94 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2491.02 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2491.1 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+current simulated time: 51120 min (max: 60480 min)
+total agents: 9355
+interval wall time: 0 days, 0 hours, 0 minutes, and 32.0109 seconds 
+total wall time: 0 days, 0 hours, 57 minutes, and 25.8104 seconds 
+
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2492.09 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2492.14 vs 7.2585e-08 dead: 02494 vs 5.8068e-07 dead: 
+0
+0 Live
+0 Live
+2492.19 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2492.29 vs 7.2585e-08 dead: 0
+0 Live
+2492.34 vs 7.2585e-08 dead: 0
+0 Live
+2485.18 vs 7.2585e-08 dead: 0
+0 Live
+2492.38 vs 7.2585e-08 dead: 0
+0 Live
+2485.43 vs 7.2585e-08 dead: 0
+0 Live
+2492.43 vs 7.2585e-08 dead: 0
+0 Live
+2485.66 vs 7.2585e-08 dead: 0
+0 Live
+2492.47 vs 7.2585e-08 dead: 0
+0 Live
+2485.89 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2492.55 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2492.59 vs 7.2585e-08 dead: 0
+0 Live
+2492.63 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2492.67 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2492.7 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2490.28 vs 7.2585e-08 dead: 0
+0 Live
+2490.38 vs 7.2585e-08 dead: 0
+0 Live
+2490.48 vs 7.2585e-08 dead: 0
+0 Live
+2490.58 vs 7.2585e-08 dead: 0
+0 Live
+2490.67 vs 7.2585e-08 dead: 0
+0 Live
+2490.76 vs 7.2585e-08 dead: 0
+0 Live
+2490.85 vs 7.2585e-08 dead: 0
+0 Live
+2490.94 vs 7.2585e-08 dead: 0
+0 Live
+2491.02 vs 7.2585e-08 dead: 0
+0 Live
+2491.1 vs 7.2585e-08 dead: 0
+0 Live
+2491.18 vs 7.2585e-08 dead: 0
+0 Live
+2491.26 vs 7.2585e-08 dead: 0
+0 Live
+2491.34 vs 7.2585e-08 dead: 0
+0 Live
+2491.41 vs 7.2585e-08 dead: 0
+0 Live
+2491.48 vs 7.2585e-08 dead: 0
+0 Live
+2491.55 vs 7.2585e-08 dead: 0
+0 Live
+current simulated time: 51480 min (max: 60480 min)
+total agents: 9448
+interval wall time: 0 days, 0 hours, 0 minutes, and 32.2136 seconds 
+total wall time: 0 days, 0 hours, 57 minutes, and 58.0241 seconds 
+
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2468.94 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2469.63 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2470.3 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2470.96 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2474.52 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2475.06 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2475.58 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2476.09 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2477.53 vs 1.81462e-08 dead: 0
+0 Live
+2493.86 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2477.99 vs 1.81462e-08 dead: 0
+0 Live
+2493.87 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2478.43 vs 1.81462e-08 dead: 0
+0 Live
+2493.87 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2478.86 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2479.28 vs 1.81462e-08 dead: 0
+0 Live
+2480.08 vs 1.81462e-08 dead: 0
+0 Live
+2480.46 vs 1.81462e-08 dead: 0
+0 Live
+2480.83 vs 1.81462e-08 dead: 0
+0 Live
+2481.2 vs 1.81462e-08 dead: 0
+0 Live
+2481.55 vs 1.81462e-08 dead: 0
+0 Live
+2481.89 vs 1.81462e-08 dead: 0
+0 Live
+2482.23 vs 1.81462e-08 dead: 0
+0 Live
+2482.55 vs 1.81462e-08 dead: 0
+0 Live
+2482.87 vs 1.81462e-08 dead: 0
+0 Live
+2483.17 vs 1.81462e-08 dead: 0
+0 Live
+2483.47 vs 1.81462e-08 dead: 0
+0 Live
+2483.76 vs 1.81462e-08 dead: 0
+0 Live
+2484.04 vs 1.81462e-08 dead: 0
+0 Live
+2484.32 vs 1.81462e-08 dead: 0
+0 Live
+current simulated time: 51840 min (max: 60480 min)
+total agents: 9556
+interval wall time: 0 days, 0 hours, 0 minutes, and 32.3468 seconds 
+total wall time: 0 days, 0 hours, 58 minutes, and 30.3709 seconds 
+
+2493.94 vs 7.2585e-08 dead: 0
+0 Live
+2493.94 vs 7.2585e-08 dead: 0
+0 Live
+2493.94 vs 7.2585e-08 dead: 0
+0 Live
+2487.63 vs 1.81462e-08 dead: 0
+0 Live
+2493.95 vs 7.2585e-08 dead: 0
+0 Live
+2487.8 vs 1.81462e-08 dead: 0
+0 Live
+2493.95 vs 7.2585e-08 dead: 0
+0 Live
+2487.97 vs 1.81462e-08 dead: 0
+0 Live
+2488.14 vs 1.81462e-08 dead: 0
+0 Live
+2493.95 vs 7.2585e-08 dead: 0
+0 Live
+2493.95 vs 7.2585e-08 dead: 0
+0 Live
+2493.95 vs 7.2585e-08 dead: 0
+0 Live
+2493.95 vs 7.2585e-08 dead: 0
+0 Live
+2493.95 vs 7.2585e-08 dead: 0
+0 Live
+2493.96 vs 7.2585e-08 dead: 0
+0 Live
+2493.96 vs 7.2585e-08 dead: 0
+0 Live
+2493.96 vs 7.2585e-08 dead: 0
+0 Live
+2493.96 vs 7.2585e-08 dead: 0
+0 Live
+2493.96 vs 7.2585e-08 dead: 0
+0 Live
+2493.96 vs 7.2585e-08 dead: 0
+0 Live
+2493.96 vs 7.2585e-08 dead: 0
+0 Live
+2493.96 vs 7.2585e-08 dead: 0
+0 Live
+2493.96 vs 7.2585e-08 dead: 0
+0 Live
+2493.97 vs 7.2585e-08 dead: 0
+0 Live
+2493.97 vs 7.2585e-08 dead: 0
+0 Live
+2493.97 vs 7.2585e-08 dead: 0
+0 Live
+2493.97 vs 7.2585e-08 dead: 0
+0 Live
+2493.97 vs 7.2585e-08 dead: 0
+0 Live
+2493.97 vs 7.2585e-08 dead: 0
+0 Live
+2493.52 vs 3.62925e-08 dead: 0
+0 Live
+2493.53 vs 3.62925e-08 dead: 0
+0 Live
+2493.54 vs 3.62925e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.56 vs 3.62925e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.57 vs 3.62925e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.64 vs 3.62925e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.65 vs 3.62925e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.66 vs 3.62925e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.67 vs 3.62925e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.68 vs 3.62925e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.69 vs 3.62925e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.7 vs 3.62925e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.71 vs 3.62925e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+current simulated time: 52200 min (max: 60480 min)
+total agents: 9691
+interval wall time: 0 days, 0 hours, 0 minutes, and 32.5348 seconds 
+total wall time: 0 days, 0 hours, 59 minutes, and 2.9057 seconds 
+
+2492.37 vs 1.81462e-08 dead: 0
+0 Live
+2493.71 vs 3.62925e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2492.41 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2492.46 vs 1.81462e-08 dead: 0
+0 Live
+2493.73 vs 3.62925e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2492.5 vs 1.81462e-08 dead: 0
+0 Live
+2493.74 vs 3.62925e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2492.54 vs 1.81462e-08 dead: 0
+0 Live
+2493.74 vs 3.62925e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2492.58 vs 1.81462e-08 dead: 0
+0 Live
+2493.75 vs 3.62925e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.76 vs 3.62925e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.76 vs 3.62925e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.77 vs 3.62925e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.78 vs 3.62925e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.78 vs 3.62925e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.31 vs 1.81462e-08 dead: 0
+0 Live
+2493.33 vs 1.81462e-08 dead: 0
+0 Live
+2493.35 vs 1.81462e-08 dead: 0
+0 Live
+2493.36 vs 1.81462e-08 dead: 0
+0 Live
+2493.38 vs 1.81462e-08 dead: 0
+0 Live
+2493.4 vs 1.81462e-08 dead: 0
+0 Live
+2493.42 vs 1.81462e-08 dead: 0
+0 Live
+2493.43 vs 1.81462e-08 dead: 0
+0 Live
+2493.59 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2493.6 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+current simulated time: 52560 min (max: 60480 min)
+total agents: 9818
+interval wall time: 0 days, 0 hours, 0 minutes, and 32.7082 seconds 
+total wall time: 0 days, 0 hours, 59 minutes, and 35.6139 seconds 
+
+2493.69 vs 1.81462e-08 dead: 0
+0 Live
+2493.7 vs 1.81462e-08 dead: 0
+0 Live
+2493.71 vs 1.81462e-08 dead: 0
+0 Live
+2493.72 vs 1.81462e-08 dead: 0
+0 Live
+2493.72 vs 1.81462e-08 dead: 0
+0 Live
+2493.73 vs 1.81462e-08 dead: 0
+0 Live
+2493.75 vs 1.81462e-08 dead: 0
+0 Live
+2493.76 vs 1.81462e-08 dead: 0
+0 Live
+2493.77 vs 1.81462e-08 dead: 0
+0 Live
+2493.77 vs 1.81462e-08 dead: 0
+0 Live
+2493.8 vs 1.81462e-08 dead: 0
+0 Live
+2493.81 vs 1.81462e-08 dead: 0
+0 Live
+2493.81 vs 1.81462e-08 dead: 0
+0 Live
+2493.82 vs 1.81462e-08 dead: 0
+0 Live
+2493.82 vs 1.81462e-08 dead: 0
+0 Live
+2493.83 vs 1.81462e-08 dead: 0
+0 Live
+2493.83 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.91 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.91 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.91 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.92 vs 1.81462e-08 dead: 0
+0 Live
+2493.92 vs 1.81462e-08 dead: 0
+0 Live
+2493.92 vs 1.81462e-08 dead: 0
+0 Live
+2493.91 vs 2.32272e-06 dead: 0
+0 Live
+2493.91 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.92 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+current simulated time: 52920 min (max: 60480 min)
+total agents: 9950
+interval wall time: 0 days, 0 hours, 0 minutes, and 32.9081 seconds 
+total wall time: 0 days, 1 hours, 0 minutes, and 8.52194 seconds 
+
+2493.95 vs 1.81462e-08 dead: 0
+0 Live
+2493.95 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+current simulated time: 53280 min (max: 60480 min)
+total agents: 10075
+interval wall time: 0 days, 0 hours, 0 minutes, and 33.1581 seconds 
+total wall time: 0 days, 1 hours, 0 minutes, and 41.6801 seconds 
+
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.99 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+current simulated time: 53640 min (max: 60480 min)
+total agents: 10231
+interval wall time: 0 days, 0 hours, 0 minutes, and 33.321 seconds 
+total wall time: 0 days, 1 hours, 1 minutes, and 15.0011 seconds 
+
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+current simulated time: 54000 min (max: 60480 min)
+total agents: 10380
+interval wall time: 0 days, 0 hours, 0 minutes, and 33.5336 seconds 
+total wall time: 0 days, 1 hours, 1 minutes, and 48.5347 seconds 
+
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+current simulated time: 54360 min (max: 60480 min)
+total agents: 10502
+interval wall time: 0 days, 0 hours, 0 minutes, and 33.7005 seconds 
+total wall time: 0 days, 1 hours, 2 minutes, and 22.2352 seconds 
+
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2493.99 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+current simulated time: 54720 min (max: 60480 min)
+total agents: 10651
+interval wall time: 0 days, 0 hours, 0 minutes, and 33.8877 seconds 
+total wall time: 0 days, 1 hours, 2 minutes, and 56.123 seconds 
+
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 2.32272e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2474.85 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2475.38 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2475.89 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2476.39 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2476.88 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2477.35 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2482.42 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2482.74 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2483.05 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2483.35 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2483.64 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2483.93 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2485.45 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2485.68 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2485.91 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2485.94 vs 7.2585e-08 dead: 0
+0 Live
+2486.13 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2486.17 vs 7.2585e-08 dead: 0
+0 Live
+2486.35 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2486.38 vs 7.2585e-08 dead: 0
+0 Live
+2486.56 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2486.59 vs 7.2585e-08 dead: 0
+0 Live
+2486.76 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2486.79 vs 7.2585e-08 dead: 0
+0 Live
+2486.96 vs 7.2585e-08 dead: 0
+0 Live
+2487.16 vs 7.2585e-08 dead: 0
+0 Live
+current simulated time: 55080 min (max: 60480 min)
+total agents: 10811
+interval wall time: 0 days, 0 hours, 0 minutes, and 34.2559 seconds 
+total wall time: 0 days, 1 hours, 3 minutes, and 30.3789 seconds 
+
+2487.18 vs 7.2585e-08 dead: 0
+0 Live
+2487.34 vs 7.2585e-08 dead: 0
+0 Live
+2487.37 vs 7.2585e-08 dead: 0
+0 Live
+2487.55 vs 7.2585e-08 dead: 0
+0 Live
+2487.73 vs 7.2585e-08 dead: 0
+0 Live
+2487.9 vs 7.2585e-08 dead: 0
+0 Live
+2488.05 vs 7.2585e-08 dead: 0
+0 Live
+2488.07 vs 7.2585e-08 dead: 0
+0 Live
+2488.21 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2488.23 vs 7.2585e-08 dead: 0
+0 Live
+2488.37 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2488.39 vs 7.2585e-08 dead: 0
+0 Live
+2488.52 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2488.67 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2488.82 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2488.96 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2489.1 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2489.23 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2489.36 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2492.46 vs 1.4517e-07 dead: 0
+0 Live
+2492.5 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2492.55 vs 1.4517e-07 dead: 0
+0 Live
+2492.58 vs 1.4517e-07 dead: 0
+0 Live
+2489.85 vs 7.2585e-08 dead: 0
+0 Live
+2492.62 vs 1.4517e-07 dead: 0
+0 Live
+2489.97 vs 7.2585e-08 dead: 0
+0 Live
+2492.66 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.23 vs 1.4517e-07 dead: 0
+0 Live
+2493.25 vs 1.4517e-07 dead: 0
+0 Live
+2493.27 vs 1.4517e-07 dead: 0
+0 Live
+2493.29 vs 1.4517e-07 dead: 0
+0 Live
+2493.31 vs 1.4517e-07 dead: 0
+0 Live
+2493.33 vs 1.4517e-07 dead: 0
+0 Live
+2493.35 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.38 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.4 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.42 vs 1.4517e-07 dead: 0
+0 Live
+2492.34 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.43 vs 1.4517e-07 dead: 0
+0 Live
+2492.39 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.45 vs 1.4517e-07 dead: 0
+0 Live
+2492.43 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2492.47 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2492.52 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2492.56 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2492.6 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2492.63 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2492.67 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2492.71 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+current simulated time: 55440 min (max: 60480 min)
+total agents: 10957
+interval wall time: 0 days, 0 hours, 0 minutes, and 34.3294 seconds 
+total wall time: 0 days, 1 hours, 4 minutes, and 4.70834 seconds 
+
+2492.74 vs 7.2585e-08 dead: 0
+0 Live
+2492.78 vs 7.2585e-08 dead: 0
+0 Live
+2492.78 vs 7.2585e-08 dead: 0
+0 Live
+2492.81 vs 7.2585e-08 dead: 0
+0 Live
+2492.82 vs 7.2585e-08 dead: 0
+0 Live
+2492.84 vs 7.2585e-08 dead: 0
+0 Live
+2492.85 vs 7.2585e-08 dead: 0
+0 Live
+2492.87 vs 7.2585e-08 dead: 0
+0 Live
+2492.88 vs 7.2585e-08 dead: 0
+0 Live
+2492.91 vs 7.2585e-08 dead: 0
+0 Live
+2492.91 vs 7.2585e-08 dead: 0
+0 Live
+2492.94 vs 7.2585e-08 dead: 0
+0 Live
+2492.94 vs 7.2585e-08 dead: 0
+0 Live
+2492.96 vs 7.2585e-08 dead: 0
+0 Live
+2492.97 vs 7.2585e-08 dead: 0
+0 Live
+2492.99 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.03 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.05 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.08 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.1 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.13 vs 7.2585e-08 dead: 0
+0 Live
+2493.71 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.15 vs 7.2585e-08 dead: 0
+0 Live
+2493.72 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.17 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.74 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.75 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.75 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.76 vs 1.4517e-07 dead: 0
+0 Live
+2493.77 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.44 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.45 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.47 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.48 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.5 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.51 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.53 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.54 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.55 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2493.99 vs 4.53656e-09 dead: 0
+0 Live
+2493.99 vs 4.53656e-09 dead: 0
+0 Live
+2493.99 vs 4.53656e-09 dead: 0
+0 Live
+2493.99 vs 4.53656e-09 dead: 0
+0 Live
+current simulated time: 55800 min (max: 60480 min)
+total agents: 11107
+interval wall time: 0 days, 0 hours, 0 minutes, and 34.5594 seconds 
+total wall time: 0 days, 1 hours, 4 minutes, and 39.2677 seconds 
+
+2493.83 vs 7.2585e-08 dead: 0
+0 Live
+2493.83 vs 7.2585e-08 dead: 0
+0 Live
+2493.84 vs 7.2585e-08 dead: 0
+0 Live
+2493.84 vs 7.2585e-08 dead: 0
+0 Live
+2493.85 vs 7.2585e-08 dead: 0
+0 Live
+2493.85 vs 7.2585e-08 dead: 0
+0 Live
+2493.93 vs 7.2585e-08 dead: 0
+0 Live
+2493.93 vs 7.2585e-08 dead: 0
+0 Live
+2493.93 vs 7.2585e-08 dead: 0
+0 Live
+2493.94 vs 7.2585e-08 dead: 0
+0 Live
+2493.94 vs 7.2585e-08 dead: 0
+0 Live
+2493.94 vs 7.2585e-08 dead: 0
+0 Live
+2493.94 vs 7.2585e-08 dead: 0
+0 Live
+2493.95 vs 7.2585e-08 dead: 0
+0 Live
+2329.82 vs 1.16136e-06 dead: 0
+0 Live
+2493.95 vs 7.2585e-08 dead: 0
+0 Live
+2334.37 vs 1.16136e-06 dead: 0
+0 Live
+2493.95 vs 7.2585e-08 dead: 0
+0 Live
+2338.79 vs 1.16136e-06 dead: 0
+0 Live
+2493.95 vs 7.2585e-08 dead: 0
+0 Live
+2343.09 vs 1.16136e-06 dead: 0
+0 Live
+current simulated time: 56160 min (max: 60480 min)
+total agents: 11248
+interval wall time: 0 days, 0 hours, 0 minutes, and 34.7492 seconds 
+total wall time: 0 days, 1 hours, 5 minutes, and 14.017 seconds 
+
+2493.95 vs 7.2585e-08 dead: 0
+0 Live
+2347.27 vs 1.16136e-06 dead: 0
+0 Live
+2493.95 vs 7.2585e-08 dead: 0
+0 Live
+2351.34 vs 1.16136e-06 dead: 0
+0 Live
+2493.96 vs 7.2585e-08 dead: 0
+0 Live
+2355.29 vs 1.16136e-06 dead: 0
+0 Live
+2493.96 vs 7.2585e-08 dead: 0
+0 Live
+2359.14 vs 1.16136e-06 dead: 0
+0 Live
+2493.96 vs 7.2585e-08 dead: 0
+0 Live
+2362.88 vs 1.16136e-06 dead: 0
+0 Live
+2493.96 vs 7.2585e-08 dead: 0
+0 Live
+2366.52 vs 1.16136e-06 dead: 0
+0 Live
+2493.96 vs 7.2585e-08 dead: 0
+0 Live
+2370.05 vs 1.16136e-06 dead: 0
+0 Live
+2493.96 vs 7.2585e-08 dead: 0
+0 Live
+2373.49 vs 1.16136e-06 dead: 0
+0 Live
+2493.96 vs 7.2585e-08 dead: 0
+0 Live
+2376.83 vs 1.16136e-06 dead: 0
+0 Live
+2493.96 vs 7.2585e-08 dead: 0
+0 Live
+2380.09 vs 1.16136e-06 dead: 0
+0 Live
+2493.96 vs 7.2585e-08 dead: 0
+0 Live
+2383.25 vs 1.16136e-06 dead: 0
+0 Live
+2493.97 vs 7.2585e-08 dead: 0
+0 Live
+2386.32 vs 1.16136e-06 dead: 0
+0 Live
+2493.97 vs 7.2585e-08 dead: 0
+0 Live
+2389.31 vs 1.16136e-06 dead: 0
+0 Live
+2493.97 vs 7.2585e-08 dead: 0
+0 Live
+2392.21 vs 1.16136e-06 dead: 0
+0 Live
+2493.97 vs 7.2585e-08 dead: 0
+0 Live
+2395.04 vs 1.16136e-06 dead: 0
+0 Live
+2493.97 vs 7.2585e-08 dead: 0
+0 Live
+2397.78 vs 1.16136e-06 dead: 0
+0 Live
+2493.97 vs 7.2585e-08 dead: 0
+0 Live
+2400.45 vs 1.16136e-06 dead: 0
+0 Live
+2493.97 vs 7.2585e-08 dead: 0
+0 Live
+2403.05 vs 1.16136e-06 dead: 0
+0 Live
+2493.97 vs 7.2585e-08 dead: 0
+0 Live
+2405.57 vs 1.16136e-06 dead: 0
+0 Live
+2493.97 vs 7.2585e-08 dead: 0
+0 Live
+2408.03 vs 1.16136e-06 dead: 0
+0 Live
+2493.97 vs 7.2585e-08 dead: 0
+0 Live
+2410.41 vs 1.16136e-06 dead: 0
+0 Live
+2493.97 vs 7.2585e-08 dead: 0
+0 Live
+2493.97 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2460.94 vs 1.16136e-06 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2461.86 vs 1.16136e-06 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2462.75 vs 1.16136e-06 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2463.61 vs 1.16136e-06 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2464.45 vs 1.16136e-06 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2465.27 vs 1.16136e-06 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2466.06 vs 1.16136e-06 dead: 0
+0 Live
+current simulated time: 56520 min (max: 60480 min)
+total agents: 11389
+interval wall time: 0 days, 0 hours, 0 minutes, and 34.9854 seconds 
+total wall time: 0 days, 1 hours, 5 minutes, and 49.0024 seconds 
+
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2466.84 vs 1.16136e-06 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2467.59 vs 1.16136e-06 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2468.32 vs 1.16136e-06 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2469.03 vs 1.16136e-06 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2469.72 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2470.39 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2471.04 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2471.68 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2472.29 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2472.89 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2473.47 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2474.04 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2474.59 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2478.49 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2478.91 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 7.2585e-08 dead: 0
+0 Live
+2479.33 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2479.73 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2480.13 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2480.51 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2480.88 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2481.24 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2481.6 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.85817e-05 dead: 0
+0 Live
+2482.59 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2482.91 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2483.21 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2483.51 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2483.8 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2484.08 vs 1.16136e-06 dead: 0
+0 Live
+2484.35 vs 1.16136e-06 dead: 0
+0 Live
+2484.62 vs 1.16136e-06 dead: 0
+0 Live
+2484.88 vs 1.16136e-06 dead: 0
+0 Live
+2485.13 vs 1.16136e-06 dead: 0
+0 Live
+2485.37 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2485.61 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2485.84 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2486.07 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2486.28 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2486.5 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2486.7 vs 1.16136e-06 dead: 0
+0 Live
+2486.9 vs 1.16136e-06 dead: 0
+0 Live
+2487.1 vs 1.16136e-06 dead: 0
+0 Live
+2487.29 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2487.47 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2487.65 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2487.83 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2488 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2488.16 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2488.32 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2488.63 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2488.78 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+current simulated time: 56880 min (max: 60480 min)
+total agents: 11521
+interval wall time: 0 days, 0 hours, 0 minutes, and 35.2119 seconds 
+total wall time: 0 days, 1 hours, 6 minutes, and 24.2143 seconds 
+
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2488.92 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2489.06 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2489.2 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2489.33 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2489.46 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2489.58 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2489.7 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2489.82 vs 1.16136e-06 dead: 0
+0 Live
+2489.94 vs 1.16136e-06 dead: 0
+0 Live
+2490.05 vs 1.16136e-06 dead: 0
+0 Live
+2490.16 vs 1.16136e-06 dead: 0
+0 Live
+2490.26 vs 1.16136e-06 dead: 0
+0 Live
+2490.36 vs 1.16136e-06 dead: 0
+0 Live
+2490.46 vs 1.16136e-06 dead: 0
+0 Live
+2490.56 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2490.65 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2491.6 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2491.67 vs 1.16136e-06 dead: 0
+0 Live
+2491.73 vs 1.16136e-06 dead: 0
+0 Live
+2491.8 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2491.86 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2491.91 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2491.97 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2492.03 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2492.08 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2492.13 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2492.18 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2492.9 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2492.93 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2492.96 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2492.99 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.01 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+current simulated time: 57240 min (max: 60480 min)
+total agents: 11644
+interval wall time: 0 days, 0 hours, 0 minutes, and 35.4293 seconds 
+total wall time: 0 days, 1 hours, 6 minutes, and 59.6436 seconds 
+
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.04 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.07 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 5.8068e-07 dead: 0
+0 Live
+2493.25 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.27 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.29 vs 1.16136e-06 dead: 0
+0 Live
+2463.54 vs 2.26828e-09 dead: 0
+0 Live
+2493.31 vs 1.16136e-06 dead: 0
+0 Live
+2464.38 vs 2.26828e-09 dead: 0
+0 Live
+2493.4 vs 1.16136e-06 dead: 0
+0 Live
+2493.42 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.43 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.45 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.46 vs 1.16136e-06 dead: 0
+0 Live
+2470.99 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.48 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2472.84 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2473.43 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2473.99 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2474.55 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2475.08 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2475.61 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 2494 vs 4.53656e-09 dead: 4.53656e-090 dead: 
+0 Live
+0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2476.11 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2476.61 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2477.09 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2477.55 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2478.01 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2478.45 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.67 vs 1.16136e-06 dead: 0
+0 Live
+2479.7 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.67 vs 1.16136e-06 dead: 0
+0 Live
+2480.09 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.68 vs 1.16136e-06 dead: 0
+0 Live
+2480.48 vs 2.26828e-09 dead: 0
+0 Live
+2493.69 vs 1.16136e-06 dead: 0
+0 Live
+2480.85 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.7 vs 1.16136e-06 dead: 0
+0 Live
+2481.21 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.71 vs 1.16136e-06 dead: 0
+0 Live
+2481.57 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2481.91 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2482.24 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2482.57 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.74 vs 1.16136e-06 dead: 0
+0 Live
+2482.88 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.75 vs 1.16136e-06 dead: 0
+0 Live
+2483.19 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.75 vs 1.16136e-06 dead: 0
+0 Live
+2483.48 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.76 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.77 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.77 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.78 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.79 vs 1.16136e-06 dead: 0
+0 Live
+2493.8 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.8 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.81 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.81 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+current simulated time: 57600 min (max: 60480 min)
+total agents: 11808
+interval wall time: 0 days, 0 hours, 0 minutes, and 35.4993 seconds 
+total wall time: 0 days, 1 hours, 7 minutes, and 35.1429 seconds 
+
+2493.82 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.82 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.83 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.83 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.84 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 3.62925e-08 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+current simulated time: 57960 min (max: 60480 min)
+total agents: 11951
+interval wall time: 0 days, 0 hours, 0 minutes, and 35.7844 seconds 
+total wall time: 0 days, 1 hours, 8 minutes, and 10.9273 seconds 
+
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2490.16 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2490.26 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2490.36 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2490.46 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2490.56 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2490.65 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2490.75 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2492.9 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2490.84 vs 1.16136e-06 dead: 0
+0 Live
+2492.93 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2490.92 vs 1.16136e-06 dead: 0
+0 Live
+2492.96 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2491.01 vs 1.16136e-06 dead: 0
+0 Live
+2492.99 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.02 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.04 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.07 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+current simulated time: 58320 min (max: 60480 min)
+total agents: 12065
+interval wall time: 0 days, 0 hours, 0 minutes, and 35.9096 seconds 
+total wall time: 0 days, 1 hours, 8 minutes, and 46.837 seconds 
+
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2492.18 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2492.23 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2492.28 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2492.33 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2492.38 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2492.42 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.66 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.67 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.67 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.68 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.69 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.72 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.73 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.74 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.75 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.75 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.76 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.57 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.77 vs 1.41767e-10 dead: 0
+0 Live
+2493.58 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.77 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.78 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.78 vs 1.41767e-10 dead: 0
+0 Live
+2493.79 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.8 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.8 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.81 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.81 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+current simulated time: 58680 min (max: 60480 min)
+total agents: 12229
+interval wall time: 0 days, 0 hours, 0 minutes, and 36.0931 seconds 
+total wall time: 0 days, 1 hours, 9 minutes, and 22.9301 seconds 
+
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.91 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.91 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.91 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2493.91 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2493.92 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.92 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.92 vs 1.41767e-10 dead: 2494 vs 07.4327e-05 dead: 
+0 Live
+0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2493.97 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2493.97 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2493.98 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.4327e-05 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.95 vs 1.41767e-10 dead: 0
+0 Live
+2432.66 vs 1.13414e-09 dead: 0
+0 Live
+2493.95 vs 1.41767e-10 dead: 0
+0 Live
+2434.36 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2436.02 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2437.62 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2439.19 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2440.71 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2442.18 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2443.62 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2445.02 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2446.37 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2447.69 vs 1.13414e-09 dead: 0
+0 Live
+2448.98 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2450.22 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2451.44 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2452.61 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2453.76 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2455.96 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2457.01 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+current simulated time: 59040 min (max: 60480 min)
+total agents: 12377
+interval wall time: 0 days, 0 hours, 0 minutes, and 36.3787 seconds 
+total wall time: 0 days, 1 hours, 9 minutes, and 59.3088 seconds 
+
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.97 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2461.86 vs 1.13414e-09 dead: 0
+0 Live
+2493.98 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2462.74 vs 1.13414e-09 dead: 0
+0 Live
+2493.98 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2463.61 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.98 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2464.45 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.98 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2465.27 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.98 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2466.06 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.98 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2466.83 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2467.59 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2468.32 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2469.03 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2469.72 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2470.39 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 2.26828e-09 dead: 0
+0 Live
+2493.98 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2471.04 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 2.26828e-09 dead: 0
+0 Live
+2493.98 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 2.26828e-09 dead: 0
+0 Live
+2493.98 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 2.26828e-09 dead: 0
+0 Live
+2493.98 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 2.26828e-09 dead: 0
+0 Live
+2493.98 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 2.26828e-09 dead: 0
+0 Live
+2493.98 vs 1.41767e-10 dead: 0
+0 Live
+2493.99 vs 1.41767e-10 dead: 0
+0 Live
+2493.99 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 2.26828e-09 dead: 0
+0 Live
+2493.99 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 2.26828e-09 dead: 0
+0 Live
+2493.99 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 2.26828e-09 dead: 0
+0 Live
+2493.99 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.98 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2493.99 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2493.99 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 2.26828e-09 dead: 0
+0 Live
+2493.99 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 2.26828e-09 dead: 0
+0 Live
+2493.99 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 2.26828e-09 dead: 0
+0 Live
+current simulated time: 59400 min (max: 60480 min)
+total agents: 12526
+interval wall time: 0 days, 0 hours, 0 minutes, and 36.5883 seconds 
+total wall time: 0 days, 1 hours, 10 minutes, and 35.8971 seconds 
+
+2494 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 2.26828e-09 dead: 0
+0 Live
+2494 vs 2.26828e-09 dead: 0
+2494 vs 0 Live
+1.81462e-08 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 7.2585e-08 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.99 vs 5.6707e-10 dead: 0
+0 Live
+2492.55 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.99 vs 5.6707e-10 dead: 0
+0 Live
+2492.59 vs 1.13414e-09 dead: 0
+0 Live
+2493.99 vs 5.6707e-10 dead: 0
+0 Live
+2492.62 vs 1.13414e-09 dead: 0
+0 Live
+2493.99 vs 5.6707e-10 dead: 0
+0 Live
+2492.66 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.99 vs 5.6707e-10 dead: 0
+0 Live
+2492.7 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.99 vs 5.6707e-10 dead: 0
+0 Live
+2492.73 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.99 vs 5.6707e-10 dead: 0
+0 Live
+2492.77 vs 1.13414e-09 dead: 0
+0 Live
+2494 vs 1.81462e-08 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.99 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.99 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.99 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.99 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.99 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.99 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.99 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2486.91 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2487.11 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2487.3 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2487.48 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2487.66 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2487.83 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2488 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+current simulated time: 59760 min (max: 60480 min)
+total agents: 12674
+interval wall time: 0 days, 0 hours, 0 minutes, and 36.8103 seconds 
+total wall time: 0 days, 1 hours, 11 minutes, and 12.7074 seconds 
+
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2491.17 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2491.25 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2491.32 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2491.4 vs 8.86047e-12 dead: 0
+0 Live
+2491.47 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.16136e-06 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+current simulated time: 60120 min (max: 60480 min)
+total agents: 12845
+interval wall time: 0 days, 0 hours, 0 minutes, and 37.0312 seconds 
+total wall time: 0 days, 1 hours, 11 minutes, and 49.7386 seconds 
+
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2492.96 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2492.99 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.01 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.04 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.07 vs 8.86047e-12 dead: 0
+0 Live
+2493.09 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.19 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.21 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.23 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.25 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.27 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2494 vs 1.4517e-07 dead: 0
+0 Live
+2493.29 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.31 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.33 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.35 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.37 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+1763.3 vs 5.8068e-07 dead: 0
+0 Live
+2493.38 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+1781.15 vs 5.8068e-07 dead: 0
+0 Live
+2493.4 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+1798.69 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2493.42 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+1815.93 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 5.6707e-10 dead: 0
+0 Live
+2493.43 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+1832.85 vs 5.8068e-07 dead: 0
+0 Live
+2493.45 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+1849.46 vs 5.8068e-07 dead: 0
+0 Live
+2493.46 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+1865.75 vs 5.8068e-07 dead: 0
+0 Live
+2493.48 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+1881.72 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+1897.36 vs 5.8068e-07 dead: 0
+0 Live
+2493.51 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.52 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+2493.53 vs 8.86047e-12 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+1942.36 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+1956.71 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+1970.75 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2494 vs 1.41767e-10 dead: 0
+0 Live
+1984.47 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+1997.87 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2010.97 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2023.76 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2036.24 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2048.43 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2060.33 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2071.93 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2083.25 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2094.29 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+2493.67 vs 8.86047e-12 dead: 0
+0 Live
+2105.06 vs 5.8068e-07 dead: 0
+0 Live
+2493.68 vs 8.86047e-12 dead: 0
+0 Live
+2115.56 vs 5.8068e-07 dead: 0
+0 Live
+2493.69 vs 8.86047e-12 dead: 0
+0 Live
+2125.79 vs 5.8068e-07 dead: 0
+0 Live
+2135.76 vs 5.8068e-07 dead: 0
+0 Live
+2145.48 vs 5.8068e-07 dead: 0
+0 Live
+2154.94 vs 5.8068e-07 dead: 0
+0 Live
+2164.17 vs 5.8068e-07 dead: 0
+0 Live
+2173.15 vs 5.8068e-07 dead: 0
+0 Live
+2181.9 vs 5.8068e-07 dead: 0
+0 Live
+2190.43 vs 5.8068e-07 dead: 0
+0 Live
+2198.73 vs 5.8068e-07 dead: 0
+0 Live
+2206.81 vs 5.8068e-07 dead: 0
+0 Live
+2214.68 vs 5.8068e-07 dead: 0
+0 Live
+2222.34 vs 5.8068e-07 dead: 0
+0 Live
+2229.79 vs 5.8068e-07 dead: 0
+0 Live
+current simulated time: 60480 min (max: 60480 min)
+total agents: 13012
+interval wall time: 0 days, 0 hours, 0 minutes, and 37.3008 seconds 
+total wall time: 0 days, 1 hours, 12 minutes, and 27.0394 seconds 
+
+2237.05 vs 5.8068e-07 dead: 0
+0 Live
+2494 vs 4.53656e-09 dead: 0
+0 Live
+
+Total simulation runtime: 
+0 days, 1 hours, 12 minutes, and 27.5109 seconds [stage2] simulation done:  Wed Mar 25 11:50:39 UTC 2026
+[stage2] output: /home/a0hirs04/PROJECT-NORTHSTAR/build/rc2_full_seed42/replicate_01_seed42/output
+[stage2] job: 10620

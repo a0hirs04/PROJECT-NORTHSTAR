@@ -1294,7 +1294,7 @@ void module7_drug_response(Cell* pCell, Phenotype& phenotype, double dt, ModuleP
     {
         // A. NRF2 — transcription factor (fast: t_1/2 ~ 20 min = tau * ln2)
         const double nrf2_tau = 20.0;
-        const double stress = intracellular_drug + (hif1a_active > 0.5 ? 0.5 : 0.0);
+        const double stress = intracellular_drug + (hif1a_active > 0.5 ? hif1a_nrf2_priming_bonus : 0.0);
         const double nrf2_production = (stress > drug_stress_threshold) ? 0.05 : 0.0;
         nrf2_active += nrf2_production * dt;
         nrf2_active *= std::exp(-dt / nrf2_tau);
