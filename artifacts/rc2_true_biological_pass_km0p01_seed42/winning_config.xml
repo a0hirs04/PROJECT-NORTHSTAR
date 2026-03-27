@@ -1,0 +1,778 @@
+<?xml version='1.0' encoding='utf-8'?>
+<PhysiCell_settings version="devel-version">
+
+    
+
+    
+    <domain>
+        <x_min>-1000</x_min>
+        <x_max>1000</x_max>
+        <y_min>-1000</y_min>
+        <y_max>1000</y_max>
+        <z_min>-10</z_min>
+        <z_max>10</z_max>
+        <dx>20</dx>
+        <dy>20</dy>
+        <dz>20</dz>
+        <use_2D>true</use_2D>
+    </domain>
+
+    
+    <overall>
+        <max_time units="min">60480.0</max_time>
+        <time_units>min</time_units>
+        <space_units>micron</space_units>
+        <dt_diffusion units="min">0.01</dt_diffusion>
+        <dt_mechanics units="min">0.1</dt_mechanics>
+        <dt_phenotype units="min">6</dt_phenotype>
+    </overall>
+
+    
+    <parallel>
+        <omp_num_threads>32</omp_num_threads>
+    </parallel>
+
+    
+    <save>
+        <folder>/home/a0hirs04/PROJECT-NORTHSTAR/build/rc2_full_seed42/replicate_01_seed42/output</folder>
+
+        
+        <full_data>
+            <interval units="min">360</interval>
+            <enable>true</enable>
+        </full_data>
+
+        
+        <SVG>
+            <interval units="min">360</interval>
+            <enable>true</enable>
+            <plot_substrate enabled="true" limits="true">
+                <substrate>oxygen</substrate>
+                <colormap>YlOrRd</colormap>
+                <min_conc>0</min_conc>
+                <max_conc>38</max_conc>
+            </plot_substrate>
+        </SVG>
+
+        <legacy_data>
+            <enable>false</enable>
+        </legacy_data>
+    </save>
+
+    
+    <options>
+        <legacy_random_points_on_sphere_in_divide>false</legacy_random_points_on_sphere_in_divide>
+        
+        <virtual_wall_at_domain_edge>true</virtual_wall_at_domain_edge>
+        <disable_automated_spring_adhesions>false</disable_automated_spring_adhesions>
+        <random_seed>42</random_seed>
+    </options>
+
+    
+    <microenvironment_setup>
+
+        
+        <variable name="oxygen" units="mmHg" ID="0">
+            <physical_parameter_set>
+                <diffusion_coefficient units="micron^2/min">100000.0</diffusion_coefficient>
+                <decay_rate units="1/min">0.1</decay_rate>
+            </physical_parameter_set>
+            <initial_condition units="mmHg">38</initial_condition>
+            <Dirichlet_boundary_condition units="mmHg" enabled="true">38</Dirichlet_boundary_condition>
+            <Dirichlet_options>
+                <boundary_value ID="xmin" enabled="true">38</boundary_value>
+                <boundary_value ID="xmax" enabled="true">38</boundary_value>
+                <boundary_value ID="ymin" enabled="true">38</boundary_value>
+                <boundary_value ID="ymax" enabled="true">38</boundary_value>
+                <boundary_value ID="zmin" enabled="true">38</boundary_value>
+                <boundary_value ID="zmax" enabled="true">38</boundary_value>
+            </Dirichlet_options>
+        </variable>
+
+        
+        <variable name="tgfb" units="dimensionless" ID="1">
+            <physical_parameter_set>
+                <diffusion_coefficient units="micron^2/min">1000.0</diffusion_coefficient>
+                <decay_rate units="1/min">0.01</decay_rate>
+            </physical_parameter_set>
+            <initial_condition units="dimensionless">0</initial_condition>
+            <Dirichlet_boundary_condition units="dimensionless" enabled="true">0</Dirichlet_boundary_condition>
+            <Dirichlet_options>
+                <boundary_value ID="xmin" enabled="true">0</boundary_value>
+                <boundary_value ID="xmax" enabled="true">0</boundary_value>
+                <boundary_value ID="ymin" enabled="true">0</boundary_value>
+                <boundary_value ID="ymax" enabled="true">0</boundary_value>
+                <boundary_value ID="zmin" enabled="true">0</boundary_value>
+                <boundary_value ID="zmax" enabled="true">0</boundary_value>
+            </Dirichlet_options>
+        </variable>
+
+        
+        <variable name="shh" units="dimensionless" ID="2">
+            <physical_parameter_set>
+                <diffusion_coefficient units="micron^2/min">1000.0</diffusion_coefficient>
+                <decay_rate units="1/min">0.01</decay_rate>
+            </physical_parameter_set>
+            <initial_condition units="dimensionless">0</initial_condition>
+            <Dirichlet_boundary_condition units="dimensionless" enabled="true">0</Dirichlet_boundary_condition>
+            <Dirichlet_options>
+                <boundary_value ID="xmin" enabled="true">0</boundary_value>
+                <boundary_value ID="xmax" enabled="true">0</boundary_value>
+                <boundary_value ID="ymin" enabled="true">0</boundary_value>
+                <boundary_value ID="ymax" enabled="true">0</boundary_value>
+                <boundary_value ID="zmin" enabled="true">0</boundary_value>
+                <boundary_value ID="zmax" enabled="true">0</boundary_value>
+            </Dirichlet_options>
+        </variable>
+
+        
+        <variable name="drug" units="dimensionless" ID="3">
+            <physical_parameter_set>
+                <diffusion_coefficient units="micron^2/min">5000.0</diffusion_coefficient>
+                <decay_rate units="1/min">0.002</decay_rate>
+            </physical_parameter_set>
+            <initial_condition units="dimensionless">0</initial_condition>
+            <Dirichlet_boundary_condition units="dimensionless" enabled="true">0</Dirichlet_boundary_condition>
+            <Dirichlet_options>
+                <boundary_value ID="xmin" enabled="true">0</boundary_value>
+                <boundary_value ID="xmax" enabled="true">0</boundary_value>
+                <boundary_value ID="ymin" enabled="true">0</boundary_value>
+                <boundary_value ID="ymax" enabled="true">0</boundary_value>
+                <boundary_value ID="zmin" enabled="true">0</boundary_value>
+                <boundary_value ID="zmax" enabled="true">0</boundary_value>
+            </Dirichlet_options>
+        </variable>
+
+        
+        <variable name="ecm_density" units="dimensionless" ID="4">
+            <physical_parameter_set>
+                <diffusion_coefficient units="micron^2/min">0.0</diffusion_coefficient>
+                <decay_rate units="1/min">0.0</decay_rate>
+            </physical_parameter_set>
+            <initial_condition units="dimensionless">0</initial_condition>
+            <Dirichlet_boundary_condition units="dimensionless" enabled="false">0</Dirichlet_boundary_condition>
+            <Dirichlet_options>
+                <boundary_value ID="xmin" enabled="false">0</boundary_value>
+                <boundary_value ID="xmax" enabled="false">0</boundary_value>
+                <boundary_value ID="ymin" enabled="false">0</boundary_value>
+                <boundary_value ID="ymax" enabled="false">0</boundary_value>
+                <boundary_value ID="zmin" enabled="false">0</boundary_value>
+                <boundary_value ID="zmax" enabled="false">0</boundary_value>
+            </Dirichlet_options>
+        </variable>
+
+        <options>
+            
+            <calculate_gradients>true</calculate_gradients>
+            
+            <track_internalized_substrates_in_each_agent>true</track_internalized_substrates_in_each_agent>
+            <initial_condition type="matlab" enabled="false">
+                <filename>./config/initial.mat</filename>
+            </initial_condition>
+            <dirichlet_nodes type="matlab" enabled="false">
+                <filename>./config/dirichlet.mat</filename>
+            </dirichlet_nodes>
+        </options>
+
+    </microenvironment_setup>
+
+    
+    <cell_definitions>
+
+        
+        <cell_definition name="tumor_cell" ID="0">
+            <phenotype>
+
+                
+                <cycle code="5" name="live">
+                    <phase_transition_rates units="1/min">
+                        <rate start_index="0" end_index="0" fixed_duration="false">0.01</rate>
+                    </phase_transition_rates>
+                </cycle>
+
+                <death>
+                    
+                    <model code="100" name="apoptosis">
+                        <death_rate units="1/min">0.00015</death_rate>
+                        <phase_durations units="min">
+                            <duration index="0" fixed_duration="true">516</duration>
+                        </phase_durations>
+                        <parameters>
+                            <unlysed_fluid_change_rate units="1/min">0.05</unlysed_fluid_change_rate>
+                            <lysed_fluid_change_rate units="1/min">0</lysed_fluid_change_rate>
+                            <cytoplasmic_biomass_change_rate units="1/min">1.66667e-02</cytoplasmic_biomass_change_rate>
+                            <nuclear_biomass_change_rate units="1/min">5.83333e-03</nuclear_biomass_change_rate>
+                            <calcification_rate units="1/min">0</calcification_rate>
+                            <relative_rupture_volume units="dimensionless">2.0</relative_rupture_volume>
+                        </parameters>
+                    </model>
+
+                    
+                    <model code="101" name="necrosis">
+                        <death_rate units="1/min">0.0</death_rate>
+                        <phase_durations units="min">
+                            <duration index="0" fixed_duration="true">0</duration>
+                            <duration index="1" fixed_duration="true">86400</duration>
+                        </phase_durations>
+                        <parameters>
+                            <unlysed_fluid_change_rate units="1/min">1.11667e-2</unlysed_fluid_change_rate>
+                            <lysed_fluid_change_rate units="1/min">8.33333e-4</lysed_fluid_change_rate>
+                            <cytoplasmic_biomass_change_rate units="1/min">5.33333e-5</cytoplasmic_biomass_change_rate>
+                            <nuclear_biomass_change_rate units="1/min">2.16667e-3</nuclear_biomass_change_rate>
+                            <calcification_rate units="1/min">0</calcification_rate>
+                            <relative_rupture_volume units="dimensionless">2.0</relative_rupture_volume>
+                        </parameters>
+                    </model>
+                </death>
+
+                
+                <volume>
+                    <total units="micron^3">2494</total>
+                    <fluid_fraction units="dimensionless">0.75</fluid_fraction>
+                    <nuclear units="micron^3">540</nuclear>
+                    <fluid_change_rate units="1/min">0.05</fluid_change_rate>
+                    <cytoplasmic_biomass_change_rate units="1/min">0.0045</cytoplasmic_biomass_change_rate>
+                    <nuclear_biomass_change_rate units="1/min">0.0055</nuclear_biomass_change_rate>
+                    <calcified_fraction units="dimensionless">0</calcified_fraction>
+                    <calcification_rate units="1/min">0</calcification_rate>
+                    <relative_rupture_volume units="dimensionless">2.0</relative_rupture_volume>
+                </volume>
+
+                
+                <mechanics>
+                    <cell_cell_adhesion_strength units="micron/min">5.0</cell_cell_adhesion_strength>
+                    <cell_cell_repulsion_strength units="micron/min">10.0</cell_cell_repulsion_strength>
+                    <relative_maximum_adhesion_distance units="dimensionless">1.25</relative_maximum_adhesion_distance>
+                    <cell_adhesion_affinities>
+                        <cell_adhesion_affinity name="tumor_cell">1.0</cell_adhesion_affinity>
+                        <cell_adhesion_affinity name="stromal_cell">0.5</cell_adhesion_affinity>
+                    </cell_adhesion_affinities>
+                    <options>
+                        <set_relative_equilibrium_distance enabled="false" units="dimensionless">1.8</set_relative_equilibrium_distance>
+                        <set_absolute_equilibrium_distance enabled="false" units="micron">15.12</set_absolute_equilibrium_distance>
+                    </options>
+                    <attachment_elastic_constant units="1/min">0.01</attachment_elastic_constant>
+                    <attachment_rate units="1/min">0.0</attachment_rate>
+                    <detachment_rate units="1/min">0.0</detachment_rate>
+                    <maximum_number_of_attachments>12</maximum_number_of_attachments>
+                </mechanics>
+
+                
+                <motility>
+                    <speed units="micron/min">0.1</speed>
+                    <persistence_time units="min">10</persistence_time>
+                    <migration_bias units="dimensionless">0.0</migration_bias>
+                    <options>
+                        <enabled>true</enabled>
+                        <use_2D>true</use_2D>
+                        <chemotaxis>
+                            <enabled>false</enabled>
+                            <substrate>oxygen</substrate>
+                            <direction>1</direction>
+                        </chemotaxis>
+                        <advanced_chemotaxis>
+                            <enabled>false</enabled>
+                            <normalize_each_gradient>false</normalize_each_gradient>
+                            <chemotactic_sensitivities>
+                                <chemotactic_sensitivity substrate="oxygen">0.0</chemotactic_sensitivity>
+                                <chemotactic_sensitivity substrate="tgfb">0.0</chemotactic_sensitivity>
+                                <chemotactic_sensitivity substrate="shh">0.0</chemotactic_sensitivity>
+                                <chemotactic_sensitivity substrate="ecm_density">0.0</chemotactic_sensitivity>
+                                <chemotactic_sensitivity substrate="drug">0.0</chemotactic_sensitivity>
+                            </chemotactic_sensitivities>
+                        </advanced_chemotaxis>
+                    </options>
+                </motility>
+
+                
+                <secretion>
+                    <substrate name="oxygen">
+                        <secretion_rate units="1/min">0</secretion_rate>
+                        <secretion_target units="mmHg">38</secretion_target>
+                        <uptake_rate units="1/min">10</uptake_rate>
+                        <net_export_rate units="total substrate/min">0</net_export_rate>
+                    </substrate>
+                    <substrate name="tgfb">
+                        <secretion_rate units="1/min">0.5</secretion_rate>
+                        <secretion_target units="dimensionless">1</secretion_target>
+                        <uptake_rate units="1/min">0</uptake_rate>
+                        <net_export_rate units="total substrate/min">0</net_export_rate>
+                    </substrate>
+                    <substrate name="shh">
+                        <secretion_rate units="1/min">0.3</secretion_rate>
+                        <secretion_target units="dimensionless">1</secretion_target>
+                        <uptake_rate units="1/min">0</uptake_rate>
+                        <net_export_rate units="total substrate/min">0</net_export_rate>
+                    </substrate>
+                    <substrate name="ecm_density">
+                        <secretion_rate units="1/min">0</secretion_rate>
+                        <secretion_target units="dimensionless">1</secretion_target>
+                        <uptake_rate units="1/min">0</uptake_rate>
+                        <net_export_rate units="total substrate/min">0</net_export_rate>
+                    </substrate>
+                    <substrate name="drug">
+                        <secretion_rate units="1/min">0</secretion_rate>
+                        <secretion_target units="dimensionless">1</secretion_target>
+                        <uptake_rate units="1/min">0.01</uptake_rate>
+                        <net_export_rate units="total substrate/min">0</net_export_rate>
+                    </substrate>
+                </secretion>
+
+                <cell_interactions>
+                    <apoptotic_phagocytosis_rate units="1/min">0</apoptotic_phagocytosis_rate>
+                    <necrotic_phagocytosis_rate units="1/min">0</necrotic_phagocytosis_rate>
+                    <other_dead_phagocytosis_rate units="1/min">0</other_dead_phagocytosis_rate>
+                    <live_phagocytosis_rates>
+                        <phagocytosis_rate name="tumor_cell" units="1/min">0</phagocytosis_rate>
+                        <phagocytosis_rate name="stromal_cell" units="1/min">0</phagocytosis_rate>
+                    </live_phagocytosis_rates>
+                    <attack_rates>
+                        <attack_rate name="tumor_cell" units="1/min">0</attack_rate>
+                        <attack_rate name="stromal_cell" units="1/min">0</attack_rate>
+                    </attack_rates>
+                    <attack_damage_rate units="1/min">1</attack_damage_rate>
+                    <attack_duration units="min">0.1</attack_duration>
+                    <fusion_rates>
+                        <fusion_rate name="tumor_cell" units="1/min">0</fusion_rate>
+                        <fusion_rate name="stromal_cell" units="1/min">0</fusion_rate>
+                    </fusion_rates>
+                </cell_interactions>
+
+                <cell_transformations>
+                    <transformation_rates>
+                        <transformation_rate name="tumor_cell" units="1/min">0</transformation_rate>
+                        <transformation_rate name="stromal_cell" units="1/min">0</transformation_rate>
+                    </transformation_rates>
+                </cell_transformations>
+
+                <cell_integrity>
+                    <damage_rate units="1/min">0.0</damage_rate>
+                    <damage_repair_rate units="1/min">0.0</damage_repair_rate>
+                </cell_integrity>
+
+            </phenotype>
+
+            
+            <custom_data>
+
+                
+                <KRAS conserved="false" units="dimensionless" description="KRAS oncogene activation; 1=mutant/constitutively active (PDAC hallmark)">1.0</KRAS>
+                <MYC conserved="false" units="dimensionless" description="MYC transcription factor; amplified downstream of KRAS">0.0</MYC>
+                <EGFR conserved="false" units="dimensionless" description="EGFR receptor tyrosine kinase activity">1.0</EGFR>
+
+                
+                <TP53 conserved="false" units="dimensionless" description="TP53 guardian of genome; 0=lost/mutated (common in PDAC)">0.0</TP53>
+                <CDKN2A conserved="false" units="dimensionless" description="CDKN2A/p16 CDK inhibitor; 0=deleted (nearly universal in PDAC)">0.0</CDKN2A>
+                <SMAD4 conserved="false" units="dimensionless" description="SMAD4 TGF-beta effector; 0=lost (55% of PDAC)">0.0</SMAD4>
+                <RB1 conserved="false" units="dimensionless" description="RB1 retinoblastoma protein; cell cycle checkpoint">0.0</RB1>
+
+                
+                <BCL_XL conserved="false" units="dimensionless" description="BCL-XL anti-apoptotic protein; upregulated in drug resistance">0.0</BCL_XL>
+                <BAX conserved="false" units="dimensionless" description="BAX pro-apoptotic protein; activated by TP53">0.0</BAX>
+
+                
+                <ZEB1 conserved="false" units="dimensionless" description="ZEB1 EMT transcription factor; represses CDH1">0.0</ZEB1>
+                <CDH1 conserved="false" units="dimensionless" description="E-cadherin epithelial marker; lost during EMT">0.0</CDH1>
+                <MMP2 conserved="false" units="dimensionless" description="MMP2 matrix metalloproteinase; ECM degradation">0.0</MMP2>
+
+                
+                <TGFB1_expr conserved="false" units="dimensionless" description="TGF-beta1 gene expression level (drives tgfb secretion)">0.0</TGFB1_expr>
+                <SHH_expr conserved="false" units="dimensionless" description="Sonic Hedgehog gene expression level (drives shh secretion)">0.0</SHH_expr>
+
+                
+                <HIF1A conserved="false" units="dimensionless" description="HIF-1alpha; activated under hypoxia, drives anaerobic adaptation">0.0</HIF1A>
+                <NRF2 conserved="false" units="dimensionless" description="NRF2 oxidative stress master regulator">0.0</NRF2>
+
+                
+                <ABCB1 conserved="false" units="dimensionless" description="ABCB1/MDR1 P-glycoprotein drug efflux pump">0.0</ABCB1>
+
+                
+                <is_mesenchymal conserved="false" units="dimensionless" description="EMT state flag: 0=epithelial, 1=mesenchymal">0.0</is_mesenchymal>
+                <stress_level conserved="false" units="dimensionless" description="Accumulated cellular stress index [0,1]">0.0</stress_level>
+                <drug_sensitivity conserved="false" units="dimensionless" description="Drug kill coefficient [0,1]; reduced by ABCB1/BCL_XL">1.0</drug_sensitivity>
+                <apoptosis_threshold conserved="false" units="dimensionless" description="Stress threshold above which apoptosis is induced">0.5</apoptosis_threshold>
+
+                
+                <cell_id conserved="false" units="none" description="Unique immutable tumor cell identifier">-1.0</cell_id>
+                <parent_id conserved="false" units="none" description="Parent tumor cell identifier; -1 for founders">-1.0</parent_id>
+
+                
+                <gene_state_KRAS conserved="false" units="none">1.0</gene_state_KRAS>
+                <gene_state_TP53 conserved="false" units="none">2.0</gene_state_TP53>
+                <gene_state_CDKN2A conserved="false" units="none">2.0</gene_state_CDKN2A>
+                <gene_state_SMAD4 conserved="false" units="none">2.0</gene_state_SMAD4>
+                <gene_state_BCL_XL conserved="false" units="none">1.0</gene_state_BCL_XL>
+                <gene_state_MYC conserved="false" units="none">0.0</gene_state_MYC>
+                <gene_state_EGFR conserved="false" units="none">0.0</gene_state_EGFR>
+                <gene_state_RB1 conserved="false" units="none">0.0</gene_state_RB1>
+                <gene_state_BAX conserved="false" units="none">0.0</gene_state_BAX>
+                <gene_state_ZEB1 conserved="false" units="none">0.0</gene_state_ZEB1>
+                <gene_state_CDH1 conserved="false" units="none">0.0</gene_state_CDH1>
+                <gene_state_MMP2 conserved="false" units="none">0.0</gene_state_MMP2>
+                <gene_state_TGFB1 conserved="false" units="none">0.0</gene_state_TGFB1>
+                <gene_state_SHH conserved="false" units="none">0.0</gene_state_SHH>
+                <gene_state_HIF1A conserved="false" units="none">0.0</gene_state_HIF1A>
+                <gene_state_NRF2 conserved="false" units="none">0.0</gene_state_NRF2>
+                <gene_state_ABCB1 conserved="false" units="none">0.0</gene_state_ABCB1>
+                <gene_state_HAS2 conserved="false" units="none">0.0</gene_state_HAS2>
+                <gene_state_COL1A1 conserved="false" units="none">0.0</gene_state_COL1A1>
+                <gene_state_GLI1 conserved="false" units="none">0.0</gene_state_GLI1>
+                <gene_state_ACTA2 conserved="false" units="none">0.0</gene_state_ACTA2>
+
+                
+                <hif1a_active conserved="false" units="dimensionless">0.0</hif1a_active>
+                <zeb1_active conserved="false" units="dimensionless">0.0</zeb1_active>
+                <cdh1_expressed conserved="false" units="dimensionless">1.0</cdh1_expressed>
+                <nrf2_active conserved="false" units="dimensionless">0.0</nrf2_active>
+                <abcb1_active conserved="false" units="dimensionless">0.0</abcb1_active>
+                <mmp2_active conserved="false" units="dimensionless">0.0</mmp2_active>
+                <intracellular_drug conserved="false" units="dimensionless">0.0</intracellular_drug>
+                <time_since_drug_exposure conserved="false" units="hour">-1.0</time_since_drug_exposure>
+                <time_alive conserved="false" units="min">0.0</time_alive>
+                <emt_extent conserved="false" units="dimensionless">0.0</emt_extent>
+                <mechanical_pressure conserved="false" units="dimensionless">0.0</mechanical_pressure>
+                <emt_signal_time conserved="false" units="min" description="Fix B: accumulated time induction_signal has exceeded emt_induction_threshold">0.0</emt_signal_time>
+                <emt_activation_time conserved="false" units="min" description="Timestamp when ZEB1 was last activated (for persistence timer)">0.0</emt_activation_time>
+
+            </custom_data>
+        </cell_definition>
+
+        
+        <cell_definition name="stromal_cell" ID="1">
+            <phenotype>
+
+                
+                <cycle code="5" name="live">
+                    <phase_transition_rates units="1/min">
+                        <rate start_index="0" end_index="0" fixed_duration="false">0.0</rate>
+                    </phase_transition_rates>
+                </cycle>
+
+                <death>
+                    
+                    <model code="100" name="apoptosis">
+                        <death_rate units="1/min">0.0</death_rate>
+                        <phase_durations units="min">
+                            <duration index="0" fixed_duration="true">516</duration>
+                        </phase_durations>
+                        <parameters>
+                            <unlysed_fluid_change_rate units="1/min">0.05</unlysed_fluid_change_rate>
+                            <lysed_fluid_change_rate units="1/min">0</lysed_fluid_change_rate>
+                            <cytoplasmic_biomass_change_rate units="1/min">1.66667e-02</cytoplasmic_biomass_change_rate>
+                            <nuclear_biomass_change_rate units="1/min">5.83333e-03</nuclear_biomass_change_rate>
+                            <calcification_rate units="1/min">0</calcification_rate>
+                            <relative_rupture_volume units="dimensionless">2.0</relative_rupture_volume>
+                        </parameters>
+                    </model>
+
+                    
+                    <model code="101" name="necrosis">
+                        <death_rate units="1/min">0.0</death_rate>
+                        <phase_durations units="min">
+                            <duration index="0" fixed_duration="true">0</duration>
+                            <duration index="1" fixed_duration="true">86400</duration>
+                        </phase_durations>
+                        <parameters>
+                            <unlysed_fluid_change_rate units="1/min">1.11667e-2</unlysed_fluid_change_rate>
+                            <lysed_fluid_change_rate units="1/min">8.33333e-4</lysed_fluid_change_rate>
+                            <cytoplasmic_biomass_change_rate units="1/min">5.33333e-5</cytoplasmic_biomass_change_rate>
+                            <nuclear_biomass_change_rate units="1/min">2.16667e-3</nuclear_biomass_change_rate>
+                            <calcification_rate units="1/min">0</calcification_rate>
+                            <relative_rupture_volume units="dimensionless">2.0</relative_rupture_volume>
+                        </parameters>
+                    </model>
+                </death>
+
+                
+                <volume>
+                    <total units="micron^3">2494</total>
+                    <fluid_fraction units="dimensionless">0.75</fluid_fraction>
+                    <nuclear units="micron^3">540</nuclear>
+                    <fluid_change_rate units="1/min">0.05</fluid_change_rate>
+                    <cytoplasmic_biomass_change_rate units="1/min">0.0045</cytoplasmic_biomass_change_rate>
+                    <nuclear_biomass_change_rate units="1/min">0.0055</nuclear_biomass_change_rate>
+                    <calcified_fraction units="dimensionless">0</calcified_fraction>
+                    <calcification_rate units="1/min">0</calcification_rate>
+                    <relative_rupture_volume units="dimensionless">2.0</relative_rupture_volume>
+                </volume>
+
+                
+                <mechanics>
+                    <cell_cell_adhesion_strength units="micron/min">0.8</cell_cell_adhesion_strength>
+                    <cell_cell_repulsion_strength units="micron/min">10.0</cell_cell_repulsion_strength>
+                    <relative_maximum_adhesion_distance units="dimensionless">1.25</relative_maximum_adhesion_distance>
+                    <cell_adhesion_affinities>
+                        <cell_adhesion_affinity name="tumor_cell">0.5</cell_adhesion_affinity>
+                        <cell_adhesion_affinity name="stromal_cell">1.0</cell_adhesion_affinity>
+                    </cell_adhesion_affinities>
+                    <options>
+                        <set_relative_equilibrium_distance enabled="false" units="dimensionless">1.8</set_relative_equilibrium_distance>
+                        <set_absolute_equilibrium_distance enabled="false" units="micron">15.12</set_absolute_equilibrium_distance>
+                    </options>
+                    <attachment_elastic_constant units="1/min">0.01</attachment_elastic_constant>
+                    <attachment_rate units="1/min">0.0</attachment_rate>
+                    <detachment_rate units="1/min">0.0</detachment_rate>
+                    <maximum_number_of_attachments>12</maximum_number_of_attachments>
+                </mechanics>
+
+                
+                <motility>
+                    <speed units="micron/min">0.05</speed>
+                    <persistence_time units="min">10</persistence_time>
+                    <migration_bias units="dimensionless">0.0</migration_bias>
+                    <options>
+                        <enabled>true</enabled>
+                        <use_2D>true</use_2D>
+                        <chemotaxis>
+                            <enabled>false</enabled>
+                            <substrate>oxygen</substrate>
+                            <direction>1</direction>
+                        </chemotaxis>
+                        <advanced_chemotaxis>
+                            <enabled>false</enabled>
+                            <normalize_each_gradient>false</normalize_each_gradient>
+                            <chemotactic_sensitivities>
+                                <chemotactic_sensitivity substrate="oxygen">0.0</chemotactic_sensitivity>
+                                <chemotactic_sensitivity substrate="tgfb">0.0</chemotactic_sensitivity>
+                                <chemotactic_sensitivity substrate="shh">0.0</chemotactic_sensitivity>
+                                <chemotactic_sensitivity substrate="ecm_density">0.0</chemotactic_sensitivity>
+                                <chemotactic_sensitivity substrate="drug">0.0</chemotactic_sensitivity>
+                            </chemotactic_sensitivities>
+                        </advanced_chemotaxis>
+                    </options>
+                </motility>
+
+                
+                <secretion>
+                    <substrate name="oxygen">
+                        <secretion_rate units="1/min">0</secretion_rate>
+                        <secretion_target units="mmHg">38</secretion_target>
+                        <uptake_rate units="1/min">5</uptake_rate>
+                        <net_export_rate units="total substrate/min">0</net_export_rate>
+                    </substrate>
+                    <substrate name="tgfb">
+                        <secretion_rate units="1/min">0</secretion_rate>
+                        <secretion_target units="dimensionless">1</secretion_target>
+                        <uptake_rate units="1/min">0</uptake_rate>
+                        <net_export_rate units="total substrate/min">0</net_export_rate>
+                    </substrate>
+                    <substrate name="shh">
+                        <secretion_rate units="1/min">0</secretion_rate>
+                        <secretion_target units="dimensionless">1</secretion_target>
+                        <uptake_rate units="1/min">0</uptake_rate>
+                        <net_export_rate units="total substrate/min">0</net_export_rate>
+                    </substrate>
+                    <substrate name="ecm_density">
+                        <secretion_rate units="1/min">0</secretion_rate>
+                        <secretion_target units="dimensionless">1</secretion_target>
+                        <uptake_rate units="1/min">0</uptake_rate>
+                        <net_export_rate units="total substrate/min">0</net_export_rate>
+                    </substrate>
+                    <substrate name="drug">
+                        <secretion_rate units="1/min">0</secretion_rate>
+                        <secretion_target units="dimensionless">1</secretion_target>
+                        <uptake_rate units="1/min">0</uptake_rate>
+                        <net_export_rate units="total substrate/min">0</net_export_rate>
+                    </substrate>
+                </secretion>
+
+                <cell_interactions>
+                    <apoptotic_phagocytosis_rate units="1/min">0</apoptotic_phagocytosis_rate>
+                    <necrotic_phagocytosis_rate units="1/min">0</necrotic_phagocytosis_rate>
+                    <other_dead_phagocytosis_rate units="1/min">0</other_dead_phagocytosis_rate>
+                    <live_phagocytosis_rates>
+                        <phagocytosis_rate name="tumor_cell" units="1/min">0</phagocytosis_rate>
+                        <phagocytosis_rate name="stromal_cell" units="1/min">0</phagocytosis_rate>
+                    </live_phagocytosis_rates>
+                    <attack_rates>
+                        <attack_rate name="tumor_cell" units="1/min">0</attack_rate>
+                        <attack_rate name="stromal_cell" units="1/min">0</attack_rate>
+                    </attack_rates>
+                    <attack_damage_rate units="1/min">1</attack_damage_rate>
+                    <attack_duration units="min">0.1</attack_duration>
+                    <fusion_rates>
+                        <fusion_rate name="tumor_cell" units="1/min">0</fusion_rate>
+                        <fusion_rate name="stromal_cell" units="1/min">0</fusion_rate>
+                    </fusion_rates>
+                </cell_interactions>
+
+                <cell_transformations>
+                    <transformation_rates>
+                        <transformation_rate name="tumor_cell" units="1/min">0</transformation_rate>
+                        <transformation_rate name="stromal_cell" units="1/min">0</transformation_rate>
+                    </transformation_rates>
+                </cell_transformations>
+
+                <cell_integrity>
+                    <damage_rate units="1/min">0.0</damage_rate>
+                    <damage_repair_rate units="1/min">0.0</damage_repair_rate>
+                </cell_integrity>
+
+            </phenotype>
+
+            
+            <custom_data>
+
+                
+                <cell_id conserved="false" units="none">-1.0</cell_id>
+                <parent_id conserved="false" units="none">-1.0</parent_id>
+
+                
+                <gene_state_SMAD4 conserved="false" units="none">0.0</gene_state_SMAD4>
+                <gene_state_ACTA2 conserved="false" units="none">0.0</gene_state_ACTA2>
+                <gene_state_GLI1 conserved="false" units="none">0.0</gene_state_GLI1>
+                <gene_state_HAS2 conserved="false" units="none">0.0</gene_state_HAS2>
+                <gene_state_COL1A1 conserved="false" units="none">0.0</gene_state_COL1A1>
+                <gene_state_TGFB1 conserved="false" units="none">0.0</gene_state_TGFB1>
+                <gene_state_SHH conserved="false" units="none">0.0</gene_state_SHH>
+
+                
+                <acta2_active conserved="false" units="dimensionless">0.0</acta2_active>
+                <gli1_active conserved="false" units="dimensionless">0.0</gli1_active>
+                <activation_mode conserved="false" units="dimensionless">0.0</activation_mode>
+
+                
+                <hif1a_active conserved="false" units="dimensionless">0.0</hif1a_active>
+
+                
+                <ecm_production_rate conserved="false" units="dimensionless">0.0</ecm_production_rate>
+                <tgfb_secretion_active conserved="false" units="dimensionless">0.0</tgfb_secretion_active>
+
+                
+                <time_alive conserved="false" units="min">0.0</time_alive>
+                <mechanical_pressure conserved="false" units="dimensionless">0.0</mechanical_pressure>
+
+            </custom_data>
+        </cell_definition>
+
+    </cell_definitions>
+
+    
+    <initial_conditions>
+        <cell_positions type="csv" enabled="false">
+            <folder>./config</folder>
+            <filename>cells.csv</filename>
+        </cell_positions>
+    </initial_conditions>
+
+    
+    <cell_rules>
+        <rulesets>
+            <ruleset protocol="CBHG" version="3.0" format="csv" enabled="false">
+                <folder>./config</folder>
+                <filename>cell_rules.csv</filename>
+            </ruleset>
+        </rulesets>
+        <settings />
+    </cell_rules>
+
+    
+    <user_parameters>
+
+        
+        <number_of_tumor_cells type="int" units="none" description="Number of tumor cells placed in cluster at domain center">50</number_of_tumor_cells>
+        <number_of_stromal_cells type="int" units="none" description="Number of PSCs placed in annular ring around tumor">500</number_of_stromal_cells>
+
+        
+        <tumor_cluster_radius type="double" units="micron" description="Radius of initial tumor cell cluster centered at origin">100.0</tumor_cluster_radius>
+
+        
+        <stroma_inner_radius type="double" units="micron" description="Inner radius of PSC seeding annulus">100.0</stroma_inner_radius>
+        <stroma_outer_radius type="double" units="micron" description="Outer radius of PSC seeding annulus">300.0</stroma_outer_radius>
+
+        
+        <mechanics_voxel_size type="double" units="micron" description="Cell mechanics container voxel size (Cell_Container resolution)">30.0</mechanics_voxel_size>
+
+        
+        <tgfb_activation_threshold type="double" units="dimensionless" description="Minimum tgfb concentration to trigger stromal CAF activation">0.1</tgfb_activation_threshold>
+        <shh_activation_threshold type="double" units="dimensionless" description="Minimum stromal SHH signal needed to sustain GLI1 activation on the live diffusive field scale">1e-5</shh_activation_threshold>
+        <oxygen_necrosis_threshold type="double" units="mmHg" description="Oxygen level below which necrosis rate is upregulated">5.0</oxygen_necrosis_threshold>
+        <oxygen_hypoxia_threshold type="double" units="mmHg" description="Oxygen level below which HIF1A is activated">15.0</oxygen_hypoxia_threshold>
+
+        
+        <drug_start_time type="double" units="min" description="Simulation time at which drug Dirichlet BCs are enabled (t=7200 = day 5)">20160.0</drug_start_time>
+        <drug_end_time type="double" units="min" description="Simulation time at which drug is withdrawn (Dirichlet BC zeroed, interior cleared)">40320.0</drug_end_time>
+        <drug_concentration type="double" units="dimensionless" description="Drug boundary concentration when administered">1.0</drug_concentration>
+
+        
+        <shh_inhibition_start_time type="double" units="min" description="Simulation time at which stromal SHH-pathway inhibition starts">1e18</shh_inhibition_start_time>
+        <shh_inhibition_strength type="double" units="dimensionless" description="Fractional blockade of stromal SHH sensing after start time (0-1)">0.0</shh_inhibition_strength>
+
+        
+        <calibration_profile type="string" units="none" description="Tumor calibration profile (AsPC-1 default, PANC-1 for Knob 2 comparator)">AsPC-1</calibration_profile>
+        <tumor_calibration_knobs_json type="string" units="none" description="Path to tumor calibration profiles JSON">config/tumor_calibration_knobs.json</tumor_calibration_knobs_json>
+
+        
+        <tgfb_secretion_rate type="double" units="dimensionless" description="Knob 1a (Targetable): tumor TGFB secretion scale">0.8</tgfb_secretion_rate>
+        <shh_secretion_rate type="double" units="dimensionless" description="Knob 1b (Targetable): tumor SHH secretion scale">0.7</shh_secretion_rate>
+        <hif1a_tgfb_amplification_factor type="double" units="dimensionless" description="Multiplier applied to tumor TGFB secretion when hif1a_active=1">1.5</hif1a_tgfb_amplification_factor>
+        <caf_tgfb_secretion_rate type="double" units="dimensionless" description="Activated stromal (CAF) TGFB secretion rate">0.3</caf_tgfb_secretion_rate>
+        <tgfb_brake_sensitivity type="double" units="dimensionless" description="Knob 2 (Fixed): TGF-beta growth-arrest sensitivity">0.05</tgfb_brake_sensitivity>
+        <proliferation_rate type="double" units="dimensionless" description="Knob 3a (Fixed): proliferative drive scale">0.75</proliferation_rate>
+        <checkpoint_integrity type="double" units="dimensionless" description="Knob 3b (Fixed): checkpoint integrity scale">0.05</checkpoint_integrity>
+        <apoptosis_resistance type="double" units="dimensionless" description="Knob 4 (Fixed): basal apoptosis resistance">0.85</apoptosis_resistance>
+        <base_proliferation_rate type="double" units="1/min" description="Tumor baseline proliferation transition rate">0.00048</base_proliferation_rate>
+        <go_grow_penalty type="double" units="dimensionless" description="Fractional proliferation penalty when zeb1_active=1">0.95</go_grow_penalty>
+        <hypoxia_proliferation_modifier type="double" units="dimensionless" description="Fractional proliferation reduction when hif1a_active=1">0.2</hypoxia_proliferation_modifier>
+        <hypoxia_death_resistance_bonus type="double" units="dimensionless" description="Additive death-resistance modifier when hif1a_active=1">0.1</hypoxia_death_resistance_bonus>
+        <contact_inhibition_threshold type="double" units="dimensionless" description="Mechanical pressure threshold above which tumor proliferation is arrested">25.0</contact_inhibition_threshold>
+        <stromal_contact_inhibition_threshold type="double" units="dimensionless" description="Mechanical pressure threshold above which stromal (CAF) proliferation is arrested — lower than tumor because stromal cells have intact checkpoints">0.8</stromal_contact_inhibition_threshold>
+        <drug_kill_coefficient type="double" units="1/min" description="Maps effective intracellular drug to apoptosis rate contribution">0.05</drug_kill_coefficient>
+        <efflux_drug_reduction type="double" units="dimensionless" description="Fractional reduction in effective drug when abcb1_active=1">0.7</efflux_drug_reduction>
+        <caf_proliferation_rate type="double" units="1/min" description="Baseline CAF proliferation transition rate">0.0001</caf_proliferation_rate>
+        <caf_base_death_rate type="double" units="1/min" description="Baseline apoptosis rate for uncrowded activated CAFs">0.0</caf_base_death_rate>
+        <caf_crowded_death_rate type="double" units="1/min" description="Apoptosis rate for contact-inhibited CAFs under mechanical compression">0.0</caf_crowded_death_rate>
+        <gli1_proliferation_boost type="double" units="dimensionless" description="CAF proliferation multiplier when gli1_active=1">1.3</gli1_proliferation_boost>
+        <psc_proliferation_rate type="double" units="1/min" description="Quiescent PSC proliferation transition rate">0.0</psc_proliferation_rate>
+        <ecm_production_rate_base type="double" units="1/min" description="ECM production rate for activated CAFs when gli1_active=0">0.01</ecm_production_rate_base>
+        <ecm_production_rate_boosted type="double" units="1/min" description="ECM production rate for activated CAFs when gli1_active=1">0.015</ecm_production_rate_boosted>
+        <ecm_ha_fraction_default type="double" units="dimensionless" description="Default HA fraction of newly produced ECM">0.6</ecm_ha_fraction_default>
+        <mmp2_degradation_rate type="double" units="1/min" description="ECM degradation rate for mmp2_active tumor cells">0.001</mmp2_degradation_rate>
+        <ecm_natural_decay_rate type="double" units="1/min" description="Slow background ECM turnover (handled outside per-cell Module 6)">0.0001</ecm_natural_decay_rate>
+        <drug_uptake_rate type="double" units="1/hour" description="Intracellular drug accumulation rate per local drug concentration">0.10</drug_uptake_rate>
+        <drug_stress_threshold type="double" units="dimensionless" description="Intracellular drug level threshold for NRF2 activation">0.03</drug_stress_threshold>
+        <nrf2_decay_rate type="double" units="1/hour" description="Slow NRF2 decay rate when drug stress is removed">0.01</nrf2_decay_rate>
+        <nrf2_persistence_threshold type="double" units="dimensionless" description="Minimum intracellular drug needed to keep NRF2/ABCB1 maintenance active during withdrawal">0.003</nrf2_persistence_threshold>
+        <drug_natural_decay_rate type="double" units="1/hour" description="Natural intracellular drug metabolism/decay rate">0.0</drug_natural_decay_rate>
+        <hif1a_nrf2_priming_bonus type="double" units="dimensionless" description="Stress-signal bonus under hypoxia for earlier NRF2 activation">0.02</hif1a_nrf2_priming_bonus>
+        <emt_induction_threshold type="double" units="dimensionless" description="Knob 5a (Observable): EMT induction threshold">0.30</emt_induction_threshold>
+        <emt_phenotype_extent type="int" units="dimensionless" description="Knob 5b for EMT engine (1=LOW, 2=MEDIUM, 3=HIGH)">3</emt_phenotype_extent>
+        <hif1a_emt_boost type="double" units="dimensionless" description="Additive EMT induction boost when hif1a_active=1">0.02</hif1a_emt_boost>
+        <motility_epithelial type="double" units="micron/min" description="Tumor epithelial baseline motility">0.1</motility_epithelial>
+        <motility_mesenchymal_low type="double" units="micron/min" description="Tumor mesenchymal motility at LOW EMT extent">0.5</motility_mesenchymal_low>
+        <motility_mesenchymal_med type="double" units="micron/min" description="Tumor mesenchymal motility at MEDIUM EMT extent">1.0</motility_mesenchymal_med>
+        <motility_mesenchymal_high type="double" units="micron/min" description="Tumor mesenchymal motility at HIGH EMT extent">2.0</motility_mesenchymal_high>
+        <adhesion_epithelial type="double" units="dimensionless" description="Tumor epithelial baseline cell-cell adhesion">5.0</adhesion_epithelial>
+        <adhesion_mesenchymal_low type="double" units="dimensionless" description="Tumor mesenchymal adhesion at LOW EMT extent">3.0</adhesion_mesenchymal_low>
+        <adhesion_mesenchymal_med type="double" units="dimensionless" description="Tumor mesenchymal adhesion at MEDIUM EMT extent">1.5</adhesion_mesenchymal_med>
+        <adhesion_mesenchymal_high type="double" units="dimensionless" description="Tumor mesenchymal adhesion at HIGH EMT extent">0.5</adhesion_mesenchymal_high>
+        <emt_phenotype_extent type="string" units="none" description="Knob 5b (Observable): EMT phenotype extent (LOW|MEDIUM|HIGH)">HIGH</emt_phenotype_extent>
+        <hypoxia_response_threshold type="double" units="dimensionless" description="Knob 6a (Observable): hypoxia response threshold control">0.35</hypoxia_response_threshold>
+        <hypoxia_phenotype_shift type="string" units="none" description="Knob 6b (Observable): hypoxia phenotype shift (LOW|MEDIUM|HIGH)">HIGH</hypoxia_phenotype_shift>
+        <efflux_induction_delay type="double" units="dimensionless" description="Knob 7a (Targetable): ABCB1 induction delay control">0.5</efflux_induction_delay>
+        <efflux_strength type="double" units="dimensionless" description="Knob 7b (Targetable): ABCB1 efflux strength">0.04</efflux_strength>
+        <abcb1_production_rate type="double" units="1/min" description="NRF2-driven ABCB1 synthesis rate. SS=rate*tau. 0.001→SS=1.0,t_resist~10h (too fast). 0.0005→SS=0.81,t_resist~26h (Goldilocks).">0.0005</abcb1_production_rate>
+        <abcb1_decay_tau type="double" units="min" description="Relaxation tau for ABCB1 decay — anchored to ABCB1 protein half-life ~27h (1620 min)">1620.0</abcb1_decay_tau>
+        <abcb1_max_daily_drop_fraction type="double" units="dimensionless" description="Maximum allowed fractional ABCB1 decrease per 24h (0.25 = protein persistence guardrail)">0.25</abcb1_max_daily_drop_fraction>
+        <abcb1_inheritance_floor type="double" units="dimensionless" description="Minimum ABCB1 for daughters born in post-withdrawal resistance memory (must be &gt; 0.5 analysis threshold)">0.6</abcb1_inheritance_floor>
+        <mechanical_compaction_strength type="double" units="dimensionless" description="Knob 8 (Fixed): mechanical compaction / solid-stress strength">0.6</mechanical_compaction_strength>
+        <compaction_ecm_increment type="double" units="dimensionless" description="Passive ECM density increment per solid-stress unit per step">0.01</compaction_ecm_increment>
+        <crowding_base_pressure type="double" units="dimensionless" description="Additive crowding baseline so contact inhibition fires even without ECM">0.3</crowding_base_pressure>
+        <stromal_contact_emt_boost type="double" units="dimensionless" description="LEGACY (unused)">0.00</stromal_contact_emt_boost>
+        <ecm_emt_threshold type="double" units="dimensionless" description="ECM density below which ECM-EMT boost is zero">0.3</ecm_emt_threshold>
+        <ecm_emt_ramp type="double" units="dimensionless" description="Width of smooth ramp above ecm_emt_threshold (gate goes 0-&gt;1 over this range)">0.3</ecm_emt_ramp>
+        <ecm_emt_strength type="double" units="dimensionless" description="Scaling factor for ECM-EMT boost (multiplied by gate)">0.4</ecm_emt_strength>
+        <ecm_emt_cap type="double" units="dimensionless" description="Maximum ECM-EMT boost added to induction_signal">0.30</ecm_emt_cap>
+        <ecm_reversion_weight type="double" units="dimensionless" description="Fraction of ECM boost included in reversion signal (0=ignore ECM, 1=full ECM)">0.3</ecm_reversion_weight>
+        <emt_death_increase type="double" units="1/min" description="Fix A: additional apoptosis rate for EMT (zeb1_active=1) cells">0.00005</emt_death_increase>
+        <emt_off_threshold type="double" units="dimensionless" description="Fix B: reversion_signal below which EMT reverts (hysteresis; must be less than emt_induction_threshold)">0.10</emt_off_threshold>
+        <emt_activation_delay type="double" units="min" description="Fix B: minutes signal must exceed emt_induction_threshold before EMT activates">360.0</emt_activation_delay>
+        <emt_persistence_time type="double" units="min" description="Minimum duration EMT must remain active before reversion is allowed">7200.0</emt_persistence_time>
+        <ecm_emt_require_caf_contact type="double" units="dimensionless" description="Fix C: if &gt;0.5, ECM-EMT boost only applies when an activated CAF neighbor is present">1.0</ecm_emt_require_caf_contact>
+        <ecm_motility_block_threshold type="double" units="dimensionless" description="Fix D: ECM density at which EMT motility drops to zero (linear ramp)">0.8</ecm_motility_block_threshold>
+        <host_death_ceiling type="int" units="cells" description="Max live tumor cells before simulation halts (safety valve)">50000</host_death_ceiling>
+        <drug_kill_multiplier type="double" units="dimensionless" description="Amplification factor for drug kill rate in the apoptosis equation">0.01</drug_kill_multiplier>
+
+    </user_parameters>
+
+</PhysiCell_settings>
