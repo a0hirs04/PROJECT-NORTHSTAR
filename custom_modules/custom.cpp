@@ -147,6 +147,103 @@ void ensure_custom_scalar(Cell_Definition* pCD,
     }
 }
 
+inline bool is_stromal_reserved_name(const std::string& name)
+{
+    static const std::string prefix = "_stromal_reserved_";
+    return name.compare(0, prefix.size(), prefix) == 0;
+}
+
+const Variable* find_custom_scalar(const Custom_Cell_Data& data, const std::string& name)
+{
+    for (size_t i = 0; i < data.variables.size(); ++i)
+    {
+        if (data.variables[i].name == name)
+        {
+            return &data.variables[i];
+        }
+    }
+    return NULL;
+}
+
+void add_custom_scalar_with_metadata(Custom_Cell_Data* data,
+                                     const std::string& name,
+                                     const std::string& units,
+                                     double value,
+                                     bool conserved_quantity)
+{
+    if (data == NULL) return;
+    data->add_variable(name, units, value);
+    if (!data->variables.empty())
+    {
+        data->variables.back().conserved_quantity = conserved_quantity;
+    }
+}
+
+Custom_Cell_Data build_shared_custom_schema(const Custom_Cell_Data& tumor_data,
+                                            const Custom_Cell_Data& stromal_data)
+{
+    Custom_Cell_Data schema;
+
+    for (size_t i = 0; i < stromal_data.variables.size(); ++i)
+    {
+        const Variable& var = stromal_data.variables[i];
+        if (is_stromal_reserved_name(var.name)) continue;
+        add_custom_scalar_with_metadata(
+            &schema,
+            var.name,
+            var.units,
+            0.0,
+            var.conserved_quantity);
+    }
+
+    for (size_t i = 0; i < tumor_data.variables.size(); ++i)
+    {
+        const Variable& var = tumor_data.variables[i];
+        if (is_stromal_reserved_name(var.name)) continue;
+        if (find_custom_scalar(schema, var.name) != NULL) continue;
+        add_custom_scalar_with_metadata(
+            &schema,
+            var.name,
+            var.units,
+            0.0,
+            var.conserved_quantity);
+    }
+
+    return schema;
+}
+
+void apply_shared_custom_schema(Cell_Definition* pCD, const Custom_Cell_Data& shared_schema)
+{
+    if (pCD == NULL) return;
+
+    const Custom_Cell_Data existing = pCD->custom_data;
+    Custom_Cell_Data rebuilt;
+
+    for (size_t i = 0; i < shared_schema.variables.size(); ++i)
+    {
+        const Variable& canonical = shared_schema.variables[i];
+        const Variable* current = find_custom_scalar(existing, canonical.name);
+        const std::string& units = (current != NULL) ? current->units : canonical.units;
+        const double value = (current != NULL) ? current->value : 0.0;
+        const bool conserved = (current != NULL) ? current->conserved_quantity : canonical.conserved_quantity;
+        add_custom_scalar_with_metadata(&rebuilt, canonical.name, units, value, conserved);
+    }
+
+    rebuilt.vector_variables = existing.vector_variables;
+    pCD->custom_data = rebuilt;
+}
+
+void rebuild_shared_custom_schema(Cell_Definition* pTumor, Cell_Definition* pStroma)
+{
+    if (pTumor == NULL || pStroma == NULL) return;
+
+    const Custom_Cell_Data shared_schema =
+        build_shared_custom_schema(pTumor->custom_data, pStroma->custom_data);
+
+    apply_shared_custom_schema(pTumor, shared_schema);
+    apply_shared_custom_schema(pStroma, shared_schema);
+}
+
 double read_custom_or_fallback(Cell* pCell, const std::string& name, double fallback)
 {
     if (pCell == NULL) return fallback;
@@ -332,17 +429,6 @@ void rebuild_stromal_custom_schema(Cell_Definition* pStroma, const Cell_Definiti
     add_scalar("tgfb_secretion_active", "dimensionless", 0.0);
     add_scalar("time_alive", "min", 0.0);
     add_scalar("mechanical_pressure", "dimensionless", 0.0);
-
-    // Keep vector lengths aligned with tumor custom data to avoid per-cell
-    // serialization/index mismatches in output routines.
-    const size_t target_size =
-        (pTumor != NULL) ? pTumor->custom_data.variables.size() : schema.variables.size();
-    int pad_counter = 0;
-    while (schema.variables.size() < target_size)
-    {
-        add_scalar("_stromal_reserved_" + std::to_string(pad_counter), "none", 0.0);
-        ++pad_counter;
-    }
 
     pStroma->custom_data = schema;
 }
@@ -2397,6 +2483,11 @@ void create_cell_types(void)
     {
         std::cerr << "[create_cell_types] WARNING: 'stromal_cell' not found in XML definitions.\n";
     }
+
+    // Output export uses a single custom-data schema view. Rebuild both cell
+    // definitions to a shared ordered union that preserves stromal positions
+    // for acta2_active and gli1_active while appending tumor-only variables.
+    rebuild_shared_custom_schema(pTumor, pStroma);
 
     display_cell_definitions(std::cout);
 
