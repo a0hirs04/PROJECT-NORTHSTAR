@@ -1,7 +1,7 @@
 # RC3 Vismodegib Paradox Pass
 
 Verdict: `RC3 = PASS`  
-`C3.5 = PASS, but provisional`
+`C3.5 = PASS, final`
 
 ## What Failed Originally
 
@@ -44,7 +44,7 @@ Old vs new Arm C day-56 median live tumor: `1111 -> 127`
 - `C3.2`: PASS
 - `C3.3`: PASS
 - `C3.4`: PASS
-- `C3.5`: PASS, provisional
+- `C3.5`: PASS, final
 - `C3.6`: PASS
 
 Median endpoint tumor counts:
@@ -57,6 +57,12 @@ Final rank order:
 
 - `C < A < B`
 
+Final RC2 benchmark for `C3.5`:
+
+- matched 5-seed RC2 gold comparator root: `/work/a0hirs04/PROJECT-NORTHSTAR/build/rc2_gold_benchmark_5seed`
+- benchmark median day-28 live tumor: `133`
+- RC2 gold comparator composition: `4/5` true biological pass and `1/5` false pass (`seed 42`), with the median retained as the final comparator for `C3.5`
+
 ## Reproducibility
 
 This tag includes the tracked launcher and evaluator used to produce and assess this pass:
@@ -64,14 +70,9 @@ This tag includes the tracked launcher and evaluator used to produce and assess 
 - [launch_rc3.py](/home/a0hirs04/PROJECT-NORTHSTAR/launch_rc3.py)
 - [evaluate_rc3.py](/home/a0hirs04/PROJECT-NORTHSTAR/evaluate_rc3.py)
 
-The passing Arm C full-window configs are saved under [`arm_c_fullwindow/`](./arm_c_fullwindow), and the mixed-arm evaluation report is saved as [`rc3_armc_fullwindow_summary.txt`](./rc3_armc_fullwindow_summary.txt).
+The passing Arm C full-window configs are saved under [`arm_c_fullwindow/`](./arm_c_fullwindow).
 
-## Provisional Note
+Saved evaluation reports:
 
-`C3.5` is still provisional because the clean RC2 gold comparator currently covers only seed `42` in:
-
-`/home/a0hirs04/PROJECT-NORTHSTAR/build/rc2_full_seed42`
-
-Next cleanup task:
-
-Create a clean 5-seed RC2 gold benchmark set for seeds `42-46` with unchanged gold-master biology so `C3.5` can be finalized.
+- initial mixed-arm pass report: [`rc3_armc_fullwindow_summary.txt`](./rc3_armc_fullwindow_summary.txt)
+- final benchmarked pass report: [`rc3_armc_fullwindow_summary_final.txt`](./rc3_armc_fullwindow_summary_final.txt)
