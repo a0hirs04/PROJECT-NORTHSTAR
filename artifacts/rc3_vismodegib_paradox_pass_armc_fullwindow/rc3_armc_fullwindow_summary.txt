@@ -1,0 +1,53 @@
+====================================================================================================
+RC3 VISMODEGIB PARADOX REPORT
+Base: arm-overrides
+====================================================================================================
+
+Per-Seed Endpoint Table
+Seed  A_live  A_rad  A_peri   B_live  B_rad  B_peri   C_live  C_rad  C_peri
+42    567    289.49 0.9544   2476   1416.43 0.0068   109    325.39 0.0981  
+43    842    330.99 0.9324   2772   1429.99 0.0074   127    435.62 0.0688  
+44    2252   932.29 0.8730   2640   1407.37 0.0085   46     348.12 0.1110  
+45    958    283.38 0.8976   3129   1403.15 0.0078   214    1187.25 0.0602  
+46    455    233.20 0.9413   2802   1427.01 0.0057   144    1206.46 0.0378  
+
+Per-Run Endpoint Diagnostics
+Arm  Seed  LiveTumor  RadiusMax  RadiusP95  PeriECM    Snapshot
+A    42    567        289.49     206.83     0.9544     output00000224.xml
+A    43    842        330.99     245.64     0.9324     output00000224.xml
+A    44    2252       932.29     811.06     0.8730     output00000224.xml
+A    45    958        283.38     222.77     0.8976     output00000224.xml
+A    46    455        233.20     171.90     0.9413     output00000224.xml
+B    42    2476       1416.43    1339.92    0.0068     output00000224.xml
+B    43    2772       1429.99    1334.00    0.0074     output00000224.xml
+B    44    2640       1407.37    1356.26    0.0085     output00000224.xml
+B    45    3129       1403.15    1333.51    0.0078     output00000224.xml
+B    46    2802       1427.01    1332.41    0.0057     output00000224.xml
+C    42    109        325.39     166.10     0.0981     output00000224.xml
+C    43    127        435.62     222.43     0.0688     output00000224.xml
+C    44    46         348.12     170.45     0.1110     output00000224.xml
+C    45    214        1187.25    991.86     0.0602     output00000224.xml
+C    46    144        1206.46    985.81     0.0378     output00000224.xml
+
+Arm Summary Table
+Arm  n  LiveTumor(mean±sd)  RadiusMax(mean±sd)  RadiusP95(mean±sd)  PeriECM(mean±sd)
+A    5  1014.80±720.70    413.87±291.88    331.64±269.34    0.9197±0.0336
+B    5  2763.80±241.38    1416.79±11.77    1339.22±9.96    0.0072±0.0011
+C    5  128.00±60.70    700.57±454.96    507.33±440.11    0.0752±0.0295
+
+RC2 Benchmark: /home/a0hirs04/PROJECT-NORTHSTAR/build/rc2_full_seed42 (benchmark-set median from 1 run(s); PROVISIONAL because matched seeds 42, 43, 44, 45, 46 are not all available (available: 42))
+Benchmark value for C3.5: 301.00
+Benchmark runs loaded for C3.5:
+- replicate_01_seed42 seed=42 day28_live_tumor=301.00 source=/home/a0hirs04/PROJECT-NORTHSTAR/build/rc2_full_seed42/replicate_01_seed42/output
+
+RC3 Checks
+C3.1: PASS | median_tumor_B=2772.00 > median_tumor_A=842.00
+C3.2: PASS | median_radius_B=1416.43 > median_radius_A=289.49
+C3.3: PASS | median_periECM_B=0.0074 < median_periECM_A=0.9324
+C3.4: PASS | median_tumor_C=127.00 < median_tumor_A=842.00
+C3.5: PASS | median_tumor_C=127.00 < rc2_benchmark=301.00
+C3.6: PASS | rank order tumor medians: C=127.00 < A=842.00 < B=2772.00
+
+Overall Verdict: PASS
+Interpretation: SHH-only worsens outcome and expands the tumor while lowering periECM, while combo outperforms both control and RC2 drug-alone.
+
